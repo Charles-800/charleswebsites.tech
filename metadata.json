@@ -1,0 +1,8 @@
+{
+  "name": "Charles Websites",
+  "description": "Web Development & AI Engineering Agency building modern websites, intelligent automation, and digital growth systems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

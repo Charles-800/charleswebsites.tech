@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #151515;
+    font-family: var(--font-manrope), system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+    text-wrap: balance;
+  }
+}
+
+/* Primary CTA Button Standard: Red (#E5092F) -> Purple Hover (#7137D8) */
+.btn-primary-cta {
+  background-color: #E5092F;
+  color: #FFFFFF;
+  transition: background-color 90ms ease-out,
+              transform 90ms ease-out,
+              box-shadow 90ms ease-out;
+  box-shadow: 0 4px 14px -2px rgba(229, 9, 47, 0.28);
+}
+
+.btn-primary-cta:hover {
+  background-color: #7137D8;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -4px rgba(113, 55, 216, 0.36);
+}
+
+.btn-primary-cta:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-primary-cta:focus-visible {
+  outline: 2px solid #7137D8;
+  outline-offset: 2px;
+}
+
+/* Secondary Outline Button */
+.btn-secondary-outline {
+  border: 1px solid #E8E8EC;
+  background-color: #FFFFFF;
+  color: #151515;
+  transition: border-color 90ms ease-out,
+              color 90ms ease-out,
+              transform 90ms ease-out,
+              background-color 90ms ease-out;
+}
+
+.btn-secondary-outline:hover {
+  border-color: #7137D8;
+  color: #7137D8;
+  background-color: #F7F7F9;
+  transform: translateY(-1px);
+}
+
+.btn-secondary-outline:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-secondary-outline-dark {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background-color: transparent;
+  color: #FFFFFF;
+  transition: border-color 90ms ease-out,
+              background-color 90ms ease-out,
+              transform 90ms ease-out;
+}
+
+.btn-secondary-outline-dark:hover {
+  border-color: #8B5CF6;
+  background-color: rgba(113, 55, 216, 0.16);
+  transform: translateY(-1px);
+}
+
+.btn-secondary-outline-dark:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

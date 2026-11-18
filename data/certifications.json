@@ -1,0 +1,36 @@
+[
+  {
+    "id": "cert-w3schools-apps-development",
+    "title": "Apps Development Programme — Certificate of Completion",
+    "institution": "W3Schools",
+    "status": "earned",
+    "certificateFileUrl": "/assets/aistudio/CHARLES_RAMOYA2_b1b5e6f5.png",
+    "certificateFileType": "image",
+    "certificateFileName": "CHARLES_RAMOYA2_b1b5e6f5.png",
+    "createdAt": "2026-11-18T12:05:00.000Z",
+    "updatedAt": "2026-11-18T12:05:00.000Z"
+  },
+  {
+    "id": "cert-ibm-ai-automation",
+    "title": "AI Automation & Chatbot Integration — Certificate of Appreciation",
+    "institution": "IBM AI Automation",
+    "status": "earned",
+    "certificateFileUrl": "/assets/aistudio/CHARLES_RAMOYA3_cbf09df0.png",
+    "certificateFileType": "image",
+    "certificateFileName": "CHARLES_RAMOYA3_cbf09df0.png",
+    "createdAt": "2026-11-18T12:06:00.000Z",
+    "updatedAt": "2026-11-18T12:06:00.000Z"
+  },
+  {
+    "id": "cert-charles-ramoya-design",
+    "title": "Graphic Designer & Web Designer",
+    "institution": "Charles Ramoya",
+    "institutionLogo": "/assets/aistudio/CHARLES_WEBSITES_91d4851c.png",
+    "status": "earned",
+    "certificateFileUrl": "/assets/aistudio/cHARLES_RAMOYA1_61bf7fca.png",
+    "certificateFileType": "image",
+    "certificateFileName": "cHARLES_RAMOYA1_61bf7fca.png",
+    "createdAt": "2026-11-18T12:07:00.000Z",
+    "updatedAt": "2026-11-18T12:07:00.000Z"
+  }
+]

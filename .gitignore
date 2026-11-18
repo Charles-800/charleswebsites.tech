@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Next.js build & caches
+.next/
+out/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Logs & OS artifacts
+.DS_Store
+*.log
+npm-debug.log*
+
+# Environment & Secrets (NEVER commit secrets to GitHub)
+.env
+.env*.local
+.env.production
+
+# Runtime lead submissions (contains visitor PII)
+data/inquiries.json
