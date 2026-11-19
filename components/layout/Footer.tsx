@@ -88,6 +88,11 @@ export default function Footer() {
                   {t.nav.contact}
                 </Link>
               </li>
+              <li>
+                <Link href="/#download-app" className="hover:text-[#8B5CF6] transition-colors">
+                  {t.nav.downloadApp}
+                </Link>
+              </li>
             </ul>
           </div>
 

@@ -89,9 +89,21 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: '/downloads/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, must-revalidate',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
+      },
     ];
   },
-  output: 'standalone',
   experimental: {
     optimizePackageImports: ['lucide-react', 'motion'],
   },

@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import FloatingContact from '@/components/layout/FloatingContact';
 import { SITE_CONFIG, getSiteBaseUrl } from '@/lib/config/site';
+import { getServerAppDownloads } from '@/lib/server/downloads';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -73,7 +74,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const appDownloads = await getServerAppDownloads();
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -120,7 +122,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <LanguageProvider>
           <div className="flex min-h-screen flex-col">
-            <Navbar />
+            <Navbar appDownloads={appDownloads} />
             <main className="flex-1">{children}</main>
             <Footer />
             <FloatingContact />

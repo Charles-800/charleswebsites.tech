@@ -7,11 +7,16 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, Phone, MessageCircle, Globe, Download } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { SITE_CONFIG, buildWhatsAppUrl } from '@/lib/config/site';
+import type { AppDownloadOverrides } from '@/lib/config/app-clients';
 import DownloadAppModal from '@/components/layout/DownloadAppModal';
 
 const PRIMARY_ROUTES = ['/', '/about', '/services', '/portfolio', '/pricing', '/blog', '/contact'];
 
-export default function Navbar() {
+interface NavbarProps {
+  appDownloads?: AppDownloadOverrides;
+}
+
+export default function Navbar({ appDownloads }: NavbarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { locale, setLocale, t } = useLanguage();
@@ -321,6 +326,7 @@ export default function Navbar() {
       <DownloadAppModal
         isOpen={downloadModalOpen}
         onClose={() => setDownloadModalOpen(false)}
+        appDownloads={appDownloads}
       />
     </header>
   );
