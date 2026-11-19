@@ -25,13 +25,62 @@ export interface AppPlatformConfig {
 
 const BLOCKED_PLACEHOLDER_PATTERNS = [
   'coming-soon',
+  'coming_soon',
   'comingsoon',
   'placeholder',
   'example.com',
   'localhost',
 ];
 
-export function resolveDownloadUrl(rawUrl?: string): string | null {
+function matchesPlatformTarget(cleanUrl: string, platform?: ClientPlatformId): boolean {
+  const lowerPath = cleanUrl.split('?')[0].split('#')[0].toLowerCase();
+
+  if (!platform) {
+    return (
+      lowerPath.endsWith('.apk') ||
+      lowerPath.endsWith('.exe') ||
+      lowerPath.endsWith('.msi') ||
+      lowerPath.endsWith('.msix') ||
+      lowerPath.endsWith('.dmg') ||
+      lowerPath.endsWith('.pkg') ||
+      lowerPath.endsWith('.zip') ||
+      lowerPath.startsWith('https://play.google.com/') ||
+      lowerPath.startsWith('https://apps.apple.com/') ||
+      lowerPath.startsWith('https://testflight.apple.com/') ||
+      lowerPath.startsWith('https://apps.microsoft.com/')
+    );
+  }
+
+  switch (platform) {
+    case 'android':
+      return lowerPath.endsWith('.apk') || lowerPath.startsWith('https://play.google.com/');
+    case 'windows':
+      return (
+        lowerPath.endsWith('.exe') ||
+        lowerPath.endsWith('.msi') ||
+        lowerPath.endsWith('.msix') ||
+        lowerPath.endsWith('.zip') ||
+        lowerPath.startsWith('https://apps.microsoft.com/')
+      );
+    case 'ios':
+      return (
+        lowerPath.startsWith('https://apps.apple.com/') ||
+        lowerPath.startsWith('https://testflight.apple.com/')
+      );
+    case 'mac':
+      return (
+        lowerPath.endsWith('.dmg') ||
+        lowerPath.endsWith('.pkg') ||
+        lowerPath.endsWith('.zip') ||
+        lowerPath.startsWith('https://apps.apple.com/')
+      );
+  }
+}
+
+export function resolveDownloadUrl(
+  rawUrl?: string,
+  platform?: ClientPlatformId
+): string | null {
   if (!rawUrl) return null;
   const trimmed = rawUrl.trim();
   if (!trimmed || trimmed === '#' || trimmed.includes('..')) return null;
@@ -42,14 +91,15 @@ export function resolveDownloadUrl(rawUrl?: string): string | null {
   }
 
   if (trimmed.startsWith('/downloads/') && trimmed.length > '/downloads/'.length) {
-    return trimmed;
+    return matchesPlatformTarget(trimmed, platform) ? trimmed : null;
   }
 
   if (trimmed.startsWith('https://')) {
     try {
       const parsed = new URL(trimmed);
       if (parsed.protocol === 'https:' && Boolean(parsed.hostname)) {
-        return parsed.toString();
+        const normalized = parsed.toString();
+        return matchesPlatformTarget(normalized, platform) ? normalized : null;
       }
     } catch {
       return null;
@@ -137,15 +187,15 @@ export function getAppDownloadPlatforms(
   const fallbackUrls = normalized.fallbackUrls;
 
   const androidUrl =
-    resolveDownloadUrl(process.env.NEXT_PUBLIC_ANDROID_DOWNLOAD_URL) ??
-    resolveDownloadUrl(fallbackUrls?.android);
+    resolveDownloadUrl(process.env.NEXT_PUBLIC_ANDROID_DOWNLOAD_URL, 'android') ??
+    resolveDownloadUrl(fallbackUrls?.android, 'android');
   const windowsUrl =
-    resolveDownloadUrl(process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL) ??
-    resolveDownloadUrl(fallbackUrls?.windows);
-  const iosUrl = resolveDownloadUrl(process.env.NEXT_PUBLIC_IOS_DOWNLOAD_URL);
+    resolveDownloadUrl(process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL, 'windows') ??
+    resolveDownloadUrl(fallbackUrls?.windows, 'windows');
+  const iosUrl = resolveDownloadUrl(process.env.NEXT_PUBLIC_IOS_DOWNLOAD_URL, 'ios');
   const macUrl =
-    resolveDownloadUrl(process.env.NEXT_PUBLIC_MAC_DOWNLOAD_URL) ??
-    resolveDownloadUrl(fallbackUrls?.mac);
+    resolveDownloadUrl(process.env.NEXT_PUBLIC_MAC_DOWNLOAD_URL, 'mac') ??
+    resolveDownloadUrl(fallbackUrls?.mac, 'mac');
 
   const androidSize =
     fileSizes?.android || process.env.NEXT_PUBLIC_ANDROID_FILE_SIZE?.trim() || null;

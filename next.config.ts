@@ -104,6 +104,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/downloads/coming-soon',
+        destination: '/#download-app',
+        permanent: false,
+      },
+    ];
+  },
   experimental: {
     optimizePackageImports: ['lucide-react', 'motion'],
   },
