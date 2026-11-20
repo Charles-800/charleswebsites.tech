@@ -4,25 +4,18 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, Phone, MessageCircle, Globe, Download } from 'lucide-react';
+import { Menu, X, Phone, MessageCircle, Globe } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { SITE_CONFIG, buildWhatsAppUrl } from '@/lib/config/site';
-import type { AppDownloadOverrides } from '@/lib/config/app-clients';
-import DownloadAppModal from '@/components/layout/DownloadAppModal';
 
 const PRIMARY_ROUTES = ['/', '/about', '/services', '/portfolio', '/pricing', '/blog', '/contact'];
 
-interface NavbarProps {
-  appDownloads?: AppDownloadOverrides;
-}
-
-export default function Navbar({ appDownloads }: NavbarProps) {
+export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { locale, setLocale, t } = useLanguage();
   const [openPathname, setOpenPathname] = useState<string | null>(null);
   const [navTarget, setNavTarget] = useState<{ from: string; to: string } | null>(null);
-  const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const mobileOpen = openPathname === pathname;
   const isNavigating = navTarget !== null && navTarget.from === pathname && navTarget.to !== pathname;
 
@@ -167,17 +160,18 @@ export default function Navbar({ appDownloads }: NavbarProps) {
             </button>
           </div>
 
-          <button
-            type="button"
+          <Link
+            href="/contact"
+            prefetch={true}
+            onMouseEnter={() => router.prefetch('/contact')}
             onClick={() => {
               setMobileOpen(false);
-              setDownloadModalOpen(true);
+              setNavTarget({ from: pathname, to: '/contact' });
             }}
-            className="btn-primary-cta inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-xs font-bold tracking-wide whitespace-nowrap shrink-0 cursor-pointer"
+            className="btn-primary-cta inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-xs font-bold tracking-wide whitespace-nowrap shrink-0"
           >
-            <Download className="h-3.5 w-3.5 shrink-0" />
-            <span>{t.nav.downloadApp}</span>
-          </button>
+            {t.nav.contactMe}
+          </Link>
         </div>
 
         {/* Mobile Controls (Always visible below lg) */}
@@ -192,17 +186,17 @@ export default function Navbar({ appDownloads }: NavbarProps) {
             <span>{locale === 'en' ? 'SW' : 'EN'}</span>
           </button>
 
-          <button
-            type="button"
+          <Link
+            href="/contact"
+            prefetch={true}
             onClick={() => {
               setMobileOpen(false);
-              setDownloadModalOpen(true);
+              setNavTarget({ from: pathname, to: '/contact' });
             }}
-            className="btn-primary-cta hidden sm:inline-flex h-10 items-center justify-center gap-1.5 rounded-lg px-4 text-xs font-bold tracking-wide whitespace-nowrap shrink-0 cursor-pointer"
+            className="btn-primary-cta hidden sm:inline-flex h-10 items-center justify-center rounded-lg px-4 text-xs font-bold tracking-wide whitespace-nowrap shrink-0"
           >
-            <Download className="h-3.5 w-3.5 shrink-0" />
-            <span>{t.nav.downloadApp}</span>
-          </button>
+            {t.nav.contactMe}
+          </Link>
 
           <button
             type="button"
@@ -290,17 +284,17 @@ export default function Navbar({ appDownloads }: NavbarProps) {
           </div>
 
           <div className="mt-5 grid grid-cols-1 gap-3 border-t border-[#E8E8EC] pt-5 sm:grid-cols-2">
-            <button
-              type="button"
+            <Link
+              href="/contact"
+              prefetch={true}
               onClick={() => {
                 setMobileOpen(false);
-                setDownloadModalOpen(true);
+                setNavTarget({ from: pathname, to: '/contact' });
               }}
-              className="btn-primary-cta flex min-h-[48px] items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-extrabold tracking-wide cursor-pointer"
+              className="btn-primary-cta flex min-h-[48px] items-center justify-center rounded-xl px-5 py-3 text-sm font-extrabold tracking-wide"
             >
-              <Download className="h-4 w-4 shrink-0" />
-              <span>{t.nav.downloadApp}</span>
-            </button>
+              {t.nav.contactMe}
+            </Link>
             <a
               href={buildWhatsAppUrl(t.contact.whatsappPrefill)}
               target="_blank"
@@ -323,11 +317,6 @@ export default function Navbar({ appDownloads }: NavbarProps) {
         </div>
       )}
 
-      <DownloadAppModal
-        isOpen={downloadModalOpen}
-        onClose={() => setDownloadModalOpen(false)}
-        appDownloads={appDownloads}
-      />
     </header>
   );
 }

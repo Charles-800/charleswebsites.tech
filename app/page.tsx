@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { getAllBlogArticles, getAllCertifications } from '@/lib/server/store';
-import { getServerAppDownloads } from '@/lib/server/downloads';
 import HomeClient from '@/components/home/HomeClient';
 import { buildWebPageSchema } from '@/lib/seo/schema';
 
@@ -16,10 +15,9 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [articles, certifications, appDownloads] = await Promise.all([
+  const [articles, certifications] = await Promise.all([
     getAllBlogArticles(),
     getAllCertifications(),
-    getServerAppDownloads(),
   ]);
   const homePageSchema = buildWebPageSchema({
     name: 'Charles Websites — Web Development & AI Engineering Agency',
@@ -37,7 +35,6 @@ export default async function HomePage() {
       <HomeClient
         recentArticles={articles.slice(0, 3)}
         initialCertifications={certifications}
-        appDownloads={appDownloads}
       />
     </>
   );

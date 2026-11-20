@@ -10,7 +10,7 @@ export interface TranslationSchema {
     blog: string;
     contact: string;
     getQuote: string;
-    downloadApp: string;
+    contactMe: string;
     callUs: string;
     whatsappUs: string;
     languageLabel: string;
@@ -225,49 +225,6 @@ export interface TranslationSchema {
       descriptionMin: string;
     };
   };
-  downloadModal: {
-    kicker: string;
-    title: string;
-    subtitle: string;
-    comingSoon: string;
-    recommendedBadge: string;
-    detectedLabel: string;
-    switchPlatformLabel: string;
-    downloadAndroidBtn: string;
-    downloadWindowsBtn: string;
-    getIosBtn: string;
-    downloadAppStoreBtn: string;
-    downloadMacBtn: string;
-    iosComingSoonTitle: string;
-    iosComingSoonBody: string;
-    macComingSoonTitle: string;
-    macComingSoonBody: string;
-    installerPendingNote: string;
-    androidDirectReassurance: string;
-    windowsDirectReassurance: string;
-    downloadStartedTitle: string;
-    downloadStartedSubtitle: string;
-    installGuideTitle: string;
-    securitySupportNote: string;
-    securitySupportNoteIosLive: string;
-    livePlatformLabel: string;
-    notifyCta: string;
-    whatsappCta: string;
-    closeModal: string;
-    deviceNames: {
-      android: string;
-      ios: string;
-      windows: string;
-      mac: string;
-      other: string;
-    };
-    platformDescriptions: {
-      android: string;
-      windows: string;
-      ios: string;
-      mac: string;
-    };
-  };
   certifications: {
     kicker: string;
     headline: string;
@@ -324,7 +281,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       blog: 'Blog',
       contact: 'Contact',
       getQuote: 'GET A QUOTE',
-      downloadApp: 'DOWNLOAD APP',
+      contactMe: 'CONTACT ME',
       callUs: 'Call 0112298275',
       whatsappUs: 'WhatsApp',
       languageLabel: 'Language',
@@ -918,57 +875,6 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         descriptionMin: 'Please provide at least 20 characters describing your project.',
       },
     },
-    downloadModal: {
-      kicker: 'MULTI-PLATFORM ACCESS',
-      title: 'Download the App',
-      subtitle:
-        'Connect directly with Charles Websites from your phone or computer — synchronized live with charleswebsites.tech.',
-      comingSoon: 'Coming Soon',
-      recommendedBadge: 'Recommended for your device',
-      detectedLabel: 'Detected device',
-      switchPlatformLabel: 'Choose platform',
-      downloadAndroidBtn: 'Download for Android',
-      downloadWindowsBtn: 'Download for Windows',
-      getIosBtn: 'Get iOS version',
-      downloadAppStoreBtn: 'Download on the App Store',
-      downloadMacBtn: 'Download for Mac',
-      iosComingSoonTitle: 'iPhone / iPad — Coming Soon',
-      iosComingSoonBody:
-        'iPhone / iPad version coming soon. iOS installation requires an App Store listing or an approved Apple distribution method.',
-      macComingSoonTitle: 'Mac version coming soon',
-      macComingSoonBody:
-        'Mac version coming soon. Meanwhile, use charleswebsites.tech directly in your Mac browser.',
-      installerPendingNote: 'Official installer download will appear here once published.',
-      androidDirectReassurance:
-        'This app is downloaded directly from Charles Websites. Android may ask for permission to install apps from this source.',
-      windowsDirectReassurance:
-        'This installer is downloaded directly from Charles Websites. Windows may show a security warning for apps installed outside the Microsoft Store.',
-      downloadStartedTitle: 'Download started',
-      downloadStartedSubtitle:
-        'Your file is downloading directly from Charles Websites. Follow the steps below to complete installation.',
-      installGuideTitle: 'Installation Guide',
-      securitySupportNote:
-        'Choose the version for your device. Android and Windows files download directly from Charles Websites. iOS support is coming soon.',
-      securitySupportNoteIosLive:
-        'Android and Windows files are downloaded directly from Charles Websites. iOS builds are delivered through Apple App Store / TestFlight.',
-      livePlatformLabel: 'Official Domain',
-      notifyCta: 'Request Release Notification',
-      whatsappCta: 'Ask on WhatsApp',
-      closeModal: 'Close download modal',
-      deviceNames: {
-        android: 'Android',
-        ios: 'iPhone / iPad',
-        windows: 'Windows PC',
-        mac: 'Mac',
-        other: 'Your Device',
-      },
-      platformDescriptions: {
-        android: 'Direct Android APK package for instant quotes, WhatsApp support, and project updates.',
-        windows: 'Dedicated Windows 10 & 11 desktop setup installer synced with Charles Websites.',
-        ios: 'iPhone and iPad companion experience connected to our live platform.',
-        mac: 'Native macOS desktop access for Apple Silicon and Intel Macs.',
-      },
-    },
     certifications: {
       kicker: 'VERIFIED CREDENTIALS',
       headline: 'CERTIFICATIONS & PROFESSIONAL CREDENTIALS.',
@@ -1025,7 +931,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       blog: 'Makala',
       contact: 'Wasiliana',
       getQuote: 'OMBA NUKUU',
-      downloadApp: 'PAKUA APP',
+      contactMe: 'WASILIANA NAMI',
       callUs: 'Piga 0112298275',
       whatsappUs: 'WhatsApp',
       languageLabel: 'Lugha',
@@ -1617,57 +1523,6 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         serviceRequired: 'Tafadhali chagua huduma unayohitaji.',
         budgetRequired: 'Tafadhali chagua kiwango cha bajeti.',
         descriptionMin: 'Tafadhali andika angalau herufi 20 ukielezea mradi wako.',
-      },
-    },
-    downloadModal: {
-      kicker: 'UPATIKANAJI KWENYE VIFAA VYOTE',
-      title: 'Pakua Programu Yetu',
-      subtitle:
-        'Fikia Charles Websites moja kwa moja kwenye simu au kompyuta yako — imeunganishwa na charleswebsites.tech.',
-      comingSoon: 'Inakuja Hivi Karibuni',
-      recommendedBadge: 'Imependekezwa kwa kifaa chako',
-      detectedLabel: 'Kifaa kilichotambuliwa',
-      switchPlatformLabel: 'Chagua kifaa kingine',
-      downloadAndroidBtn: 'Pakua kwa Android',
-      downloadWindowsBtn: 'Pakua kwa Windows',
-      getIosBtn: 'Pata toleo la iOS',
-      downloadAppStoreBtn: 'Pakua kwenye App Store',
-      downloadMacBtn: 'Pakua kwa Mac',
-      iosComingSoonTitle: 'iPhone / iPad — Inakuja Hivi Karibuni',
-      iosComingSoonBody:
-        'Toleo la iPhone / iPad linakuja hivi karibuni. Usakinishaji wa iOS unahitaji App Store au njia rasmi iliyoidhinishwa na Apple.',
-      macComingSoonTitle: 'Toleo la Mac linakuja hivi karibuni',
-      macComingSoonBody:
-        'Toleo la Mac linakuja hivi karibuni. Kwa sasa tumia charleswebsites.tech moja kwa moja kwenye kivinjari chako.',
-      installerPendingNote: 'Faili rasmi ya kupakua itaonekana hapa ikishachapishwa.',
-      androidDirectReassurance:
-        'Programu hii inapakuliwa moja kwa moja kutoka Charles Websites. Android inaweza kuomba ruhusa ya kusakinisha kutoka chanzo hiki.',
-      windowsDirectReassurance:
-        'Kisakinishi hiki kinapakuliwa moja kwa moja kutoka Charles Websites. Windows inaweza kuonyesha onyo la usalama kwa programu zilizo nje ya Microsoft Store.',
-      downloadStartedTitle: 'Upakuaji umeanza',
-      downloadStartedSubtitle:
-        'Faili yako inapakuliwa moja kwa moja kutoka Charles Websites. Fuata hatua hizi kukamilisha usakinishaji.',
-      installGuideTitle: 'Mwongozo wa Kusakinisha',
-      securitySupportNote:
-        'Chagua toleo la kifaa chako. Faili za Android na Windows zinapakuliwa moja kwa moja kutoka Charles Websites. Toleo la iOS linakuja hivi karibuni.',
-      securitySupportNoteIosLive:
-        'Faili za Android na Windows zinapakuliwa moja kwa moja kutoka Charles Websites. Toleo la iOS linapatikana kupitia App Store / TestFlight.',
-      livePlatformLabel: 'Kikoa Rasmi',
-      notifyCta: 'Omba Taarifa Ikizinduliwa',
-      whatsappCta: 'Uliza kwa WhatsApp',
-      closeModal: 'Funga dirisha la kupakua',
-      deviceNames: {
-        android: 'Android',
-        ios: 'iPhone / iPad',
-        windows: 'Kompyuta ya Windows',
-        mac: 'Mac',
-        other: 'Kifaa Chako',
-      },
-      platformDescriptions: {
-        android: 'Faili ya APK ya moja kwa moja kwa maombi ya haraka, msaada wa WhatsApp, na taarifa za miradi.',
-        windows: 'Programu rasmi ya kompyuta kwa Windows 10 na 11 iliyounganishwa na Charles Websites.',
-        ios: 'Programu ya iPhone na iPad iliyounganishwa na mfumo wetu rasmi.',
-        mac: 'Programu ya macOS kwa kompyuta za Apple Silicon na Intel.',
       },
     },
     certifications: {

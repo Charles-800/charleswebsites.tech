@@ -30,20 +30,16 @@ import PortfolioSection from '@/components/sections/PortfolioSection';
 import PricingSection from '@/components/sections/PricingSection';
 import SkillsSection from '@/components/sections/SkillsSection';
 import CertificationsSection from '@/components/sections/CertificationsSection';
-import DownloadAppSection from '@/components/sections/DownloadAppSection';
 import ResilientImage from '@/components/ui/ResilientImage';
-import type { AppDownloadOverrides } from '@/lib/config/app-clients';
 
 interface HomeClientProps {
   recentArticles: BlogArticle[];
   initialCertifications: CertificationItem[];
-  appDownloads?: AppDownloadOverrides;
 }
 
 export default function HomeClient({
   recentArticles,
   initialCertifications,
-  appDownloads,
 }: HomeClientProps) {
   const { locale, t } = useLanguage();
 
@@ -455,10 +451,7 @@ export default function HomeClient({
         </div>
       </section>
 
-      {/* SECTION 10: DOWNLOAD THE APP */}
-      <DownloadAppSection appDownloads={appDownloads} variant="gray" />
-
-      {/* SECTION 11: FINAL CALL TO ACTION */}
+      {/* SECTION 10: FINAL CALL TO ACTION */}
       <section className="bg-[#111111] py-20 sm:py-24 text-white">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center space-y-6">
