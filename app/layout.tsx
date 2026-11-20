@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Plus_Jakarta_Sans, Manrope, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import FloatingContact from '@/components/layout/FloatingContact';
-import { SITE_CONFIG, getSiteBaseUrl } from '@/lib/config/site';
+import { getSiteBaseUrl } from '@/lib/config/site';
+import {
+  buildOrganizationAndServiceSchema,
+  buildWebSiteSchema,
+} from '@/lib/seo/schema';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -29,15 +34,19 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const siteBaseUrl = getSiteBaseUrl();
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+const bingVerification =
+  process.env.NEXT_PUBLIC_BING_VERIFICATION?.trim() || '70FAF451D53FE356E7829A6C438890AD';
+const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteBaseUrl),
   title: {
-    default: 'Charles Websites — Web Development & AI Engineering Agency',
+    default: 'Website Design & Web Development Kenya | Charles Websites',
     template: '%s | Charles Websites',
   },
   description:
-    'Your digital growth partner. We create powerful websites, AI chatbots, and intelligent business automation in Kenya to attract customers and grow online.',
+    'Custom website design, web development, e-commerce M-Pesa stores, AI chatbots, graphic branding, and technical SEO in Kenya starting at KES 39,890.',
   icons: {
     icon: '/assets/aistudio/CHARLES_WEBSITES_91d4851c.png',
     apple: '/assets/aistudio/CHARLES_WEBSITES_91d4851c.png',
@@ -45,10 +54,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  ...(googleVerification || bingVerification
+    ? {
+        verification: {
+          ...(googleVerification ? { google: googleVerification } : {}),
+          ...(bingVerification ? { other: { 'msvalidate.01': bingVerification } } : {}),
+        },
+      }
+    : {}),
   openGraph: {
-    title: 'Charles Websites — Web Development & AI Engineering Agency',
+    title: 'Website Design & Web Development Kenya | Charles Websites',
     description:
-      'We build websites, engineer intelligence, and grow businesses. Explore custom web design, AI integration, SEO, and transparent KES packages.',
+      'We build websites, engineer AI intelligence, and grow businesses across Kenya and worldwide. Explore custom web design, e-commerce, SEO, and KES packages.',
     url: siteBaseUrl,
     siteName: 'Charles Websites',
     type: 'website',
@@ -62,7 +79,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Charles Websites — Web Development & AI Engineering Agency',
+    title: 'Website Design & Web Development Kenya | Charles Websites',
     description:
       'Custom business websites, AI chatbots, M-Pesa integrations, and SEO engineered for growth.',
     images: ['/assets/aistudio/CHARLES_WEBSITES_91d4851c.png'],
@@ -74,42 +91,18 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: SITE_CONFIG.name,
-    url: siteBaseUrl,
-    logo: `${siteBaseUrl}/assets/aistudio/CHARLES_WEBSITES_91d4851c.png`,
-    description:
-      'Web Development & AI Engineering agency building modern websites, AI chatbots, Android & iOS mobile apps, and business automation.',
-    telephone: '+254112298275',
-    email: SITE_CONFIG.email,
-    areaServed: 'KE',
-    ...(SITE_CONFIG.socials.length > 0
-      ? { sameAs: SITE_CONFIG.socials.map((s) => s.href) }
-      : {}),
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+254112298275',
-      contactType: 'sales',
-      availableLanguage: ['English', 'Swahili'],
-    },
-  };
-
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: SITE_CONFIG.name,
-    url: siteBaseUrl,
-    inLanguage: ['en', 'sw'],
-  };
+  const organizationSchema = buildOrganizationAndServiceSchema();
+  const websiteSchema = buildWebSiteSchema();
 
   return (
     <html
       lang="en"
       className={`${jakarta.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="min-h-screen bg-white text-[#151515] antialiased selection:bg-[#7137D8] selection:text-white" suppressHydrationWarning>
+      <body
+        className="min-h-screen bg-white text-[#151515] antialiased selection:bg-[#7137D8] selection:text-white"
+        suppressHydrationWarning
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -118,6 +111,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        {gaMeasurementId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaMeasurementId)}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${gaMeasurementId}');`}
+            </Script>
+          </>
+        )}
         <LanguageProvider>
           <div className="flex min-h-screen flex-col">
             <Navbar />

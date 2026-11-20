@@ -20,17 +20,33 @@ export async function generateMetadata({
     };
   }
 
+  const baseUrl = getSiteBaseUrl();
+  const titleConfig: Metadata['title'] =
+    article.en.title.length > 44 ? { absolute: article.en.title } : article.en.title;
+
   return {
-    title: article.en.title,
+    title: titleConfig,
     description: article.en.excerpt,
     alternates: {
       canonical: `/blog/${article.slug}`,
     },
     openGraph: {
-      title: article.en.title,
+      title: `${article.en.title} | Charles Websites`,
       description: article.en.excerpt,
+      url: `${baseUrl}/blog/${article.slug}`,
       type: 'article',
       publishedTime: article.publishedAt,
+      images: [
+        {
+          url: article.featuredImage,
+          alt: article.en.imageAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.en.title,
+      description: article.en.excerpt,
       images: [article.featuredImage],
     },
   };

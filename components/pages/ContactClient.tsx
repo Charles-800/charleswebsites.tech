@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useMemo, useState, useSyncExternalStore } from 'react';
 import { Phone, MessageCircle, CheckCircle2, AlertCircle, Send, Mail } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { SITE_CONFIG, buildWhatsAppUrl, buildMailtoUrl } from '@/lib/config/site';
@@ -17,12 +16,16 @@ interface FormState {
   email: string;
   phone: string;
   company: string;
-  serviceIndex: number;
-  customService: string;
-  budgetIndex: number;
-  projectDescription: string;
+  serviceIndex: number | null;
+  customService: string | null;
+  budgetIndex: number | null;
+  projectDescription: string | null;
   companyWebsite: string;
 }
+
+const subscribeNoop = () => () => {};
+const getClientSearch = () => window.location.search;
+const getServerSearch = () => '';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -44,25 +47,25 @@ export default function ContactClient({
   preselectedProject,
 }: ContactClientProps) {
   const { locale, t } = useLanguage();
-  const searchParams = useSearchParams();
 
-  const resolvedPackage = preselectedPackage ?? searchParams.get('package') ?? undefined;
-  const resolvedService = preselectedService ?? searchParams.get('service') ?? undefined;
-  const resolvedProject = preselectedProject ?? searchParams.get('project') ?? undefined;
+  const searchStr = useSyncExternalStore(subscribeNoop, getClientSearch, getServerSearch);
+  const queryParams = useMemo(() => new URLSearchParams(searchStr), [searchStr]);
 
-  const [form, setForm] = useState<FormState>(() => ({
+  const resolvedPackage = preselectedPackage ?? queryParams.get('package') ?? undefined;
+  const resolvedService = preselectedService ?? queryParams.get('service') ?? undefined;
+  const resolvedProject = preselectedProject ?? queryParams.get('project') ?? undefined;
+
+  const [form, setForm] = useState<FormState>({
     fullName: '',
     email: '',
     phone: '',
     company: '',
-    serviceIndex: getInitialServiceIndex(resolvedPackage),
-    customService: resolvedService || '',
-    budgetIndex: getInitialBudgetIndex(resolvedPackage),
-    projectDescription: resolvedProject
-      ? `Interested in a website similar to ${resolvedProject}.`
-      : '',
+    serviceIndex: null,
+    customService: null,
+    budgetIndex: null,
+    projectDescription: null,
     companyWebsite: '',
-  }));
+  });
 
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -73,10 +76,19 @@ export default function ContactClient({
     mailtoUrl: string;
   } | null>(null);
 
+  const effectiveServiceIndex = form.serviceIndex ?? getInitialServiceIndex(resolvedPackage);
+  const effectiveCustomService = form.customService ?? (resolvedService || '');
+  const effectiveBudgetIndex = form.budgetIndex ?? getInitialBudgetIndex(resolvedPackage);
+  const effectiveDescription =
+    form.projectDescription ??
+    (resolvedProject ? `Interested in a website similar to ${resolvedProject}.` : '');
+
   const selectedServiceValue =
-    form.customService || t.contact.serviceOptions[form.serviceIndex] || t.contact.serviceOptions[0];
+    effectiveCustomService ||
+    t.contact.serviceOptions[effectiveServiceIndex] ||
+    t.contact.serviceOptions[0];
   const selectedBudgetValue =
-    t.contact.budgetOptions[form.budgetIndex] || t.contact.budgetOptions[0];
+    t.contact.budgetOptions[effectiveBudgetIndex] || t.contact.budgetOptions[0];
 
   const validate = (): boolean => {
     const nextErrors: Partial<Record<string, string>> = {};
@@ -95,7 +107,7 @@ export default function ContactClient({
     if (!selectedBudgetValue.trim()) {
       nextErrors.budgetRequired = t.contact.validation.budgetRequired;
     }
-    if (form.projectDescription.trim().length < 20) {
+    if (effectiveDescription.trim().length < 20) {
       nextErrors.projectDescription = t.contact.validation.descriptionMin;
     }
 
@@ -121,7 +133,7 @@ export default function ContactClient({
           company: form.company,
           serviceRequired: selectedServiceValue,
           budgetRange: selectedBudgetValue,
-          projectDescription: form.projectDescription,
+          projectDescription: effectiveDescription,
           locale,
           companyWebsite: form.companyWebsite,
         }),
@@ -135,7 +147,7 @@ export default function ContactClient({
 
       const mailtoUrl = buildMailtoUrl(
         `[${data.referenceId}] ${selectedServiceValue} — ${form.fullName}`,
-        `Reference ID: ${data.referenceId}\nName: ${form.fullName}\nEmail: ${form.email}\nPhone: ${form.phone}\nCompany: ${form.company || 'N/A'}\nService: ${selectedServiceValue}\nBudget: ${selectedBudgetValue}\n\nProject Details:\n${form.projectDescription}`
+        `Reference ID: ${data.referenceId}\nName: ${form.fullName}\nEmail: ${form.email}\nPhone: ${form.phone}\nCompany: ${form.company || 'N/A'}\nService: ${selectedServiceValue}\nBudget: ${selectedBudgetValue}\n\nProject Details:\n${effectiveDescription}`
       );
 
       setSuccessInfo({
@@ -165,8 +177,8 @@ export default function ContactClient({
   const whatsappDirectUrl = buildWhatsAppUrl(t.contact.whatsappPrefill);
 
   const serviceOptionsList =
-    form.customService && !t.contact.serviceOptions.includes(form.customService)
-      ? [form.customService, ...t.contact.serviceOptions]
+    effectiveCustomService && !t.contact.serviceOptions.includes(effectiveCustomService)
+      ? [effectiveCustomService, ...t.contact.serviceOptions]
       : t.contact.serviceOptions;
 
   return (
@@ -477,7 +489,7 @@ export default function ContactClient({
                       <textarea
                         id="projectDescription"
                         rows={5}
-                        value={form.projectDescription}
+                        value={effectiveDescription}
                         onChange={(e) =>
                           setForm({ ...form, projectDescription: e.target.value })
                         }

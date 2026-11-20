@@ -129,6 +129,7 @@ export async function PUT(
     revalidatePath('/');
     revalidatePath('/blog');
     revalidatePath(`/blog/${slug}`);
+    revalidatePath('/sitemap.xml');
 
     return NextResponse.json({ ok: true, article: updatedArticle });
   } catch {

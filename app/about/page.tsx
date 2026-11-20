@@ -2,20 +2,33 @@ import type { Metadata } from 'next';
 import AboutClient from '@/components/pages/AboutClient';
 import { getAllCertifications } from '@/lib/server/store';
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@/lib/seo/schema';
+import { getSiteBaseUrl } from '@/lib/config/site';
 
 export const revalidate = 60;
 
+const baseUrl = getSiteBaseUrl();
+
 export const metadata: Metadata = {
-  title: 'About Charles Websites — Web Developer & AI Engineer',
+  title: 'About Us — Web Developer & AI Agency',
   description:
-    'Learn about Charles Websites, a Web Development, Mobile App & AI Engineering agency helping businesses grow through modern websites, intelligent automation, and SEO.',
+    'Learn about Charles Websites, a web design, mobile app, and AI engineering agency serving businesses across Nairobi, Mombasa, Nanyuki, Kisumu, Nakuru, and worldwide.',
   alternates: {
     canonical: '/about',
   },
   openGraph: {
-    title: 'About Charles Websites — Web Development & AI Engineering Agency',
+    title: 'About Us — Web Developer & AI Agency | Charles Websites',
     description:
-      'Building the future of digital business with custom web development, Android & iOS apps, practical AI engineering, and transparent KES solutions.',
+      'Custom web development, Android & iOS apps, practical AI engineering, and transparent KES solutions across Kenya and globally.',
+    url: `${baseUrl}/about`,
+    type: 'website',
+    images: ['/assets/aistudio/CHARLES_WEBSITES_91d4851c.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Us — Web Developer & AI Agency | Charles Websites',
+    description:
+      'Discover how Charles Websites builds fast websites, AI chatbots, and SEO-ready business systems.',
+    images: ['/assets/aistudio/CHARLES_WEBSITES_91d4851c.png'],
   },
 };
 

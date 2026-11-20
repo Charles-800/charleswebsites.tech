@@ -137,6 +137,7 @@ export async function POST(req: NextRequest) {
     await saveBlogArticles(updated);
     revalidatePath('/');
     revalidatePath('/blog');
+    revalidatePath('/sitemap.xml');
 
     return NextResponse.json({ ok: true, article: newArticle }, { status: 201 });
   } catch {

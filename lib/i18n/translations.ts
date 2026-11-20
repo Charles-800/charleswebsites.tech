@@ -294,17 +294,17 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       headlineAccentPurple: 'BUSINESSES',
       headlinePost: ' FORWARD.',
       supportingText:
-        'From stunning business websites to intelligent AI-powered solutions, Charles Websites helps businesses establish their online presence, attract customers and automate growth.',
+        'Website design and web development in Kenya built for real business growth. From fast company websites and M-Pesa e-commerce stores to practical AI chatbots, Charles Websites helps businesses attract customers and automate inquiries.',
       primaryCta: 'START YOUR PROJECT',
       secondaryCta: 'VIEW OUR WORK',
       whatsappCta: 'CHAT ON WHATSAPP',
-      trustStatement: 'Creative thinking. Powerful technology. Measurable business impact.',
+      trustStatement: 'Serving Nairobi, Mombasa, Nanyuki, Kisumu, Nakuru, and global remote clients.',
       tagline: 'WE BUILD WEBSITES. WE ENGINEER INTELLIGENCE. WE GROW BUSINESSES.',
     },
     trust: {
       headline: 'YOUR IDEAS. OUR TECHNOLOGY. BETTER BUSINESS RESULTS.',
       description:
-        'Your digital growth partner. We create powerful websites and intelligent AI solutions that help businesses attract customers, automate operations and grow online.',
+        'Your digital growth partner in Kenya. We engineer fast, mobile-responsive websites, technical SEO foundations, and practical AI integration services that turn online searches into customer inquiries.',
       pillars: [
         {
           title: 'Web Development',
@@ -772,49 +772,84 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     servicesPage: {
       headline: 'SERVICES & TRANSPARENT PRICING',
       subheading:
-        'Explore our core web, mobile app, and AI engineering capabilities and choose the package aligned with your business goals.',
+        'Explore our website design, e-commerce, SEO, graphic branding, mobile app, and AI engineering capabilities in Kenya—with transparent KES packages.',
       faqHeadline: 'FREQUENTLY ASKED QUESTIONS',
-      faqSubheading: 'Clear answers about timelines, custom engineering, M-Pesa integration, and AI chatbots.',
+      faqSubheading: 'Direct answers on website cost in Kenya, timelines, M-Pesa checkout, AI chatbots, SEO, and international support.',
       faqs: [
         {
-          question: 'How long does website development take?',
+          question: 'How much does a website cost in Kenya?',
           answer:
-            'Timelines depend on project scope and how quickly content is ready. A Starter 4-page website typically takes 1 to 2 weeks from discovery to launch, Business websites take 2 to 3 weeks, and custom Premium platforms with e-commerce or payment integrations take 3 to 5 weeks.',
+            'At Charles Websites, our Starter Package (up to 4 pages with mobile optimization, WhatsApp integration, and basic SEO) costs KES 39,890. Our Business Package (4–7 pages with AI chatbot integration and standard+ SEO) costs KES 52,660. Custom e-commerce stores, booking platforms, and web applications are priced via a custom quote depending on exact features.',
         },
         {
-          question: 'Can I request a custom website?',
+          question: 'How much does website design cost?',
           answer:
-            'Yes. Every website we build can be tailored to your specific industry, branding, page structure, and functional requirements. Use our Contact page or request the Premium Package for a custom quotation.',
+            'Website design cost depends on page count, custom functionality, e-commerce catalogs, and integrations. Simple company profile websites start at KES 39,890, mid-tier growth sites with AI automation start at KES 52,660, and custom multi-feature platforms are quoted transparently before work begins.',
         },
         {
-          question: 'Do you integrate M-Pesa?',
+          question: 'How long does it take to build a website?',
           answer:
-            'Yes. We integrate M-Pesa (STK Push / Daraja API) and Paystack into e-commerce stores and booking platforms using secure server-side payment verification so orders are only confirmed after verified settlement.',
+            'A Starter 4-page website typically takes 1 to 2 weeks from discovery and content readiness to launch. Business websites take 2 to 3 weeks, while custom Premium e-commerce stores, M-Pesa integrations, or web applications take 3 to 5 weeks.',
         },
         {
-          question: 'Can you integrate an AI chatbot?',
+          question: 'Why does my business need a website?',
           answer:
-            'Yes. AI chatbot integration is included in our Business and Premium packages, or can be added to an existing site. We configure assistants grounded in your verified services, FAQs, and WhatsApp lead handoff.',
+            'Unlike social media pages where algorithms limit reach and you do not own the platform, a dedicated website serves as your permanent 24/7 digital headquarters. It helps customers find you on Google when searching for services in Kenya, builds corporate trust, and routes inquiries directly to your phone or WhatsApp.',
         },
         {
-          question: 'Is my website mobile responsive?',
+          question: 'Can you build an ecommerce website?',
           answer:
-            'Absolutely. Every website is built mobile-first and tested across Android phones, iPhones, tablets, laptops, and desktop monitors to guarantee clean spacing, readable text, and tap-friendly buttons.',
+            'Yes. We build WooCommerce and custom online shopping websites featuring organized product catalogs, mobile-friendly category filtering, shopping carts, inventory/order management, product SEO, and WhatsApp order assistance.',
         },
         {
-          question: 'Do you offer website maintenance?',
+          question: 'Can a website accept M-Pesa payments?',
           answer:
-            'Yes. We provide ongoing website maintenance covering security updates, content updates, speed monitoring, backup checks, and technical support.',
+            'Yes. We integrate M-Pesa (Safaricom Daraja STK Push where your Till or Paybill API is supported) as well as Paystack card and mobile money checkout using secure server-side payment verification.',
         },
         {
-          question: 'Can you redesign an existing website?',
+          question: 'Can you build a website with online booking?',
           answer:
-            'Yes. If your current website looks outdated, loads slowly, or does not convert mobile visitors, we can redesign and re-engineer it while preserving your domain and improving your SEO structure.',
+            'Yes. We develop appointment and reservation workflows for clinics, hotels, consultants, and service firms—allowing customers to pick a service, share preferred dates, and submit validated booking requests directly to your inbox or WhatsApp.',
         },
         {
-          question: 'Do you develop Android and iOS mobile apps?',
+          question: 'Do you build mobile-friendly websites?',
           answer:
-            'Yes. We design and build Android and iOS mobile applications—including customer apps, booking platforms, e-commerce apps with M-Pesa, and business workflow apps—and assist with Google Play Store and Apple App Store deployment.',
+            'Yes. Every website is engineered mobile-first and tested across Android smartphones, iPhones, tablets, and desktop screens to guarantee clean readability, fast loading on mobile data, and tap-friendly buttons.',
+        },
+        {
+          question: 'Can you redesign my existing website?',
+          answer:
+            'Yes. If your current website looks outdated, loads slowly, or does not generate inquiries, we redesign and rebuild it while preserving your domain and implementing proper 301 redirects to protect existing SEO value.',
+        },
+        {
+          question: 'Do you provide website maintenance?',
+          answer:
+            'Yes. We offer website maintenance covering security updates, content and image updates, backup checks, speed monitoring, and hosting/domain assistance.',
+        },
+        {
+          question: 'Can you integrate AI into a business website?',
+          answer:
+            'Yes. We implement practical AI integration services such as automated inquiry triage, customer FAQ assistants, structured lead summarization, and intelligent search workflows tailored to your real business operations.',
+        },
+        {
+          question: 'Can you create an AI chatbot?',
+          answer:
+            'Yes. AI chatbot development is included in our Business (KES 52,660) and Premium packages or can be added to an existing site. Our chatbots are grounded in your verified services and pricing and hand off seamlessly to WhatsApp or human staff.',
+        },
+        {
+          question: "How can I improve my website's Google ranking?",
+          answer:
+            'Improving Google visibility combines fast mobile page speed, clean H1–H3 page structure, unique page titles and meta descriptions, valid Schema.org structured data, an accurate XML sitemap, and genuinely helpful content targeting real customer questions. SEO growth builds steadily over time.',
+        },
+        {
+          question: 'What information is required to build a website?',
+          answer:
+            'To start efficiently, prepare your business name, summary of services or products, logo/brand colors (if available), contact phone/WhatsApp/email details, domain preference, and any sample photos or reference sites you like.',
+        },
+        {
+          question: 'Do you work with businesses outside Kenya?',
+          answer:
+            'Yes. While we actively serve clients across Nairobi, Mombasa, Nanyuki, Kisumu, Nakuru, and all of Kenya, we also partner remotely with international and diaspora businesses worldwide.',
         },
       ],
     },
@@ -1422,49 +1457,84 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     servicesPage: {
       headline: 'HUDUMA NA BEI ZILIZO WAZI',
       subheading:
-        'Chunguza uwezo wetu mkuu wa kiuhandisi na uchague kifurushi kinachoendana na malengo ya biashara yako.',
+        'Chunguza uwezo wetu mkuu wa ujenzi wa tovuti, e-commerce, SEO, chapa, na mifumo ya AI nchini Kenya—kwa bei wazi za KES.',
       faqHeadline: 'MASWALI YANAYOULIZWA MARA KWA MARA',
-      faqSubheading: 'Majibu ya wazi kuhusu muda wa kazi, tovuti maalum, malipo ya M-Pesa, na AI chatbots.',
+      faqSubheading: 'Majibu ya moja kwa moja kuhusu gharama ya tovuti Kenya, muda wa kazi, M-Pesa, AI chatbots, na SEO.',
       faqs: [
+        {
+          question: 'Tovuti inagharimu kiasi gani nchini Kenya?',
+          answer:
+            'Katika Charles Websites, Kifurushi cha Starter (hadi kurasa 4, muundo wa simu, WhatsApp, na SEO ya msingi) ni KES 39,890. Kifurushi cha Business (kurasa 4–7 pamoja na AI chatbot na SEO imara) ni KES 52,660. Maduka ya mtandaoni na mifumo maalum hutolewa nukuu kulingana na mahitaji.',
+        },
+        {
+          question: 'Ubunifu wa tovuti unagharimu kiasi gani?',
+          answer:
+            'Gharama ya ubunifu na ujenzi wa tovuti inategemea idadi ya kurasa na vipengele vinavyohitajika. Tovuti za kawaida za biashara huanza KES 39,890, tovuti za biashara zenye AI chatbot huanza KES 52,660, na miradi mikubwa hupewa nukuu wazi kabla ya kuanza.',
+        },
         {
           question: 'Ujenzi wa tovuti huchukua muda gani?',
           answer:
-            'Muda hutegemea ukubwa wa mradi na upatikanaji wa maudhui. Kifurushi cha Starter (kurasa 4) huchukua wiki 1 hadi 2, kifurushi cha Business wiki 2 hadi 3, na miradi mikubwa ya Premium yenye malipo au maduka mtandaoni huchukua wiki 3 hadi 5.',
+            'Kifurushi cha Starter huchukua wiki 1 hadi 2, kifurushi cha Business wiki 2 hadi 3, na miradi ya Premium yenye duka mtandaoni au malipo ya M-Pesa huchukua wiki 3 hadi 5 kulingana na ukubwa wa mradi.',
         },
         {
-          question: 'Je, naweza kuomba tovuti maalum (custom website)?',
+          question: 'Kwa nini biashara yangu inahitaji tovuti?',
           answer:
-            'Ndiyo. Kila tovuti inaweza kubinafsishwa kulingana na sekta yako, chapa, kurasa, na mahitaji maalum. Tumia ukurasa wa Mawasiliano au omba Kifurushi cha Premium.',
+            'Tofauti na mitandao ya kijamii ambapo kanuni hubadilika, tovuti ni makao makuu yako ya kudumu mtandaoni. Huwasaidia wateja kukupata kwenye Google wanapotafuta huduma Kenya, hujenga uaminifu wa kitaalamu, na huleta maombi moja kwa moja kwenye simu au WhatsApp.',
         },
         {
-          question: 'Je, mnaunganisha malipo ya M-Pesa?',
+          question: 'Je, mnaweza kujenga duka la mtandaoni (ecommerce website)?',
           answer:
-            'Ndiyo. Tunaunganisha M-Pesa (STK Push / Daraja API) na Paystack kwenye maduka ya mtandaoni na mifumo ya miadi kwa kutumia uthibitishaji salama wa seva kabla ya kuthibitisha malipo.',
+            'Ndiyo. Tunajenga maduka ya mtandaoni ya WooCommerce na mifumo maalum yenye katalogi za bidhaa, uchujaji rahisi kwenye simu, usimamizi wa maagizo, SEO ya bidhaa, na huduma ya kuagiza kwa WhatsApp.',
         },
         {
-          question: 'Je, mnaweza kuunganisha AI chatbot?',
+          question: 'Je, tovuti inaweza kupokea malipo ya M-Pesa?',
           answer:
-            'Ndiyo. Muunganisho wa AI chatbot umo katika vifurushi vya Business na Premium, au unaweza kuongezwa kwenye tovuti iliyopo ili kujibu wateja na kuwapeleka WhatsApp.',
+            'Ndiyo. Tunaunganisha M-Pesa (Safaricom Daraja STK Push pale API ya Till au Paybill inapotumika) pamoja na malipo ya Paystack kwa uthibitishaji salama wa seva.',
         },
         {
-          question: 'Je, tovuti yangu itafanya kazi vizuri kwenye simu?',
+          question: 'Je, mnaweza kutengeneza tovuti yenye mfumo wa kuweka miadi mtandaoni?',
           answer:
-            'Kabisa. Kila tovuti hujengwa ikianza na simu na hupimwa kwenye Android, iPhone, tableti, na kompyuta ili kuhakikisha mwonekano safi na vitufe rahisi.',
+            'Ndiyo. Tunatengeneza mifumo ya kuomba na kuweka miadi kwa kliniki, hoteli, mawakili, na watoa huduma ili wateja wachague huduma na tarehe kwa urahisi.',
         },
         {
-          question: 'Je, mnatoa huduma ya matengenezo ya tovuti?',
+          question: 'Je, tovuti zenu zinafanya kazi vizuri kwenye simu?',
           answer:
-            'Ndiyo. Tunatoa huduma endelevu ya matunzo inayojumuisha masasisho ya usalama, mabadiliko ya maudhui, ufuatiliaji wa kasi, na msaada wa kiufundi.',
+            'Ndiyo. Kila tovuti hujengwa kwanza kwa ajili ya simu na kupimwa kwenye Android, iPhone, tableti, na kompyuta ili kuhakikisha inafunguka haraka na kusomeka vizuri.',
         },
         {
           question: 'Je, mnaweza kuboresha na kubuni upya tovuti iliyopo?',
           answer:
-            'Ndiyo. Iwapo tovuti yako ya sasa inaonekana ya zamani, inachelewa kufunguka, au haileti wateja kwenye simu, tunaweza kuijenga upya huku tukihifadhi kikoa chako na kuboresha SEO.',
+            'Ndiyo. Iwapo tovuti yako ya sasa ni ya zamani au inachelewa kufunguka, tunaiboresha upya huku tukihifadhi kikoa chako na kuweka 301 redirects kulinda nafasi ya Google.',
         },
         {
-          question: 'Je, mnatengeneza apps za Android na iOS?',
+          question: 'Je, mnatoa huduma ya matengenezo ya tovuti?',
           answer:
-            'Ndiyo. Tunabuni na kutengeneza apps za Android na iOS—zikiwemo apps za wateja, kuweka miadi, maduka mtandaoni yenye M-Pesa, na apps za ndani za biashara—pamoja na kusaidia kuziweka Google Play Store na Apple App Store.',
+            'Ndiyo. Tunatoa matengenezo endelevu ikiwemo masasisho ya usalama, mabadiliko ya maudhui, ukaguzi wa nakala rudufu, ufuatiliaji wa kasi, na msaada wa hosting.',
+        },
+        {
+          question: 'Je, mnaweza kuunganisha AI kwenye tovuti ya biashara?',
+          answer:
+            'Ndiyo. Tunatekeleza mifumo halisi ya AI kama uchambuzi wa maombi ya wateja, wasaidizi wa maswali ya mara kwa mara, na mtiririko wa kiotomatiki wa biashara.',
+        },
+        {
+          question: 'Je, mnaweza kutengeneza AI chatbot?',
+          answer:
+            'Ndiyo. AI chatbot imo kwenye vifurushi vyetu vya Business (KES 52,660) na Premium, au inaweza kuongezwa kwenye tovuti iliyopo kwa msingi wa taarifa zako rasmi.',
+        },
+        {
+          question: 'Ninawezaje kuboresha nafasi ya tovuti yangu kwenye Google?',
+          answer:
+            'Kuimarisha mwonekano wa Google kunahitaji kasi ya ukurasa kwenye simu, mpangilio sahihi wa vichwa (H1–H3), title na meta descriptions za kipekee, Schema.org, XML sitemap, na maudhui yenye msaada halisi kwa wateja.',
+        },
+        {
+          question: 'Ni taarifa zipi zinahitajika ili kuanza ujenzi wa tovuti?',
+          answer:
+            'Utahitaji jina la biashara, maelezo ya huduma au bidhaa zako, nembo/rangi za chapa (kama zipo), namba za mawasiliano (simu, WhatsApp, barua pepe), na picha au mifano ya tovuti unazopenda.',
+        },
+        {
+          question: 'Je, mnafanya kazi na biashara zilizo nje ya Kenya?',
+          answer:
+            'Ndiyo. Mbali na kuhudumia wateja Nairobi, Mombasa, Nanyuki, Kisumu, Nakuru, na kote Kenya, tunashirikiana mtandaoni na biashara za kimataifa na diaspora.',
         },
       ],
     },

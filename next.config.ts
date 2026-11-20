@@ -2,8 +2,21 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  trailingSlash: false,
   compress: true,
   poweredByHeader: false,
+  htmlLimitedBots:
+    /Googlebot|GoogleOther|[\w-]+-Google|Google-[\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|OAI-SearchBot|GPTBot|ChatGPT-User|PerplexityBot|ClaudeBot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight/i,
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.charleswebsites.tech' }],
+        destination: 'https://charleswebsites.tech/:path*',
+        permanent: true,
+      },
+    ];
+  },
   eslint: {
     ignoreDuringBuilds: false,
   },

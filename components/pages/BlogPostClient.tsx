@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Check, Copy, MessageCircle, Share2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, ChevronRight, Copy, MessageCircle, Share2 } from 'lucide-react';
 import { BlogArticle } from '@/lib/data/blog';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { buildWhatsAppUrl, getSiteBaseUrl } from '@/lib/config/site';
@@ -44,9 +44,32 @@ export default function BlogPostClient({ article, relatedArticles }: BlogPostCli
     shareUrl
   )}`;
 
+  const categoryFallbackPath: Record<BlogArticle['category'], { href: string; label: string }> = {
+    'Web Development': { href: '/web-design-kenya', label: 'Explore Website Design & Development Kenya' },
+    'AI Engineering': { href: '/ai-solutions', label: 'Explore AI Chatbot & Automation Solutions' },
+    'SEO & Growth': { href: '/seo-services', label: 'Explore Technical & Local SEO Services' },
+    'Design & UX': { href: '/graphic-design', label: 'Explore Graphic Design & Branding Services' },
+  };
+  const serviceCtaHref =
+    article.relatedServicePath || categoryFallbackPath[article.category].href;
+  const serviceCtaLabel =
+    article.relatedServiceLabel || categoryFallbackPath[article.category].label;
+
   return (
     <div className="bg-white">
       <article className="mx-auto max-w-[920px] px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <nav aria-label="Breadcrumb" className="mb-4 flex flex-wrap items-center gap-2 text-xs font-semibold text-[#686868]">
+          <Link href="/" className="hover:text-[#7137D8]">
+            Home
+          </Link>
+          <ChevronRight className="h-3.5 w-3.5 text-[#A1A1AA]" />
+          <Link href="/blog" className="hover:text-[#7137D8]">
+            Blog
+          </Link>
+          <ChevronRight className="h-3.5 w-3.5 text-[#A1A1AA]" />
+          <span className="truncate max-w-[260px] text-[#151515]">{localized.title}</span>
+        </nav>
+
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-xs font-bold tracking-wider text-[#686868] hover:text-[#7137D8] transition-colors"
@@ -90,6 +113,25 @@ export default function BlogPostClient({ article, relatedArticles }: BlogPostCli
           {localized.content.map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
           ))}
+        </div>
+
+        {/* Explore Related Service CTA */}
+        <div className="mt-10 flex flex-col gap-4 rounded-2xl border border-[#E8E8EC] bg-[#F7F7F9] p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wider text-[#7137D8]">
+              {locale === 'sw' ? 'Huduma Husika' : 'Related Service'}
+            </p>
+            <p className="mt-1 font-[family-name:var(--font-jakarta)] text-base font-bold text-[#151515]">
+              {serviceCtaLabel}
+            </p>
+          </div>
+          <Link
+            href={serviceCtaHref}
+            className="btn-secondary-outline inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-xs font-bold whitespace-nowrap"
+          >
+            <span>{locale === 'sw' ? 'Fungua Huduma' : 'Explore Service'}</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
 
         {/* Social Share Bar */}

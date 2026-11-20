@@ -103,7 +103,8 @@ export default function PortfolioSection({
                 key={project.id}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-[#E8E8EC] bg-white transition-all duration-200 hover:border-[#7137D8]/50 hover:shadow-lg"
               >
-                <div
+                <Link
+                  href={`/portfolio/${project.slug}`}
                   className={`relative aspect-[4/3] w-full overflow-hidden border-b border-[#E8E8EC] ${
                     project.imageFit === 'contain' ? 'bg-[#F3F4F6]' : 'bg-[#F7F7F9]'
                   }`}
@@ -120,14 +121,19 @@ export default function PortfolioSection({
                           : 'object-cover'
                     } transition-transform duration-300 group-hover:scale-[1.02]`}
                   />
-                </div>
+                </Link>
 
                 <div className="flex flex-1 flex-col p-6">
                   <p className="text-xs font-semibold tracking-wide text-[#7137D8]">
                     {copy.industry}
                   </p>
                   <h3 className="mt-2 font-[family-name:var(--font-jakarta)] text-xl font-bold text-[#151515]">
-                    {project.name}
+                    <Link
+                      href={`/portfolio/${project.slug}`}
+                      className="hover:text-[#7137D8] transition-colors"
+                    >
+                      {project.name}
+                    </Link>
                   </h3>
                   <p className="mt-2.5 flex-1 text-sm leading-relaxed text-[#686868]">
                     {copy.shortDescription}
@@ -146,24 +152,40 @@ export default function PortfolioSection({
                           <ExternalLink className="h-3.5 w-3.5" />
                         </a>
 
+                        <div className="flex items-center gap-2">
+                          <Link
+                            href={`/portfolio/${project.slug}`}
+                            className="btn-secondary-outline inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2.5 text-xs font-bold whitespace-nowrap"
+                          >
+                            <span>{locale === 'sw' ? 'Kifani' : 'Case Study'}</span>
+                            <ArrowUpRight className="h-3.5 w-3.5" />
+                          </Link>
+                          <button
+                            type="button"
+                            onClick={() => setActiveProject(project)}
+                            className="px-2 py-2 text-xs font-semibold text-[#686868] hover:text-[#7137D8] cursor-pointer"
+                          >
+                            {locale === 'sw' ? 'Hakiki' : 'Preview'}
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Link
+                          href={`/portfolio/${project.slug}`}
+                          className="btn-primary-cta inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold tracking-wide whitespace-nowrap"
+                        >
+                          <span>{locale === 'sw' ? 'Soma Kifani' : 'Read Case Study'}</span>
+                          <ArrowUpRight className="h-3.5 w-3.5" />
+                        </Link>
                         <button
                           type="button"
                           onClick={() => setActiveProject(project)}
                           className="btn-secondary-outline inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2.5 text-xs font-bold whitespace-nowrap cursor-pointer"
                         >
                           <span>{t.portfolio.viewProject}</span>
-                          <ArrowUpRight className="h-3.5 w-3.5" />
                         </button>
-                      </>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => setActiveProject(project)}
-                        className="btn-primary-cta inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold tracking-wide whitespace-nowrap cursor-pointer"
-                      >
-                        <span>{t.portfolio.viewProject}</span>
-                        <ArrowUpRight className="h-3.5 w-3.5" />
-                      </button>
+                      </div>
                     )}
                   </div>
                 </div>

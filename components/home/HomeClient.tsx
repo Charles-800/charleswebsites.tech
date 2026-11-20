@@ -31,6 +31,7 @@ import PricingSection from '@/components/sections/PricingSection';
 import SkillsSection from '@/components/sections/SkillsSection';
 import CertificationsSection from '@/components/sections/CertificationsSection';
 import ResilientImage from '@/components/ui/ResilientImage';
+import FaqAccordionList from '@/components/seo/FaqAccordionList';
 
 interface HomeClientProps {
   recentArticles: BlogArticle[];
@@ -65,6 +66,65 @@ export default function HomeClient({
     <Bot key="t2" className="h-5 w-5 text-[#7137D8]" />,
     <ShieldCheck key="t3" className="h-5 w-5 text-[#E5092F]" />,
     <Zap key="t4" className="h-5 w-5 text-[#7137D8]" />,
+  ];
+
+  const serviceRoutes = [
+    '/web-design-kenya',
+    '/ai-solutions',
+    '/graphic-design',
+    '/seo-services',
+    '/services#mobile-app-development',
+  ];
+
+  const industryLinks = [
+    {
+      title: locale === 'sw' ? 'Hospitali na Kliniki' : 'Hospitals & Clinics',
+      description:
+        locale === 'sw'
+          ? 'Tovuti zinazomlenga mgonjwa na kuweka miadi mtandaoni.'
+          : 'Patient-focused medical directories & appointment inquiries.',
+      href: '/solutions/healthcare-websites',
+    },
+    {
+      title: locale === 'sw' ? 'Makampuni ya Sheria' : 'Law Firms & Advocates',
+      description:
+        locale === 'sw'
+          ? 'Tovuti za heshima zenye nyanja za sheria na ushauri wa siri.'
+          : 'Authoritative practice areas & confidential consultation intake.',
+      href: '/solutions/law-firm-websites',
+    },
+    {
+      title: locale === 'sw' ? 'Hoteli na Utalii' : 'Hotels & Hospitality',
+      description:
+        locale === 'sw'
+          ? 'Maonyesho ya vyumba na maombi ya moja kwa moja ya nafasi.'
+          : 'Room showcases & direct reservation inquiry flows.',
+      href: '/solutions/hotel-hospitality-websites',
+    },
+    {
+      title: locale === 'sw' ? 'Mali Isiyohamishika' : 'Real Estate Agencies',
+      description:
+        locale === 'sw'
+          ? 'Orodha ya nyumba na viwanja pamoja na maombi ya kutembelea.'
+          : 'Searchable property catalogs & WhatsApp viewing leads.',
+      href: '/solutions/real-estate-websites',
+    },
+    {
+      title: locale === 'sw' ? 'Makampuni na B2B' : 'Corporate & B2B Firms',
+      description:
+        locale === 'sw'
+          ? 'Uaminifu wa kibiashara, miradi iliyokamilika, na mawasiliano.'
+          : 'Enterprise capability hubs built for credibility & tenders.',
+      href: '/solutions/corporate-websites',
+    },
+    {
+      title: locale === 'sw' ? 'Shule na Vyuo' : 'Schools & Colleges',
+      description:
+        locale === 'sw'
+          ? 'Taarifa za udahili, masomo, na fomu za wazazi.'
+          : 'Clear admissions portals, academics & parent inquiry forms.',
+      href: '/solutions/education-school-websites',
+    },
   ];
 
   const heroWhatsappUrl = buildWhatsAppUrl(t.finalCta.whatsappPrefill);
@@ -230,14 +290,24 @@ export default function HomeClient({
                   </ul>
                 </div>
 
-                <div className="mt-8 pt-5 border-t border-[#E8E8EC]">
+                <div className="mt-8 pt-5 border-t border-[#E8E8EC] flex flex-wrap items-center justify-between gap-3">
                   <Link
-                    href={`/services#${card.id}`}
+                    href={serviceRoutes[idx] ?? `/services#${card.id}`}
                     className="inline-flex items-center gap-1.5 text-sm font-bold text-[#E5092F] hover:text-[#7137D8] transition-colors"
                   >
                     <span>{t.services.learnMore}</span>
                     <ArrowRight className="h-4 w-4" />
                   </Link>
+                  {idx === 0 && (
+                    <Link
+                      href="/ecommerce-website-development"
+                      className="text-xs font-semibold text-[#7137D8] hover:text-[#E5092F] transition-colors"
+                    >
+                      {locale === 'sw'
+                        ? 'Duka Mtandaoni & M-Pesa →'
+                        : 'E-Commerce & M-Pesa Stores →'}
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}
@@ -447,6 +517,83 @@ export default function HomeClient({
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 9B: INDUSTRY-SPECIFIC WEB SOLUTIONS */}
+      <section id="industries" className="border-t border-[#E8E8EC] bg-[#F7F7F9] py-16 sm:py-20">
+        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-xs font-bold tracking-widest text-[#7137D8]">
+                {locale === 'sw' ? 'SULUHU KWA SEKTA MBALIMBALI' : 'INDUSTRY SOLUTIONS IN KENYA'}
+              </p>
+              <h2 className="mt-2 font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515]">
+                {locale === 'sw'
+                  ? 'Tovuti Zilizoundwa Kwa Mahitaji ya Sekta Yako'
+                  : 'Tailored Websites Built for Your Industry'}
+              </h2>
+            </div>
+            <Link
+              href="/ecommerce-website-development"
+              className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#E5092F] hover:text-[#7137D8]"
+            >
+              <span>
+                {locale === 'sw'
+                  ? 'E-COMMERCE & M-PESA WEBSITES'
+                  : 'E-COMMERCE & M-PESA WEBSITES'}
+              </span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {industryLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group flex flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white p-6 transition-colors hover:border-[#7137D8]/60"
+              >
+                <div>
+                  <h3 className="font-[family-name:var(--font-jakarta)] text-lg font-bold text-[#151515] group-hover:text-[#7137D8]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#686868]">
+                    {item.description}
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#E5092F]">
+                  <span>{locale === 'sw' ? 'Soma zaidi' : 'Explore solution'}</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 9C: KEY FAQs (SSR ACCESSIBLE) */}
+      <section className="border-t border-[#E8E8EC] bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515]">
+                {t.servicesPage.faqHeadline}
+              </h2>
+              <p className="mt-2 text-base text-[#686868]">{t.servicesPage.faqSubheading}</p>
+            </div>
+            <Link
+              href="/services#faq"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#7137D8] hover:text-[#E5092F] whitespace-nowrap"
+            >
+              <span>{locale === 'sw' ? 'Maswali Yote' : 'View all 15 FAQs'}</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          <div className="mt-8">
+            <FaqAccordionList items={t.servicesPage.faqs.slice(0, 6)} defaultOpenIndex={0} />
           </div>
         </div>
       </section>

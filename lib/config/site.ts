@@ -54,9 +54,14 @@ export const SITE_CONFIG = {
   whatsappNumber: '254112298275',
   whatsappDisplay: '+254112298275',
   currency: 'KES',
-  location: 'Nairobi, Kenya',
+  location: 'Kenya',
+  serviceAreas: ['Kenya', 'Nairobi', 'Mombasa', 'Nanyuki', 'Kisumu', 'Nakuru', 'Worldwide (Remote)'],
   email: 'ramoyacharles920@gmail.com',
   emailHref: 'mailto:ramoyacharles920@gmail.com',
+  gbpUrl:
+    process.env.NEXT_PUBLIC_GBP_URL && process.env.NEXT_PUBLIC_GBP_URL.startsWith('http')
+      ? process.env.NEXT_PUBLIC_GBP_URL
+      : '',
   socials: configuredSocials,
 } as const;
 

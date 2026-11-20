@@ -1,18 +1,31 @@
 import type { Metadata } from 'next';
 import PortfolioClient from '@/components/pages/PortfolioClient';
 import { buildBreadcrumbSchema, buildWebPageSchema } from '@/lib/seo/schema';
+import { getSiteBaseUrl } from '@/lib/config/site';
+
+const baseUrl = getSiteBaseUrl();
 
 export const metadata: Metadata = {
-  title: 'Portfolio — Selected Client Website Projects',
+  title: 'Client Website Portfolio & Case Studies',
   description:
-    'Explore website projects crafted by Charles Websites for Ruevan Limited, Nyati AutoSpares, Lenanns Healthcare, Makuri Auctioneers, and MMS Advocates.',
+    'Explore real website projects and case studies by Charles Websites for Ruevan Limited, Nyati AutoSpares, Lenanns Healthcare, Makuri Auctioneers, and MMS Advocates.',
   alternates: {
     canonical: '/portfolio',
   },
   openGraph: {
-    title: 'Portfolio | Charles Websites',
+    title: 'Client Website Portfolio & Case Studies | Charles Websites',
     description:
-      'Selected business, e-commerce, healthcare, auctioneering, and legal website projects.',
+      'Verified corporate, e-commerce, healthcare, auctioneering, and legal website projects built by Charles Websites.',
+    url: `${baseUrl}/portfolio`,
+    type: 'website',
+    images: ['/assets/aistudio/CHARLES_WEBSITES_91d4851c.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Client Website Portfolio & Case Studies | Charles Websites',
+    description:
+      'Inspect live websites and engineering case studies across corporate, automotive, healthcare, and legal sectors.',
+    images: ['/assets/aistudio/CHARLES_WEBSITES_91d4851c.png'],
   },
 };
 

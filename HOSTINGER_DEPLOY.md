@@ -20,6 +20,12 @@ SMTP_HOST=smtp.hostinger.com
 SMTP_PORT=465
 SMTP_USER=
 SMTP_PASS=
+
+# Optional SEO Verification, Analytics & Google Business Profile
+NEXT_PUBLIC_GBP_URL=
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
+NEXT_PUBLIC_BING_VERIFICATION=
+NEXT_PUBLIC_GA_MEASUREMENT_ID=
 ```
 
 *(Note: After changing any `NEXT_PUBLIC_*` variable in Hostinger, click **Redeploy / Rebuild** so Next.js picks up the updated value.)*

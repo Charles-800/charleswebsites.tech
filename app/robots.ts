@@ -6,11 +6,23 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: '*',
+        userAgent: [
+          'Googlebot',
+          'Bingbot',
+          'Applebot',
+          'OAI-SearchBot',
+          'GPTBot',
+          'ChatGPT-User',
+          'PerplexityBot',
+          'ClaudeBot',
+          'Google-Extended',
+          '*',
+        ],
         allow: '/',
         disallow: ['/api/'],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   };
 }

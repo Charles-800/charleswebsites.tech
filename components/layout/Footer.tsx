@@ -91,22 +91,64 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services Column */}
+          {/* Services & Solutions Column */}
           <div className="lg:col-span-3 space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-white">
               {t.footer.servicesTitle}
             </h3>
-            <ul className="space-y-2.5 text-sm text-[#A1A1AA]">
-              {t.services.cards.map((card) => (
-                <li key={card.id}>
-                  <Link
-                    href={`/services#${card.id}`}
-                    className="hover:text-[#8B5CF6] transition-colors"
-                  >
-                    {card.title}
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-2 text-sm text-[#A1A1AA]">
+              <li>
+                <Link href="/web-design-kenya" className="hover:text-[#8B5CF6] transition-colors">
+                  Website Design & Development Kenya
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/ecommerce-website-development"
+                  className="hover:text-[#8B5CF6] transition-colors"
+                >
+                  E-Commerce & M-Pesa Websites
+                </Link>
+              </li>
+              <li>
+                <Link href="/ai-solutions" className="hover:text-[#8B5CF6] transition-colors">
+                  AI Chatbots & Business Automation
+                </Link>
+              </li>
+              <li>
+                <Link href="/seo-services" className="hover:text-[#8B5CF6] transition-colors">
+                  Technical & Local SEO Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/graphic-design" className="hover:text-[#8B5CF6] transition-colors">
+                  Graphic Design & Branding
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/solutions/healthcare-websites"
+                  className="hover:text-[#8B5CF6] transition-colors"
+                >
+                  Hospitals & Clinics Websites
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/solutions/law-firm-websites"
+                  className="hover:text-[#8B5CF6] transition-colors"
+                >
+                  Law Firm & Statutory Websites
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/solutions/hotel-hospitality-websites"
+                  className="hover:text-[#8B5CF6] transition-colors"
+                >
+                  Hotels & Real Estate Websites
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -164,6 +206,17 @@ export default function Footer() {
                 <Mail className="h-4 w-4 shrink-0 text-[#E5092F]" />
                 <span>{SITE_CONFIG.email}</span>
               </a>
+              {SITE_CONFIG.gbpUrl && (
+                <a
+                  href={SITE_CONFIG.gbpUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 pt-1 text-xs font-semibold text-[#A1A1AA] hover:text-[#8B5CF6] transition-colors"
+                >
+                  <span>Google Business Profile</span>
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -172,9 +225,17 @@ export default function Footer() {
           <p>
             © {currentYear} {SITE_CONFIG.name} — {SITE_CONFIG.title}. {t.footer.rightsReserved}
           </p>
-          <p className="font-mono tabular-nums text-white/60">
-            {SITE_CONFIG.currency} · {SITE_CONFIG.location}
-          </p>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link href="/privacy-policy" className="hover:text-[#8B5CF6] transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms-of-service" className="hover:text-[#8B5CF6] transition-colors">
+              Terms of Service
+            </Link>
+            <span className="font-mono tabular-nums text-white/60">
+              {SITE_CONFIG.currency} · {SITE_CONFIG.location}
+            </span>
+          </div>
         </div>
       </div>
     </footer>

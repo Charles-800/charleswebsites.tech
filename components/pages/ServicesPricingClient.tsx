@@ -1,12 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import {
   ArrowRight,
   Bot,
   Check,
-  ChevronDown,
   MessageCircle,
   Monitor,
   Palette,
@@ -16,6 +15,7 @@ import {
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { buildWhatsAppUrl } from '@/lib/config/site';
 import PricingSection from '@/components/sections/PricingSection';
+import FaqAccordionList from '@/components/seo/FaqAccordionList';
 
 interface ServicesPricingClientProps {
   mode: 'services' | 'pricing';
@@ -23,7 +23,14 @@ interface ServicesPricingClientProps {
 
 export default function ServicesPricingClient({ mode }: ServicesPricingClientProps) {
   const { locale, t } = useLanguage();
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  const dedicatedServiceRoutes = [
+    '/web-design-kenya',
+    '/ai-solutions',
+    '/graphic-design',
+    '/seo-services',
+    null,
+  ];
 
   const serviceIcons = [
     <Monitor key="s1" className="h-6 w-6 text-[#E5092F]" />,
@@ -149,7 +156,7 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
                     {card.title}
                   </h2>
                   <p className="text-base leading-relaxed text-[#686868]">{card.description}</p>
-                  <div className="pt-2 flex flex-wrap gap-3">
+                  <div className="pt-2 flex flex-wrap items-center gap-3">
                     <Link
                       href={`/contact?service=${encodeURIComponent(card.title)}`}
                       className="btn-primary-cta inline-flex items-center gap-2 rounded-xl px-5 py-3 text-xs font-bold tracking-wider whitespace-nowrap"
@@ -168,6 +175,24 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
                       <MessageCircle className="h-4 w-4 text-[#E5092F]" />
                       <span>{t.nav.whatsappUs}</span>
                     </a>
+                    {dedicatedServiceRoutes[idx] && (
+                      <Link
+                        href={dedicatedServiceRoutes[idx] as string}
+                        className="inline-flex items-center gap-1 px-2 py-2 text-xs font-bold text-[#7137D8] hover:text-[#E5092F] transition-colors"
+                      >
+                        <span>{locale === 'sw' ? 'Maelezo Kamili' : 'Detailed Guide'}</span>
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    )}
+                    {idx === 0 && (
+                      <Link
+                        href="/ecommerce-website-development"
+                        className="inline-flex items-center gap-1 px-2 py-2 text-xs font-bold text-[#E5092F] hover:text-[#7137D8] transition-colors"
+                      >
+                        <span>{locale === 'sw' ? 'Duka Mtandaoni & M-Pesa' : 'E-Commerce & M-Pesa'}</span>
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    )}
                   </div>
                 </div>
 
@@ -243,8 +268,8 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
         </div>
       </section>
 
-      {/* FAQs Accordion */}
-      <section className="border-t border-[#E8E8EC] bg-[#F7F7F9] py-16 sm:py-20">
+      {/* FAQs Accordion (all answers rendered in SSR DOM) */}
+      <section id="faq" className="scroll-mt-24 border-t border-[#E8E8EC] bg-[#F7F7F9] py-16 sm:py-20">
         <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515]">
@@ -253,35 +278,8 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
             <p className="mt-3 text-base text-[#686868]">{t.servicesPage.faqSubheading}</p>
           </div>
 
-          <div className="mt-10 space-y-3">
-            {t.servicesPage.faqs.map((faq, index) => {
-              const isOpen = openFaqIndex === index;
-              return (
-                <div
-                  key={faq.question}
-                  className="overflow-hidden rounded-xl border border-[#E8E8EC] bg-white"
-                >
-                  <button
-                    type="button"
-                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
-                    aria-expanded={isOpen}
-                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left font-[family-name:var(--font-jakarta)] text-base font-bold text-[#151515] hover:text-[#7137D8] cursor-pointer"
-                  >
-                    <span>{faq.question}</span>
-                    <ChevronDown
-                      className={`h-5 w-5 shrink-0 text-[#686868] transition-transform duration-200 ${
-                        isOpen ? 'rotate-180 text-[#7137D8]' : ''
-                      }`}
-                    />
-                  </button>
-                  {isOpen && (
-                    <div className="border-t border-[#E8E8EC] px-6 py-4 text-sm leading-relaxed text-[#686868]">
-                      {faq.answer}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+          <div className="mt-10">
+            <FaqAccordionList items={t.servicesPage.faqs} defaultOpenIndex={0} />
           </div>
         </div>
       </section>

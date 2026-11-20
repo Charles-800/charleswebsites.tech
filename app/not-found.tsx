@@ -44,9 +44,15 @@ export default function NotFound() {
         </div>
 
         <div className="mt-10 border-t border-[#E8E8EC] pt-6 flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-[#686868]">
+          <Link href="/web-design-kenya" className="hover:text-[#7137D8]">
+            Website Design Kenya
+          </Link>
           <Link href="/portfolio" className="inline-flex items-center gap-1.5 hover:text-[#7137D8]">
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Explore Portfolio</span>
+          </Link>
+          <Link href="/blog" className="hover:text-[#7137D8]">
+            SEO & Web Guides
           </Link>
           <a href={SITE_CONFIG.phoneHref} className="inline-flex items-center gap-1.5 hover:text-[#7137D8]">
             <Phone className="h-3.5 w-3.5 text-[#E5092F]" />
