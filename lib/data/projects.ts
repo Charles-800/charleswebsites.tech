@@ -279,6 +279,198 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       ],
     },
   },
+  {
+    id: 'cm-advocates',
+    slug: 'cm-advocates',
+    name: 'CM Advocates',
+    category: 'legal',
+    image: '/images/portfolio_cm_advocates_1795365183733.jpg',
+    liveUrl: 'https://cmadvocates.com/',
+    technologies: ['Corporate Legal Web Platform', 'Responsive UI', 'Practice Area Architecture', 'Technical SEO'],
+    servicePath: '/solutions/law-firm-websites',
+    en: {
+      industry: 'Corporate & Regional Law Firm',
+      serviceLabel: 'Law Firm Website Development',
+      locationContext: 'Kenya & East Africa',
+      shortDescription:
+        'A full-service corporate law firm digital platform built to present regional practice areas, partner teams, legal insights, and cross-border advisory desks.',
+      overview:
+        'Structured around high-credibility legal navigation covering corporate transactions, dispute resolution, legal insights, and direct client consultation pathways.',
+      challenge:
+        'Regional corporate and commercial clients needed fast access to specialized legal practice areas, partner profiles, and legal publications across desktop and mobile devices.',
+      solution:
+        'Designed and structured a clean editorial legal web experience with clear practice-area architecture, searchable legal insights, and direct consultation contact flows.',
+      deliverables: [
+        'Practice Area & Advisory Architecture',
+        'Partner & Team Directory Layout',
+        'Legal Insights & Publications Hub',
+        'Search-Optimized Corporate Presence',
+      ],
+    },
+    sw: {
+      industry: 'Kampuni ya Sheria ya Kikanda na Kibiashara',
+      serviceLabel: 'Ujenzi wa Tovuti ya Kampuni ya Sheria',
+      locationContext: 'Kenya na Afrika Mashariki',
+      shortDescription:
+        'Jukwaa kamili la kidijitali la kampuni ya sheria lililoundwa kuonyesha nyanja za kisheria za kikanda, timu ya mawakili, na machapisho ya kisheria.',
+      overview:
+        'Limejengwa kwa urambazaji thabiti unaojumuisha huduma za kibiashara, utatuzi wa migogoro, makala za kisheria, na mawasiliano ya wateja.',
+      challenge:
+        'Wateja wa makampuni walihitaji njia ya haraka ya kuona nyanja maalumu za sheria, wasifu wa mawakili, na machapisho kwenye simu na kompyuta.',
+      solution:
+        'Tulibuni muundo safi wa kisheria wenye kurasa za huduma, orodha ya timu, na fomu rahisi za kuomba ushauri wa kisheria.',
+      deliverables: [
+        'Muundo wa Nyanja za Kisheria na Ushauri',
+        'Orodha ya Timu na Washirika',
+        'Kituo cha Makala na Machapisho',
+        'Msingi Bora wa SEO ya Utafutaji',
+      ],
+    },
+  },
+  {
+    id: 'mohammed-muigai',
+    slug: 'mohammed-muigai',
+    name: 'Mohammed Muigai',
+    category: 'legal',
+    image: '/images/portfolio_mohammed_muigai_1795365184599.jpg',
+    liveUrl: 'https://mohammedmuigai.com/',
+    technologies: ['Editorial Web Design', 'Responsive Legal UI', 'Practice Directories', 'Technical SEO'],
+    servicePath: '/solutions/law-firm-websites',
+    en: {
+      industry: 'Litigation & Corporate Law',
+      serviceLabel: 'Advocacy Firm Web Platform',
+      locationContext: 'Kenya',
+      shortDescription:
+        'An authoritative legal practice website presenting litigation, corporate advisory, banking law, and institutional counsel credentials with editorial clarity.',
+      overview:
+        'Crafted to communicate institutional authority and precision across dispute resolution, corporate transactions, and lawyer profile pages on desktop and mobile.',
+      challenge:
+        'High-stakes litigation and corporate clients expect immediate clarity around senior counsel expertise, core practice groups, and direct office contact channels.',
+      solution:
+        'Delivered a restrained editorial layout paired with structured practice-area navigation, legible typography, and direct inquiry access.',
+      deliverables: [
+        'Editorial Legal Brand Presentation',
+        'Litigation & Corporate Practice Pages',
+        'Responsive Counsel Profiles',
+        'Clean Client Contact Routing',
+      ],
+    },
+    sw: {
+      industry: 'Uwajili wa Mahakamani na Sheria za Biashara',
+      serviceLabel: 'Jukwaa la Tovuti ya Sheria',
+      locationContext: 'Kenya',
+      shortDescription:
+        'Tovuti ya heshima ya kampuni ya mawakili inayoonyesha huduma za uwakilishi mahakamani, ushauri wa kibiashara, na wasifu wa mawakili.',
+      overview:
+        'Imeundwa kuakisi weledi wa juu katika utatuzi wa migogoro, mikataba ya makampuni, na mawasiliano ya moja kwa moja.',
+      challenge:
+        'Wateja wa mashauri makubwa ya kibiashara wanahitaji kuona kwa haraka uzoefu wa mawakili wakuu na nyanja za kisheria.',
+      solution:
+        'Tulijenga muundo tulivu wa kihariri wenye mpangilio mzuri wa huduma za kisheria na njia wazi za mawasiliano.',
+      deliverables: [
+        'Mwonekano wa Kihariri wa Heshima',
+        'Kurasa za Sheria na Utatuzi wa Migogoro',
+        'Wasifu wa Mawakili Kwenye Simu',
+        'Njia Rahisi za Kuomba Ushauri',
+      ],
+    },
+  },
+  {
+    id: 'jmk-advocates',
+    slug: 'jmk-advocates',
+    name: 'JMK Advocates',
+    category: 'legal',
+    image: '/images/portfolio_jmk_advocates_1795365184521.jpg',
+    liveUrl: 'https://www.jmkadvocates.co.ke/',
+    technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Law Portal', 'SEO Structure'],
+    servicePath: '/solutions/law-firm-websites',
+    en: {
+      industry: 'Legal Practice & Advocacy',
+      serviceLabel: 'Law Firm Website Design',
+      locationContext: 'Kenya',
+      shortDescription:
+        'A modern Kenyan law firm website engineered to present litigation, commercial advisory, conveyancing, and direct legal consultation booking.',
+      overview:
+        'Built for clear mobile navigation, fast page loading, and straightforward consultation booking for individuals and corporate clients across Kenya.',
+      challenge:
+        'Prospective legal clients searching on mobile needed an approachable yet authoritative overview of legal services, conveyancing support, and office contact details.',
+      solution:
+        'Engineered a structured legal practice portal featuring dedicated practice summaries, news insights, and clear inquiry pathways.',
+      deliverables: [
+        'Mobile-First Legal Practice Website',
+        'Conveyancing & Litigation Pages',
+        'Legal Consultation Capture Flow',
+        'On-Page Search Optimization',
+      ],
+    },
+    sw: {
+      industry: 'Huduma za Kisheria na Uwakili',
+      serviceLabel: 'Ubunifu wa Tovuti ya Mawakili',
+      locationContext: 'Kenya',
+      shortDescription:
+        'Tovuti ya kisasa ya kampuni ya sheria nchini Kenya iliyojengwa kuonyesha huduma za mahakamani, ushauri wa kibiashara, uhamisho wa mali, na uhifadhi wa miadi.',
+      overview:
+        'Imeundwa kwa urambazaji mwepesi wa simu, kasi ya kufunguka, na mfumo rahisi wa kuomba ushauri wa kisheria.',
+      challenge:
+        'Wateja wanaotafuta huduma za kisheria kwa simu walihitaji maelezo yaliyo wazi kuhusu huduma za ardhi, biashara, na mawasiliano.',
+      solution:
+        'Tulijenga tovuti ya kisheria yenye maelezo ya huduma, makala, na njia za haraka za kuwasiliana na ofisi.',
+      deliverables: [
+        'Tovuti ya Sheria Inayofanya Kazi Kwenye Simu',
+        'Kurasa za Sheria za Ardhi na Biashara',
+        'Fomu ya Kuomba Ushauri wa Kisheria',
+        'Mpangilio Bora wa SEO',
+      ],
+    },
+  },
+  {
+    id: 'kirk-hospital-mombasa',
+    slug: 'kirk-hospital-mombasa',
+    name: 'Kirk Hospital, Mombasa',
+    category: 'healthcare',
+    image: '/images/portfolio_kirk_hospital_1795365185911.jpg',
+    liveUrl: 'https://kirk-hospital-mombasa.ai.studio/',
+    technologies: ['Next.js / Web UI', 'Patient Booking Flow', 'Department Directory', 'Responsive Medical Design'],
+    servicePath: '/solutions/healthcare-websites',
+    en: {
+      industry: 'Hospital & Medical Care',
+      serviceLabel: 'Hospital Web Platform',
+      locationContext: 'Mombasa, Kenya',
+      shortDescription:
+        'A patient-focused hospital website for Kirk Hospital in Mombasa featuring medical department directories, emergency contact access, and online appointment requests.',
+      overview:
+        'Designed for coastal patients and families to quickly locate specialist clinics, emergency care details, and doctor consultation booking from any device.',
+      challenge:
+        'Hospital visitors urgently need clear emergency phone numbers, specialty department listings, and frictionless appointment scheduling on mobile phones.',
+      solution:
+        'Built a calming healthcare web interface highlighting core medical departments, clear emergency touchpoints, and streamlined patient booking workflows.',
+      deliverables: [
+        'Hospital Departments Directory',
+        'Patient Appointment Request Flow',
+        'Mobile Emergency Access & Contacts',
+        'Accessible Healthcare UI',
+      ],
+    },
+    sw: {
+      industry: 'Hospitali na Huduma za Matibabu',
+      serviceLabel: 'Jukwaa la Tovuti ya Hospitali',
+      locationContext: 'Mombasa, Kenya',
+      shortDescription:
+        'Tovuti inayomlenga mgonjwa kwa ajili ya Kirk Hospital, Mombasa yenye orodha ya idara za matibabu, namba za dharura, na mfumo wa kuweka miadi mtandaoni.',
+      overview:
+        'Imeundwa kusaidia wagonjwa na familia kupata haraka kliniki maalumu, huduma za dharura, na kuomba miadi ya daktari kupitia simu au kompyuta.',
+      challenge:
+        'Wagonjwa wanahitaji kuona kwa haraka huduma za dharura, idara za hospitali, na kuomba miadi bila usumbufu kwenye simu.',
+      solution:
+        'Tulibuni tovuti tulivu ya afya inayoonyesha idara kuu za matibabu, mawasiliano ya dharura, na mfumo mwepesi wa miadi.',
+      deliverables: [
+        'Orodha ya Idara za Matibabu',
+        'Mfumo wa Kuomba Miadi ya Mgonjwa',
+        'Mawasiliano ya Haraka ya Dharura',
+        'Muundo Rafiki wa Afya Kwenye Simu',
+      ],
+    },
+  },
 ];
 
 export function getPortfolioProjectBySlug(slug: string): PortfolioProject | undefined {

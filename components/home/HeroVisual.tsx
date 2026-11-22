@@ -28,7 +28,10 @@ export default function HeroVisual() {
         {/* Clean Founder & Agency Credential Bar Below Image */}
         <div className="space-y-3 bg-[#111111] px-5 py-4 text-white">
           <div>
-            <p className="font-[family-name:var(--font-jakarta)] text-base font-extrabold tracking-tight text-white">
+            <p className="text-[11px] font-bold tracking-widest text-[#E5092F] uppercase">
+              {locale === 'sw' ? 'MWANZILISHI — CHARLES WEBSITES AI' : 'FOUNDER — CHARLES WEBSITES AI'}
+            </p>
+            <p className="mt-1 font-[family-name:var(--font-jakarta)] text-base font-extrabold tracking-tight text-white">
               CHARLES <span className="text-[#E5092F]">WEBSITES</span>
             </p>
             <p className="mt-0.5 text-xs font-medium leading-relaxed text-[#D4D4D8]">
