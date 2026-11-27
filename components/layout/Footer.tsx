@@ -126,6 +126,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/software-development" className="hover:text-[#8B5CF6] transition-colors">
+                  Custom Software Development
+                </Link>
+              </li>
+              <li>
                 <Link
                   href="/solutions/healthcare-websites"
                   className="hover:text-[#8B5CF6] transition-colors"

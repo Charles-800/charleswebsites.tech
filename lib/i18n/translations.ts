@@ -327,7 +327,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     services: {
       headline: 'WHAT WE DO',
       subheading:
-        'Focused web engineering, mobile app development, AI automation, branding, and search growth built for modern businesses.',
+        'Focused web engineering, custom software development, mobile apps, AI automation, branding, and search growth built for modern businesses.',
       learnMore: 'Learn More',
       cards: [
         {
@@ -398,6 +398,21 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
             'API & cloud backend integration',
             'M-Pesa & push notifications',
             'Play Store & App Store deployment',
+          ],
+        },
+        {
+          id: 'software-development',
+          number: '06',
+          title: 'SOFTWARE DEVELOPMENT',
+          description:
+            'We engineer custom business software, internal management systems, SaaS platforms, and scalable APIs tailored to your operations.',
+          features: [
+            'Custom business software & ERP/CRM tools',
+            'SaaS web applications & client portals',
+            'Inventory, billing & operations systems',
+            'REST APIs & third-party integrations',
+            'Database design & cloud architecture',
+            'Role-based dashboards & reporting',
           ],
         },
       ],
@@ -884,6 +899,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         'Business Website + AI Chatbot (KES 52,660)',
         'Premium Custom Website / E-Commerce / M-Pesa',
         'Android & iOS Mobile App Development',
+        'Custom Software Development & Web Applications',
         'AI Engineering & Business Automation',
         'Graphic Design & Branding',
         'Digital Growth, SEO & Maintenance',
@@ -1012,7 +1028,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     services: {
       headline: 'TUNACHOKIFANYA',
       subheading:
-        'Uhandisi makini wa tovuti, apps za Android na iOS, uotomatishaji wa AI, ubunifu wa chapa, na ukuaji wa SEO kwa biashara za kisasa.',
+        'Uhandisi makini wa tovuti, utengenezaji wa software maalum, apps za Android na iOS, uotomatishaji wa AI, ubunifu wa chapa, na ukuaji wa SEO kwa biashara za kisasa.',
       learnMore: 'Jifunze Zaidi',
       cards: [
         {
@@ -1083,6 +1099,21 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
             'Muunganisho wa API na seva',
             'Malipo ya M-Pesa na arifa (Notifications)',
             'Uwekaji kwenye Play Store na App Store',
+          ],
+        },
+        {
+          id: 'software-development',
+          number: '06',
+          title: 'UTENGENEZAJI WA SOFTWARE & MIFUMO',
+          description:
+            'Tunabuni na kutengeneza software maalum za biashara, mifumo ya usimamizi wa ndani, majukwaa ya SaaS, na API zinazoendana na mahitaji yako.',
+          features: [
+            'Software maalum za biashara na ERP/CRM',
+            'Programu za wavuti (SaaS) na portali za wateja',
+            'Mifumo ya stoo, bili na uendeshaji',
+            'REST APIs na muunganisho wa mifumo mingine',
+            'Muundo wa hifadhidata na seva za wingu',
+            'Dashibodi za watumiaji na ripoti za moja kwa moja',
           ],
         },
       ],
@@ -1569,6 +1600,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
         'Tovuti ya Biashara + AI Chatbot (KES 52,660)',
         'Tovuti Maalum ya Premium / E-Commerce / M-Pesa',
         'Utengenezaji wa Apps za Simu (Android & iOS)',
+        'Utengenezaji wa Software Maalum na Mifumo ya Biashara',
         'Uhandisi wa AI na Uotomatishaji wa Biashara',
         'Ubunifu wa Picha na Chapa',
         'Ukuaji wa Kidijitali, SEO na Matengenezo',

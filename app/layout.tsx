@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Plus_Jakarta_Sans, Manrope, JetBrains_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 import Navbar from '@/components/layout/Navbar';
@@ -12,23 +12,26 @@ import {
   buildWebSiteSchema,
 } from '@/lib/seo/schema';
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['500', '600', '700', '800'],
+const jakarta = localFont({
+  src: './fonts/plus-jakarta-sans-latin.woff2',
+  weight: '500 800',
+  style: 'normal',
   variable: '--font-jakarta',
   display: 'swap',
 });
 
-const manrope = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+const manrope = localFont({
+  src: './fonts/manrope-latin.woff2',
+  weight: '400 700',
+  style: 'normal',
   variable: '--font-manrope',
   display: 'swap',
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
+const jetbrainsMono = localFont({
+  src: './fonts/jetbrains-mono-latin.woff2',
+  weight: '400 600',
+  style: 'normal',
   variable: '--font-mono',
   display: 'swap',
 });

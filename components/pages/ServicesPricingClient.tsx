@@ -10,6 +10,7 @@ import {
   Monitor,
   Palette,
   Smartphone,
+  Terminal,
   TrendingUp,
 } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
@@ -30,6 +31,7 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
     '/graphic-design',
     '/seo-services',
     null,
+    '/software-development',
   ];
 
   const serviceIcons = [
@@ -38,6 +40,7 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
     <Palette key="s3" className="h-6 w-6 text-[#E5092F]" />,
     <TrendingUp key="s4" className="h-6 w-6 text-[#7137D8]" />,
     <Smartphone key="s5" className="h-6 w-6 text-[#E5092F]" />,
+    <Terminal key="s6" className="h-6 w-6 text-[#7137D8]" />,
   ];
 
   const comparisonRows = [

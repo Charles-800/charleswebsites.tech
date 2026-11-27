@@ -17,6 +17,7 @@ import {
   ShieldCheck,
   Smartphone,
   Sparkles,
+  Terminal,
   TrendingUp,
   Zap,
   Headphones,
@@ -50,6 +51,7 @@ export default function HomeClient({
     <Palette key="brand" className="h-6 w-6" />,
     <TrendingUp key="seo" className="h-6 w-6" />,
     <Smartphone key="mobile" className="h-6 w-6" />,
+    <Terminal key="software" className="h-6 w-6" />,
   ];
 
   const whyIcons = [
@@ -74,6 +76,7 @@ export default function HomeClient({
     '/graphic-design',
     '/seo-services',
     '/services#mobile-app-development',
+    '/software-development',
   ];
 
   const industryLinks = [
@@ -255,9 +258,7 @@ export default function HomeClient({
             {t.services.cards.map((card, idx) => (
               <div
                 key={card.id}
-                className={`group flex flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white p-7 sm:p-8 transition-all duration-200 hover:border-[#7137D8]/60 hover:shadow-lg ${
-                  idx === 4 ? 'md:col-span-2' : ''
-                }`}
+                className="group flex flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white p-7 sm:p-8 transition-all duration-200 hover:border-[#7137D8]/60 hover:shadow-lg"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -276,11 +277,7 @@ export default function HomeClient({
                     {card.description}
                   </p>
 
-                  <ul
-                    className={`mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 ${
-                      idx === 4 ? 'lg:grid-cols-3' : ''
-                    }`}
-                  >
+                  <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                     {card.features.map((feat) => (
                       <li key={feat} className="flex items-center gap-2 text-sm text-[#151515]">
                         <Check className="h-4 w-4 shrink-0 text-[#7137D8]" />

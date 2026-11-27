@@ -48,6 +48,7 @@ export function buildOrganizationAndServiceSchema() {
       'Technical SEO & Local SEO',
       'Graphic Design & Branding',
       'Android & iOS Mobile Apps',
+      'Custom Software Development',
     ],
     ...(sameAs.length > 0 ? { sameAs } : {}),
     contactPoint: {

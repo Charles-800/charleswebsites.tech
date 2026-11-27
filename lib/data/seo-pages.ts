@@ -464,6 +464,86 @@ export const SERVICE_LANDING_PAGES: Record<string, SeoLandingPageData> = {
       },
     ],
   },
+  'software-development': {
+    slug: 'software-development',
+    path: '/software-development',
+    category: 'service',
+    seoTitle: 'Custom Software Development Kenya',
+    seoDescription:
+      'Custom software development, SaaS web applications, business automation tools, ERP/CRM dashboards, and API engineering in Kenya by Charles Websites.',
+    kicker: 'CUSTOM SOFTWARE DEVELOPMENT & WEB APPLICATIONS',
+    h1: 'Custom Software Development & Web Applications in Kenya',
+    intro:
+      'Off-the-shelf tools rarely match real operational workflows. Charles Websites designs and builds custom software systems, internal operations portals, SaaS products, and API integrations for growing businesses in Kenya and worldwide.',
+    serviceType: 'Software Development & Application Engineering',
+    startingPriceNote: 'Custom scoped software projects · Transparent milestone quotes in KES',
+    sections: [
+      {
+        title: 'Bespoke Business Software, Portals & SaaS Applications',
+        description:
+          'We engineer reliable web-based and cloud software tailored to your exact workflows, eliminating fragile spreadsheets and manual bottlenecks.',
+        bullets: [
+          'Custom CRM, inventory tracking, invoicing, and operations management systems',
+          'Multi-user SaaS web applications with secure role-based access control',
+          'Client and patient booking portals synced with real-time notifications',
+          'Clean TypeScript, React, Next.js, and Node.js full-stack engineering',
+        ],
+      },
+      {
+        title: 'API Integrations, M-Pesa Billing & Database Architecture',
+        description:
+          'Connect your software cleanly to payment gateways, mobile apps, and external business services with resilient server-side architecture.',
+        bullets: [
+          'REST & webhook API development connecting web dashboards and mobile apps',
+          'Server-verified M-Pesa (Safaricom Daraja) and Paystack payment workflows',
+          'Structured PostgreSQL / relational and cloud document database schemas',
+          'AI-assisted document parsing, automated reporting, and workflow triggers',
+        ],
+      },
+    ],
+    deliverablesTitle: 'What Our Software Development Projects Include',
+    deliverables: [
+      'Requirements discovery, system architecture, and clear milestone roadmap',
+      'Clean, maintainable TypeScript & Node.js codebase with full ownership handover',
+      'Role-based dashboards, input validation, and security hardening',
+      'Automated database backups, cloud deployment, and post-launch support',
+    ],
+    faqs: [
+      {
+        question: 'What types of software do you build for businesses in Kenya?',
+        answer:
+          'We build custom business management systems, SaaS web applications, client and booking portals, inventory and billing tools, M-Pesa-integrated platforms, and REST APIs connecting web and mobile applications.',
+      },
+      {
+        question: 'How is custom software development priced?',
+        answer:
+          'Because software scope varies by workflows, user roles, and integrations, we scope every project during discovery and provide a clear, milestone-based quote in KES or USD before development begins.',
+      },
+      {
+        question: 'Can you integrate custom software with M-Pesa or our existing website?',
+        answer:
+          'Yes. We connect custom portals and software backends directly to your website, mobile apps, M-Pesa / Paystack payment verification, email/WhatsApp alerts, and AI assistants.',
+      },
+    ],
+    relatedProjectSlugs: ['nyati-autospares', 'kirk-hospital-mombasa', 'ruevan-limited'],
+    relatedLinks: [
+      {
+        label: 'Website Design & Development Kenya',
+        href: '/web-design-kenya',
+        description: 'Pair your software platform with a fast, conversion-focused public website.',
+      },
+      {
+        label: 'AI Chatbots & Automation',
+        href: '/ai-solutions',
+        description: 'Add intelligent customer support and workflow automation to your software.',
+      },
+      {
+        label: 'Request a Software Quote',
+        href: '/contact?service=Custom%20Software%20Development%20%26%20Web%20Applications',
+        description: 'Share your workflow requirements for a scoped technical proposal.',
+      },
+    ],
+  },
 };
 
 export const INDUSTRY_SOLUTION_PAGES: Record<string, SeoLandingPageData> = {
