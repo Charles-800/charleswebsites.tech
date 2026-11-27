@@ -67,7 +67,11 @@ export default function ProjectCaseStudyClient({ project }: ProjectCaseStudyClie
                   rel="noopener noreferrer"
                   className="btn-secondary-outline inline-flex items-center gap-2 rounded-xl px-5 py-3 text-xs font-bold"
                 >
-                  <span>{t.portfolio.visitLiveSite}</span>
+                  <span>
+                    {project.category === 'software'
+                      ? t.portfolio.visitLiveSoftware
+                      : t.portfolio.visitLiveSite}
+                  </span>
                   <ExternalLink className="h-4 w-4" />
                 </a>
               )}

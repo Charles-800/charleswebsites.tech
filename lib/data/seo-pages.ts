@@ -525,7 +525,7 @@ export const SERVICE_LANDING_PAGES: Record<string, SeoLandingPageData> = {
           'Yes. We connect custom portals and software backends directly to your website, mobile apps, M-Pesa / Paystack payment verification, email/WhatsApp alerts, and AI assistants.',
       },
     ],
-    relatedProjectSlugs: ['nyati-autospares', 'kirk-hospital-mombasa', 'ruevan-limited'],
+    relatedProjectSlugs: ['lexiguard-attendance', 'nyati-autospares', 'kirk-hospital-mombasa'],
     relatedLinks: [
       {
         label: 'Website Design & Development Kenya',

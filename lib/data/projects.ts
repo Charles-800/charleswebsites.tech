@@ -1,4 +1,4 @@
-export type ProjectCategory = 'corporate' | 'ecommerce' | 'healthcare' | 'legal';
+export type ProjectCategory = 'corporate' | 'ecommerce' | 'healthcare' | 'legal' | 'software';
 
 export interface PortfolioProject {
   id: string;
@@ -468,6 +468,60 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
         'Mfumo wa Kuomba Miadi ya Mgonjwa',
         'Mawasiliano ya Haraka ya Dharura',
         'Muundo Rafiki wa Afya Kwenye Simu',
+      ],
+    },
+  },
+  {
+    id: 'lexiguard-attendance',
+    slug: 'lexiguard-attendance',
+    name: 'LexiGuard Staff Attendance',
+    category: 'software',
+    image: '/images/portfolio_lexiguard_attendance_1795777531317.jpg',
+    liveUrl: 'https://lexiguard-attendance-presence-8903.ai.studio/',
+    technologies: [
+      'TypeScript',
+      'React & Next.js',
+      'Staff Attendance & Presence Monitoring',
+      'Role-Based Dashboard',
+      'Reporting & Export',
+    ],
+    servicePath: '/software-development',
+    en: {
+      industry: 'Workforce Software & HR Operations',
+      serviceLabel: 'Staff Attendance Monitoring Software',
+      locationContext: 'Kenya & Remote Teams',
+      shortDescription:
+        'A custom staff attendance and presence monitoring web application built to track daily check-ins, shift coverage, late arrivals, and leave status in real time.',
+      overview:
+        'Engineered as an operational workforce dashboard giving HR managers and supervisors instant visibility into staff presence, attendance logs, and exportable daily reports.',
+      challenge:
+        'Organizations relying on paper registers or disconnected spreadsheets lack real-time visibility into daily staff check-ins, shift coverage, and attendance trends across teams.',
+      solution:
+        'Built a dedicated attendance and presence monitoring software platform featuring live presence metrics, searchable employee check-in logs, shift status indicators, and structured reporting.',
+      deliverables: [
+        'Staff Check-In & Presence Tracking',
+        'Live Attendance & Shift Dashboard',
+        'Employee Status & Leave Overview',
+        'Searchable Attendance Logs & Reports',
+      ],
+    },
+    sw: {
+      industry: 'Programu za Usimamizi wa Wafanyakazi',
+      serviceLabel: 'Mfumo wa Ufuatiliaji wa Mahudhurio ya Wafanyakazi',
+      locationContext: 'Kenya na Timu za Mbali',
+      shortDescription:
+        'Mfumo maalum wa kufuatilia mahudhurio na uwepo wa wafanyakazi uliojengwa kufuatilia muda wa kuingia kazini, zamu, kuchelewa, na likizo kwa wakati halisi.',
+      overview:
+        'Umeundwa kama dashibodi ya uendeshaji inayowapa mameneja wa rasilimali watu mwonekano wa papo hapo kuhusu uwepo wa wafanyakazi, kumbukumbu za mahudhurio, na ripoti.',
+      challenge:
+        'Taasisi zinazotumia madaftari au lahajedwali zisizounganishwa hukosa taarifa za wakati halisi kuhusu kuwasili kwa wafanyakazi na uwiano wa zamu.',
+      solution:
+        'Tulitengeneza jukwaa maalum la ufuatiliaji wa mahudhurio lenye takwimu za uwepo, kumbukumbu za wafanyakazi zinazoweza kutafutwa, hali ya zamu, na ripoti.',
+      deliverables: [
+        'Ufuatiliaji wa Muda wa Kuingia na Uwepo',
+        'Dashibodi ya Mahudhurio na Zamu',
+        'Muhtasari wa Hali ya Wafanyakazi na Likizo',
+        'Kumbukumbu na Ripoti za Mahudhurio',
       ],
     },
   },

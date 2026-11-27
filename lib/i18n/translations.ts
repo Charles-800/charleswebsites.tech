@@ -61,10 +61,12 @@ export interface TranslationSchema {
     filterEcommerce: string;
     filterHealthcare: string;
     filterLegal: string;
+    filterSoftware: string;
     deliverablesLabel: string;
     overviewLabel: string;
     liveUrlPending: string;
     visitLiveSite: string;
+    visitLiveSoftware: string;
     startSimilarProject: string;
     closeModal: string;
   };
@@ -457,7 +459,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     portfolio: {
       headline: 'OUR WORK SPEAKS FOR ITSELF.',
       subheading:
-        'Selected website projects crafted for businesses across corporate services, automotive retail, healthcare, auctioneering, and legal practice.',
+        'Selected website and custom software projects crafted for corporate firms, automotive retail, healthcare, legal practice, and workforce monitoring.',
       viewProject: 'View Project',
       viewAllProjects: 'VIEW ALL PROJECTS',
       filterAll: 'All Projects',
@@ -465,10 +467,12 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       filterEcommerce: 'E-Commerce',
       filterHealthcare: 'Healthcare',
       filterLegal: 'Legal & Auction',
+      filterSoftware: 'Software & Systems',
       deliverablesLabel: 'Project Scope & Deliverables',
       overviewLabel: 'Architecture Overview',
       liveUrlPending: 'Verified live URL can be linked here once supplied by the client.',
       visitLiveSite: 'Visit Live Website',
+      visitLiveSoftware: 'Launch Live Software',
       startSimilarProject: 'Request a Similar Website',
       closeModal: 'Close preview',
     },
@@ -1158,7 +1162,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
     portfolio: {
       headline: 'KAZI ZETU ZINAJIELEZA ZENYEWE.',
       subheading:
-        'Miradi teule ya tovuti tuliyounda kwa biashara katika sekta za makampuni, vipuri vya magari, afya, minada, na huduma za kisheria.',
+        'Miradi teule ya tovuti na mifumo maalum ya software tuliyounda kwa makampuni, vipuri vya magari, afya, huduma za kisheria, na usimamizi wa wafanyakazi.',
       viewProject: 'Tazama Mradi',
       viewAllProjects: 'TAZAMA MIRADI YOTE',
       filterAll: 'Miradi Yote',
@@ -1166,10 +1170,12 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       filterEcommerce: 'Biashara Mtandaoni',
       filterHealthcare: 'Afya',
       filterLegal: 'Sheria na Minada',
+      filterSoftware: 'Software na Mifumo',
       deliverablesLabel: 'Wigo na Kazi Zilizofanywa',
       overviewLabel: 'Muhtasari wa Muundo',
       liveUrlPending: 'Kiungo halisi cha tovuti kitawekwa hapa mara tu kitakapotolewa na mteja.',
       visitLiveSite: 'Tembelea Tovuti Halisi',
+      visitLiveSoftware: 'Fungua Software Halisi',
       startSimilarProject: 'Omba Tovuti Kama Hii',
       closeModal: 'Funga dirisha',
     },
