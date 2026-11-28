@@ -49,6 +49,9 @@ export function buildOrganizationAndServiceSchema() {
       'Graphic Design & Branding',
       'Android & iOS Mobile Apps',
       'Custom Software Development',
+      'Java',
+      'C',
+      'C++',
     ],
     ...(sameAs.length > 0 ? { sameAs } : {}),
     contactPoint: {

@@ -6,6 +6,7 @@ import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import FloatingContact from '@/components/layout/FloatingContact';
+import { MotionProvider } from '@/components/ui/MotionPrimitives';
 import { getSiteBaseUrl } from '@/lib/config/site';
 import {
   buildOrganizationAndServiceSchema,
@@ -125,14 +126,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Script>
           </>
         )}
-        <LanguageProvider>
-          <div className="flex min-h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <FloatingContact />
-          </div>
-        </LanguageProvider>
+        <MotionProvider>
+          <LanguageProvider>
+            <div className="flex min-h-screen flex-col">
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <FloatingContact />
+            </div>
+          </LanguageProvider>
+        </MotionProvider>
       </body>
     </html>
   );

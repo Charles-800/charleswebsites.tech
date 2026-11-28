@@ -10,18 +10,32 @@ export default function HeroVisual() {
 
   return (
     <div className="relative w-full">
-      <div className="mx-auto max-w-[460px] lg:ml-auto lg:mr-0 overflow-hidden rounded-3xl border border-[#E8E8EC] bg-white shadow-2xl">
+      {/* Subtle architectural accent glow behind the portrait frame */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-6 -right-4 h-44 w-44 rounded-full bg-[#7137D8]/12 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-6 left-4 h-40 w-40 rounded-full bg-[#E5092F]/10 blur-3xl"
+      />
+
+      <div className="group card-interactive relative mx-auto max-w-[460px] lg:ml-auto lg:mr-0 overflow-hidden rounded-3xl border border-[#E8E8EC] bg-white shadow-2xl">
         {/* Main Hero Portrait */}
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#F7F7F9]">
           <Image
             src="/assets/aistudio/GPM_4716_828be8f9.jpg"
-            alt="Charles Websites — Web Developer, AI Engineer & Android and iOS Apps Developer"
+            alt="Charles Websites — Software Developer, Web Developer, AI Engineer & Android and iOS Apps Developer"
             fill
             priority
             quality={85}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 460px, 460px"
             referrerPolicy="no-referrer"
-            className="object-cover object-top"
+            className="img-zoom-target object-cover object-top"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           />
         </div>
 
@@ -36,22 +50,22 @@ export default function HeroVisual() {
             </p>
             <p className="mt-0.5 text-xs font-medium leading-relaxed text-[#D4D4D8]">
               {locale === 'sw'
-                ? 'Msanidi Tovuti, Mhandisi wa AI & Mtengenezaji wa Programu za Android na iOS'
-                : 'Web Developer, AI Engineer & Android / iOS Apps Developer'}
+                ? 'Msanidi wa Software, Tovuti, Mhandisi wa AI & Mtengenezaji wa Programu za Android na iOS'
+                : 'Software Developer, Web Developer, AI Engineer & Android / iOS Apps Developer'}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1.5 text-[11px] font-semibold text-white">
-              <Code2 className="h-3.5 w-3.5 text-[#E5092F]" />
+            <span className="group/pill inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1.5 text-[11px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[#E5092F]/60 hover:bg-white/10">
+              <Code2 className="h-3.5 w-3.5 text-[#E5092F] transition-transform duration-200 group-hover/pill:scale-110" />
               <span>{locale === 'sw' ? 'Tovuti' : 'Web Dev'}</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1.5 text-[11px] font-semibold text-white">
-              <Bot className="h-3.5 w-3.5 text-[#8B5CF6]" />
+            <span className="group/pill inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1.5 text-[11px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[#8B5CF6]/70 hover:bg-white/10">
+              <Bot className="h-3.5 w-3.5 text-[#8B5CF6] transition-transform duration-200 group-hover/pill:scale-110" />
               <span>AI</span>
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1.5 text-[11px] font-semibold text-white">
-              <Smartphone className="h-3.5 w-3.5 text-[#E5092F]" />
+            <span className="group/pill inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1.5 text-[11px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[#E5092F]/60 hover:bg-white/10">
+              <Smartphone className="h-3.5 w-3.5 text-[#E5092F] transition-transform duration-200 group-hover/pill:scale-110" />
               <span>{locale === 'sw' ? 'Programu za Android & iOS' : 'Android & iOS Apps'}</span>
             </span>
           </div>

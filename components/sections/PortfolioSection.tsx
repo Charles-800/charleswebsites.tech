@@ -2,10 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { AnimatePresence, motion } from 'motion/react';
 import { ArrowUpRight, CheckCircle2, ExternalLink, X, Globe } from 'lucide-react';
 import { PORTFOLIO_PROJECTS, PortfolioProject, ProjectCategory } from '@/lib/data/projects';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import ResilientImage from '@/components/ui/ResilientImage';
+import { RevealBlock, RevealItem, RevealStagger } from '@/components/ui/MotionPrimitives';
 
 interface PortfolioSectionProps {
   showFilters?: boolean;
@@ -48,7 +50,7 @@ export default function PortfolioSection({
   return (
     <section id="portfolio" className="bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <RevealBlock className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             {headingAs === 'h1' ? (
               <h1 className="font-[family-name:var(--font-jakarta)] text-4xl font-extrabold tracking-tight text-[#151515] sm:text-5xl">
@@ -73,167 +75,190 @@ export default function PortfolioSection({
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           )}
-        </div>
+        </RevealBlock>
 
         {/* Category Filter Tabs */}
         {showFilters && (
-          <div className="mt-10 flex flex-wrap items-center gap-2">
+          <RevealBlock delay={0.06} className="mt-10 flex flex-wrap items-center gap-2">
             {filterButtons.map((btn) => (
               <button
                 key={btn.key}
                 type="button"
                 onClick={() => setSelectedCategory(btn.key)}
-                className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
+                className={`rounded-lg px-4 py-2 text-xs font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer active:scale-95 ${
                   selectedCategory === btn.key
-                    ? 'bg-[#111111] text-white'
-                    : 'border border-[#E8E8EC] bg-[#F7F7F9] text-[#686868] hover:text-[#7137D8]'
+                    ? 'bg-[#111111] text-white shadow-sm'
+                    : 'border border-[#E8E8EC] bg-[#F7F7F9] text-[#686868] hover:border-[#7137D8]/50 hover:text-[#7137D8]'
                 }`}
               >
                 {btn.label}
               </button>
             ))}
-          </div>
+          </RevealBlock>
         )}
 
         {/* Portfolio Grid */}
-        <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <RevealStagger
+          key={selectedCategory}
+          className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+        >
           {filteredProjects.map((project) => {
             const copy = locale === 'sw' ? project.sw : project.en;
             return (
-              <article
-                key={project.id}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-[#E8E8EC] bg-white transition-all duration-200 hover:border-[#7137D8]/50 hover:shadow-lg"
-              >
-                <Link
-                  href={`/portfolio/${project.slug}`}
-                  className={`relative aspect-[4/3] w-full overflow-hidden border-b border-[#E8E8EC] ${
-                    project.imageFit === 'contain' ? 'bg-[#F3F4F6]' : 'bg-[#F7F7F9]'
-                  }`}
-                >
-                  <ResilientImage
-                    src={project.image}
-                    alt={`${project.name} — ${copy.industry}`}
-                    fallbackLabel={project.name}
-                    className={`${
-                      project.imageFit === 'contain'
-                        ? 'object-contain'
-                        : project.imageFit === 'cover-top'
-                          ? 'object-cover object-top'
-                          : 'object-cover'
-                    } transition-transform duration-300 group-hover:scale-[1.02]`}
-                  />
-                </Link>
-
-                <div className="flex flex-1 flex-col p-6">
-                  <p className="text-xs font-semibold tracking-wide text-[#7137D8]">
-                    {copy.industry}
-                  </p>
-                  <h3 className="mt-2 font-[family-name:var(--font-jakarta)] text-xl font-bold text-[#151515]">
-                    <Link
-                      href={`/portfolio/${project.slug}`}
-                      className="hover:text-[#7137D8] transition-colors"
+              <RevealItem key={project.id} className="h-full">
+                <article className="group card-interactive flex h-full flex-col overflow-hidden rounded-2xl border border-[#E8E8EC] bg-white">
+                  <Link
+                    href={`/portfolio/${project.slug}`}
+                    className={`relative aspect-[4/3] w-full overflow-hidden border-b border-[#E8E8EC] ${
+                      project.imageFit === 'contain' ? 'bg-[#F3F4F6]' : 'bg-[#F7F7F9]'
+                    }`}
+                  >
+                    <ResilientImage
+                      src={project.image}
+                      alt={`${project.name} — ${copy.industry}`}
+                      fallbackLabel={project.name}
+                      className={`img-zoom-target ${
+                        project.imageFit === 'contain'
+                          ? 'object-contain'
+                          : project.imageFit === 'cover-top'
+                            ? 'object-cover object-top'
+                            : 'object-cover'
+                      }`}
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 flex items-end justify-between bg-gradient-to-t from-[#111111]/75 via-[#111111]/20 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                     >
-                      {project.name}
-                    </Link>
-                  </h3>
-                  <p className="mt-2.5 flex-1 text-sm leading-relaxed text-[#686868]">
-                    {copy.shortDescription}
-                  </p>
+                      <span className="rounded-lg bg-white/95 px-2.5 py-1 text-[11px] font-bold text-[#151515] shadow-sm">
+                        {copy.industry}
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-lg bg-[#7137D8] px-2.5 py-1 text-[11px] font-bold text-white shadow-sm">
+                        <span>{locale === 'sw' ? 'Fungua' : 'Inspect'}</span>
+                        <ArrowUpRight className="h-3 w-3" />
+                      </span>
+                    </div>
+                  </Link>
 
-                  <div className="mt-6 pt-4 border-t border-[#E8E8EC] flex flex-wrap items-center justify-between gap-2.5">
-                    {project.liveUrl ? (
-                      <>
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-primary-cta inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold tracking-wide whitespace-nowrap"
-                        >
-                          <span>
-                            {project.category === 'software'
-                              ? t.portfolio.visitLiveSoftware
-                              : t.portfolio.visitLiveSite}
-                          </span>
-                          <ExternalLink className="h-3.5 w-3.5" />
-                        </a>
+                  <div className="flex flex-1 flex-col p-6">
+                    <p className="text-xs font-semibold tracking-wide text-[#7137D8]">
+                      {copy.industry}
+                    </p>
+                    <h3 className="mt-2 font-[family-name:var(--font-jakarta)] text-xl font-bold text-[#151515]">
+                      <Link
+                        href={`/portfolio/${project.slug}`}
+                        className="card-title-scale inline-block hover:text-[#7137D8]"
+                      >
+                        {project.name}
+                      </Link>
+                    </h3>
+                    <p className="card-desc-enhance mt-2.5 flex-1 text-sm leading-relaxed text-[#686868]">
+                      {copy.shortDescription}
+                    </p>
 
+                    <div className="mt-6 pt-4 border-t border-[#E8E8EC] flex flex-wrap items-center justify-between gap-2.5">
+                      {project.liveUrl ? (
+                        <>
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary-cta inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold tracking-wide whitespace-nowrap"
+                          >
+                            <span>
+                              {project.category === 'software'
+                                ? t.portfolio.visitLiveSoftware
+                                : t.portfolio.visitLiveSite}
+                            </span>
+                            <ExternalLink className="h-3.5 w-3.5" />
+                          </a>
+
+                          <div className="flex items-center gap-2">
+                            <Link
+                              href={`/portfolio/${project.slug}`}
+                              className="btn-secondary-outline inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2.5 text-xs font-bold whitespace-nowrap"
+                            >
+                              <span>{locale === 'sw' ? 'Kifani' : 'Case Study'}</span>
+                              <ArrowUpRight className="h-3.5 w-3.5" />
+                            </Link>
+                            <button
+                              type="button"
+                              onClick={() => setActiveProject(project)}
+                              className="link-interactive px-2 py-2 text-xs font-semibold text-[#686868] hover:text-[#7137D8] cursor-pointer"
+                            >
+                              {locale === 'sw' ? 'Hakiki' : 'Preview'}
+                            </button>
+                          </div>
+                        </>
+                      ) : (
                         <div className="flex items-center gap-2">
                           <Link
                             href={`/portfolio/${project.slug}`}
-                            className="btn-secondary-outline inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2.5 text-xs font-bold whitespace-nowrap"
+                            className="btn-primary-cta inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold tracking-wide whitespace-nowrap"
                           >
-                            <span>{locale === 'sw' ? 'Kifani' : 'Case Study'}</span>
+                            <span>{locale === 'sw' ? 'Soma Kifani' : 'Read Case Study'}</span>
                             <ArrowUpRight className="h-3.5 w-3.5" />
                           </Link>
                           <button
                             type="button"
                             onClick={() => setActiveProject(project)}
-                            className="px-2 py-2 text-xs font-semibold text-[#686868] hover:text-[#7137D8] cursor-pointer"
+                            className="btn-secondary-outline inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2.5 text-xs font-bold whitespace-nowrap cursor-pointer"
                           >
-                            {locale === 'sw' ? 'Hakiki' : 'Preview'}
+                            <span>{t.portfolio.viewProject}</span>
                           </button>
                         </div>
-                      </>
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <Link
-                          href={`/portfolio/${project.slug}`}
-                          className="btn-primary-cta inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold tracking-wide whitespace-nowrap"
-                        >
-                          <span>{locale === 'sw' ? 'Soma Kifani' : 'Read Case Study'}</span>
-                          <ArrowUpRight className="h-3.5 w-3.5" />
-                        </Link>
-                        <button
-                          type="button"
-                          onClick={() => setActiveProject(project)}
-                          className="btn-secondary-outline inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2.5 text-xs font-bold whitespace-nowrap cursor-pointer"
-                        >
-                          <span>{t.portfolio.viewProject}</span>
-                        </button>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </RevealItem>
             );
           })}
-        </div>
+        </RevealStagger>
       </div>
 
       {/* Project Detail Preview Modal */}
-      {activeProject && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="portfolio-modal-title"
-          onClick={() => setActiveProject(null)}
-        >
-          <div
-            className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {activeProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="portfolio-modal-title"
+            onClick={() => setActiveProject(null)}
           >
-            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#E8E8EC] bg-white px-6 py-4">
-              <div>
-                <p className="text-xs font-semibold text-[#7137D8]">
-                  {(locale === 'sw' ? activeProject.sw : activeProject.en).industry}
-                </p>
-                <h3
-                  id="portfolio-modal-title"
-                  className="font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[#151515]"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#E8E8EC] bg-white px-6 py-4">
+                <div>
+                  <p className="text-xs font-semibold text-[#7137D8]">
+                    {(locale === 'sw' ? activeProject.sw : activeProject.en).industry}
+                  </p>
+                  <h3
+                    id="portfolio-modal-title"
+                    className="font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[#151515]"
+                  >
+                    {activeProject.name}
+                  </h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveProject(null)}
+                  aria-label={t.portfolio.closeModal}
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#E8E8EC] text-[#151515] transition-colors hover:border-[#7137D8] hover:text-[#7137D8] cursor-pointer"
                 >
-                  {activeProject.name}
-                </h3>
+                  <X className="h-5 w-5" />
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={() => setActiveProject(null)}
-                aria-label={t.portfolio.closeModal}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#E8E8EC] text-[#151515] hover:border-[#7137D8] hover:text-[#7137D8] cursor-pointer"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
 
             <div className="p-6 space-y-6">
               {activeProject.imageFit === 'cover-top' ? (
@@ -322,10 +347,11 @@ export default function PortfolioSection({
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

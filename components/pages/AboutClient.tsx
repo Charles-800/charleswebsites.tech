@@ -8,6 +8,7 @@ import { buildWhatsAppUrl } from '@/lib/config/site';
 import { CertificationItem } from '@/lib/data/certifications';
 import SkillsSection from '@/components/sections/SkillsSection';
 import CertificationsSection from '@/components/sections/CertificationsSection';
+import { RevealBlock, RevealItem, RevealStagger } from '@/components/ui/MotionPrimitives';
 
 interface AboutClientProps {
   initialCertifications: CertificationItem[];
@@ -48,47 +49,57 @@ export default function AboutClient({ initialCertifications }: AboutClientProps)
       {/* Mission & Vision */}
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            <div className="rounded-2xl border border-[#E8E8EC] bg-white p-8">
-              <h2 className="font-[family-name:var(--font-jakarta)] text-2xl font-extrabold text-[#151515]">
-                {t.about.missionTitle}
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-[#686868]">
-                {t.about.missionText}
-              </p>
-            </div>
+          <RevealStagger className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <RevealItem className="h-full">
+              <div className="group card-interactive h-full rounded-2xl border border-[#E8E8EC] bg-white p-8">
+                <h2 className="card-title-scale inline-block font-[family-name:var(--font-jakarta)] text-2xl font-extrabold text-[#151515]">
+                  {t.about.missionTitle}
+                </h2>
+                <p className="card-desc-enhance mt-4 text-base leading-relaxed text-[#686868]">
+                  {t.about.missionText}
+                </p>
+              </div>
+            </RevealItem>
 
-            <div className="rounded-2xl border border-[#111111] bg-[#111111] p-8 text-white">
-              <h2 className="font-[family-name:var(--font-jakarta)] text-2xl font-extrabold text-white">
-                {t.about.visionTitle}
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-[#D4D4D8]">
-                {t.about.visionText}
-              </p>
-            </div>
-          </div>
+            <RevealItem className="h-full">
+              <div className="group card-interactive-dark h-full rounded-2xl border border-[#111111] bg-[#111111] p-8 text-white">
+                <h2 className="card-title-scale inline-block font-[family-name:var(--font-jakarta)] text-2xl font-extrabold text-white">
+                  {t.about.visionTitle}
+                </h2>
+                <p className="card-desc-enhance mt-4 text-base leading-relaxed text-[#D4D4D8]">
+                  {t.about.visionText}
+                </p>
+              </div>
+            </RevealItem>
+          </RevealStagger>
         </div>
       </section>
 
       {/* Core Values */}
       <section className="border-y border-[#E8E8EC] bg-[#F7F7F9] py-16 sm:py-20">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515]">
-            {t.about.valuesTitle}
-          </h2>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <RevealBlock>
+            <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515]">
+              {t.about.valuesTitle}
+            </h2>
+          </RevealBlock>
+          <RevealStagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {t.about.values.map((val, idx) => (
-              <div key={val.title} className="rounded-2xl border border-[#E8E8EC] bg-white p-7">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#F7F7F9]">
-                  {valueIcons[idx]}
+              <RevealItem key={val.title} className="h-full">
+                <div className="group card-interactive h-full rounded-2xl border border-[#E8E8EC] bg-white p-7">
+                  <div className="card-icon-float flex h-10 w-10 items-center justify-center rounded-lg bg-[#F7F7F9]">
+                    {valueIcons[idx]}
+                  </div>
+                  <h3 className="card-title-scale mt-4 inline-block font-[family-name:var(--font-jakarta)] text-lg font-bold text-[#151515]">
+                    {val.title}
+                  </h3>
+                  <p className="card-desc-enhance mt-2 text-sm leading-relaxed text-[#686868]">
+                    {val.description}
+                  </p>
                 </div>
-                <h3 className="mt-4 font-[family-name:var(--font-jakarta)] text-lg font-bold text-[#151515]">
-                  {val.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#686868]">{val.description}</p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
@@ -97,50 +108,55 @@ export default function AboutClient({ initialCertifications }: AboutClientProps)
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             <div className="lg:col-span-7 space-y-6">
-              <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515]">
-                {t.about.expertiseTitle}
-              </h2>
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <RevealBlock>
+                <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515]">
+                  {t.about.expertiseTitle}
+                </h2>
+              </RevealBlock>
+              <RevealStagger className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 {t.about.expertise.map((item) => (
-                  <div
-                    key={item.title}
-                    className="rounded-2xl border border-[#E8E8EC] bg-[#F7F7F9] p-6"
-                  >
-                    <h3 className="font-[family-name:var(--font-jakarta)] text-base font-bold text-[#151515]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#686868]">
-                      {item.description}
-                    </p>
-                  </div>
+                  <RevealItem key={item.title} className="h-full">
+                    <div className="group card-interactive h-full rounded-2xl border border-[#E8E8EC] bg-[#F7F7F9] p-6 hover:bg-white">
+                      <h3 className="card-title-scale inline-block font-[family-name:var(--font-jakarta)] text-base font-bold text-[#151515]">
+                        {item.title}
+                      </h3>
+                      <p className="card-desc-enhance mt-2 text-sm leading-relaxed text-[#686868]">
+                        {item.description}
+                      </p>
+                    </div>
+                  </RevealItem>
                 ))}
-              </div>
+              </RevealStagger>
             </div>
 
-            <div className="lg:col-span-5 space-y-8">
-              <div className="rounded-2xl border border-[#E8E8EC] bg-white p-7">
-                <h2 className="font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[#151515]">
-                  {t.about.approachTitle}
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-[#686868]">
-                  {t.about.approachText}
-                </p>
-              </div>
+            <RevealStagger className="lg:col-span-5 space-y-8">
+              <RevealItem>
+                <div className="group card-interactive rounded-2xl border border-[#E8E8EC] bg-white p-7">
+                  <h2 className="card-title-scale inline-block font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[#151515]">
+                    {t.about.approachTitle}
+                  </h2>
+                  <p className="card-desc-enhance mt-3 text-sm leading-relaxed text-[#686868]">
+                    {t.about.approachText}
+                  </p>
+                </div>
+              </RevealItem>
 
-              <div className="rounded-2xl border border-[#E8E8EC] bg-white p-7">
-                <h2 className="font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[#151515]">
-                  {t.about.whyWorkTitle}
-                </h2>
-                <ul className="mt-4 space-y-3">
-                  {t.about.whyWorkPoints.map((pt) => (
-                    <li key={pt} className="flex items-start gap-2.5 text-sm text-[#151515]">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#E5092F]" />
-                      <span>{pt}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+              <RevealItem>
+                <div className="group card-interactive rounded-2xl border border-[#E8E8EC] bg-white p-7">
+                  <h2 className="card-title-scale inline-block font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-[#151515]">
+                    {t.about.whyWorkTitle}
+                  </h2>
+                  <ul className="mt-4 space-y-3">
+                    {t.about.whyWorkPoints.map((pt) => (
+                      <li key={pt} className="flex items-start gap-2.5 text-sm text-[#151515]">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#E5092F] transition-transform duration-200 group-hover:scale-110" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </RevealItem>
+            </RevealStagger>
           </div>
         </div>
       </section>
@@ -152,8 +168,12 @@ export default function AboutClient({ initialCertifications }: AboutClientProps)
       <CertificationsSection initialCertifications={initialCertifications} />
 
       {/* Consultation CTA */}
-      <section className="bg-[#111111] py-16 sm:py-20 text-white">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative overflow-hidden bg-[#111111] py-16 sm:py-20 text-white">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-0 left-1/2 h-56 w-96 -translate-x-1/2 rounded-full bg-[#7137D8]/15 blur-3xl"
+        />
+        <RevealBlock className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="mx-auto max-w-2xl font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             {t.about.ctaHeadline}
           </h2>
@@ -175,7 +195,7 @@ export default function AboutClient({ initialCertifications }: AboutClientProps)
               <span>{t.nav.whatsappUs}</span>
             </a>
           </div>
-        </div>
+        </RevealBlock>
       </section>
     </div>
   );

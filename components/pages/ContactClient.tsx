@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useMemo, useState, useSyncExternalStore } from 'react';
+import { motion } from 'motion/react';
 import { Phone, MessageCircle, CheckCircle2, AlertCircle, Send, Mail } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { SITE_CONFIG, buildWhatsAppUrl, buildMailtoUrl } from '@/lib/config/site';
+import { RevealBlock } from '@/components/ui/MotionPrimitives';
 
 interface ContactClientProps {
   preselectedPackage?: string;
@@ -205,8 +207,8 @@ export default function ContactClient({
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
             {/* Left Direct Contact Column */}
-            <div className="lg:col-span-4 space-y-6">
-              <div className="rounded-2xl border border-[#E8E8EC] bg-[#111111] p-7 text-white">
+            <RevealBlock className="lg:col-span-4 space-y-6">
+              <div className="card-interactive-dark rounded-2xl border border-[#E8E8EC] bg-[#111111] p-7 text-white">
                 <h2 className="font-[family-name:var(--font-jakarta)] text-xl font-extrabold text-white">
                   {t.contact.directTitle}
                 </h2>
@@ -217,9 +219,9 @@ export default function ContactClient({
                 <div className="mt-7 space-y-4">
                   <a
                     href={SITE_CONFIG.phoneHref}
-                    className="flex items-center gap-3.5 rounded-xl border border-white/15 bg-white/5 p-4 text-white transition-colors hover:border-[#8B5CF6]"
+                    className="group flex items-center gap-3.5 rounded-xl border border-white/15 bg-white/5 p-4 text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[#8B5CF6] hover:bg-white/10"
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E5092F] text-white">
+                    <div className="card-icon-float flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#E5092F] text-white">
                       <Phone className="h-5 w-5" />
                     </div>
                     <div>
@@ -234,9 +236,9 @@ export default function ContactClient({
                     href={whatsappDirectUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-primary-cta flex items-center gap-3.5 rounded-xl p-4 text-white"
+                    className="btn-primary-cta group flex items-center gap-3.5 rounded-xl p-4 text-white"
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/15 text-white">
+                    <div className="card-icon-float flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/15 text-white">
                       <MessageCircle className="h-5 w-5" />
                     </div>
                     <div>
@@ -249,9 +251,9 @@ export default function ContactClient({
 
                   <a
                     href={SITE_CONFIG.emailHref}
-                    className="flex items-center gap-3.5 rounded-xl border border-white/15 bg-white/5 p-4 text-white transition-colors hover:border-[#8B5CF6]"
+                    className="group flex items-center gap-3.5 rounded-xl border border-white/15 bg-white/5 p-4 text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-[#8B5CF6] hover:bg-white/10"
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#7137D8] text-white">
+                    <div className="card-icon-float flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#7137D8] text-white">
                       <Mail className="h-5 w-5" />
                     </div>
                     <div className="min-w-0">
@@ -263,17 +265,22 @@ export default function ContactClient({
                   </a>
                 </div>
               </div>
-            </div>
+            </RevealBlock>
 
             {/* Right Contact Form Column */}
-            <div className="lg:col-span-8">
-              <div className="rounded-2xl border border-[#E8E8EC] bg-white p-6 sm:p-10 shadow-xs">
+            <RevealBlock delay={0.08} className="lg:col-span-8">
+              <div className="rounded-2xl border border-[#E8E8EC] bg-white p-6 sm:p-10 shadow-xs transition-shadow duration-300 hover:shadow-md">
                 <h2 className="font-[family-name:var(--font-jakarta)] text-2xl font-extrabold text-[#151515]">
                   {t.contact.formTitle}
                 </h2>
 
                 {successInfo ? (
-                  <div className="mt-8 rounded-2xl border border-[#E8E8EC] bg-[#F7F7F9] p-8 text-center space-y-4">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.97, y: 8 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="mt-8 rounded-2xl border border-[#E8E8EC] bg-[#F7F7F9] p-8 text-center space-y-4"
+                  >
                     <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#7137D8]/15 text-[#7137D8]">
                       <CheckCircle2 className="h-7 w-7" />
                     </div>
@@ -313,7 +320,7 @@ export default function ContactClient({
                         <span>{t.nav.whatsappUs}</span>
                       </a>
                     </div>
-                  </div>
+                  </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-5">
                     {/* Invisible honeypot field against automated bot spam */}
@@ -516,7 +523,7 @@ export default function ContactClient({
                   </form>
                 )}
               </div>
-            </div>
+            </RevealBlock>
           </div>
         </div>
       </section>

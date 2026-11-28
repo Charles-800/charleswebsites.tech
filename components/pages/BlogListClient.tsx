@@ -2,10 +2,12 @@
 
 import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
+import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, Plus, Search, X, Pencil } from 'lucide-react';
 import { BlogArticle, BlogCategory } from '@/lib/data/blog';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import ResilientImage from '@/components/ui/ResilientImage';
+import { RevealBlock, RevealItem, RevealStagger } from '@/components/ui/MotionPrimitives';
 
 interface BlogListClientProps {
   initialArticles: BlogArticle[];
@@ -164,15 +166,15 @@ export default function BlogListClient({ initialArticles }: BlogListClientProps)
       {/* Search & Category Filters */}
       <section className="py-12 sm:py-16">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <RevealBlock className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex flex-wrap items-center gap-2">
               <button
                 type="button"
                 onClick={() => setSelectedCategory('all')}
-                className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
+                className={`rounded-lg px-4 py-2 text-xs font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer active:scale-95 ${
                   selectedCategory === 'all'
-                    ? 'bg-[#111111] text-white'
-                    : 'border border-[#E8E8EC] bg-[#F7F7F9] text-[#686868] hover:text-[#7137D8]'
+                    ? 'bg-[#111111] text-white shadow-sm'
+                    : 'border border-[#E8E8EC] bg-[#F7F7F9] text-[#686868] hover:border-[#7137D8]/50 hover:text-[#7137D8]'
                 }`}
               >
                 {t.blog.allCategories}
@@ -182,10 +184,10 @@ export default function BlogListClient({ initialArticles }: BlogListClientProps)
                   key={cat}
                   type="button"
                   onClick={() => setSelectedCategory(cat)}
-                  className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
+                  className={`rounded-lg px-4 py-2 text-xs font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer active:scale-95 ${
                     selectedCategory === cat
-                      ? 'bg-[#111111] text-white'
-                      : 'border border-[#E8E8EC] bg-[#F7F7F9] text-[#686868] hover:text-[#7137D8]'
+                      ? 'bg-[#111111] text-white shadow-sm'
+                      : 'border border-[#E8E8EC] bg-[#F7F7F9] text-[#686868] hover:border-[#7137D8]/50 hover:text-[#7137D8]'
                   }`}
                 >
                   {cat}
@@ -201,10 +203,10 @@ export default function BlogListClient({ initialArticles }: BlogListClientProps)
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t.blog.searchPlaceholder}
                 aria-label={t.blog.searchPlaceholder}
-                className="w-full rounded-xl border border-[#E8E8EC] bg-white py-2.5 pl-10 pr-4 text-sm text-[#151515] placeholder:text-[#686868]/70 focus:border-[#7137D8] focus:outline-none"
+                className="w-full rounded-xl border border-[#E8E8EC] bg-white py-2.5 pl-10 pr-4 text-sm text-[#151515] placeholder:text-[#686868]/70 transition-colors focus:border-[#7137D8] focus:outline-none"
               />
             </div>
-          </div>
+          </RevealBlock>
 
           {/* Articles Grid */}
           {filtered.length === 0 ? (
@@ -212,91 +214,106 @@ export default function BlogListClient({ initialArticles }: BlogListClientProps)
               <p className="text-base text-[#686868]">{t.blog.noResults}</p>
             </div>
           ) : (
-            <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <RevealStagger
+              key={selectedCategory}
+              className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+            >
               {filtered.map((article) => {
                 const localized = locale === 'sw' ? article.sw : article.en;
                 return (
-                  <article
-                    key={article.slug}
-                    className="group flex flex-col overflow-hidden rounded-2xl border border-[#E8E8EC] bg-white transition-all duration-200 hover:border-[#7137D8]/50 hover:shadow-lg"
-                  >
-                    <Link
-                      href={`/blog/${article.slug}`}
-                      className="relative aspect-[16/9] w-full overflow-hidden bg-[#F7F7F9]"
-                    >
-                      <ResilientImage
-                        src={article.featuredImage}
-                        alt={localized.imageAlt}
-                        fallbackLabel={localized.title}
-                        className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                      />
-                    </Link>
+                  <RevealItem key={article.slug} className="h-full">
+                    <article className="group card-interactive flex h-full flex-col overflow-hidden rounded-2xl border border-[#E8E8EC] bg-white">
+                      <Link
+                        href={`/blog/${article.slug}`}
+                        className="relative aspect-[16/9] w-full overflow-hidden bg-[#F7F7F9]"
+                      >
+                        <ResilientImage
+                          src={article.featuredImage}
+                          alt={localized.imageAlt}
+                          fallbackLabel={localized.title}
+                          className="img-zoom-target object-cover"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                        />
+                      </Link>
 
-                    <div className="flex flex-1 flex-col p-6">
-                      <div className="flex items-center gap-2 text-xs text-[#686868]">
-                        <span className="font-semibold text-[#7137D8]">{article.category}</span>
-                        <span aria-hidden="true">·</span>
-                        <time dateTime={article.publishedAt}>{article.publishedAt}</time>
-                        <span aria-hidden="true">·</span>
-                        <span>
-                          {article.readTimeMinutes} {t.blog.minRead}
-                        </span>
+                      <div className="flex flex-1 flex-col p-6">
+                        <div className="flex items-center gap-2 text-xs text-[#686868]">
+                          <span className="font-semibold text-[#7137D8]">{article.category}</span>
+                          <span aria-hidden="true">·</span>
+                          <time dateTime={article.publishedAt}>{article.publishedAt}</time>
+                          <span aria-hidden="true">·</span>
+                          <span>
+                            {article.readTimeMinutes} {t.blog.minRead}
+                          </span>
+                        </div>
+
+                        <h2 className="mt-3 font-[family-name:var(--font-jakarta)] text-xl font-bold leading-snug text-[#151515]">
+                          <Link
+                            href={`/blog/${article.slug}`}
+                            className="card-title-scale inline-block hover:text-[#7137D8]"
+                          >
+                            {localized.title}
+                          </Link>
+                        </h2>
+
+                        <p className="card-desc-enhance mt-2.5 flex-1 text-sm leading-relaxed text-[#686868]">
+                          {localized.excerpt}
+                        </p>
+
+                        <div className="mt-6 flex items-center justify-between border-t border-[#E8E8EC] pt-4">
+                          <Link
+                            href={`/blog/${article.slug}`}
+                            className="link-interactive inline-flex items-center gap-1.5 text-xs font-extrabold tracking-wider text-[#E5092F] hover:text-[#7137D8]"
+                          >
+                            <span>{t.blog.readMore}</span>
+                            <ArrowRight className="h-3.5 w-3.5" />
+                          </Link>
+
+                          <button
+                            type="button"
+                            onClick={() => openEditModal(article)}
+                            aria-label={`Edit ${localized.title}`}
+                            className="link-interactive inline-flex items-center gap-1 text-xs font-semibold text-[#686868] hover:text-[#7137D8] cursor-pointer"
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                            <span>Edit</span>
+                          </button>
+                        </div>
                       </div>
-
-                      <h2 className="mt-3 font-[family-name:var(--font-jakarta)] text-xl font-bold leading-snug text-[#151515]">
-                        <Link
-                          href={`/blog/${article.slug}`}
-                          className="hover:text-[#7137D8] transition-colors"
-                        >
-                          {localized.title}
-                        </Link>
-                      </h2>
-
-                      <p className="mt-2.5 flex-1 text-sm leading-relaxed text-[#686868]">
-                        {localized.excerpt}
-                      </p>
-
-                      <div className="mt-6 flex items-center justify-between border-t border-[#E8E8EC] pt-4">
-                        <Link
-                          href={`/blog/${article.slug}`}
-                          className="inline-flex items-center gap-1.5 text-xs font-extrabold tracking-wider text-[#E5092F] hover:text-[#7137D8] transition-colors"
-                        >
-                          <span>{t.blog.readMore}</span>
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </Link>
-
-                        <button
-                          type="button"
-                          onClick={() => openEditModal(article)}
-                          aria-label={`Edit ${localized.title}`}
-                          className="inline-flex items-center gap-1 text-xs font-semibold text-[#686868] hover:text-[#7137D8] cursor-pointer"
-                        >
-                          <Pencil className="h-3.5 w-3.5" />
-                          <span>Edit</span>
-                        </button>
-                      </div>
-                    </div>
-                  </article>
+                    </article>
+                  </RevealItem>
                 );
               })}
-            </div>
+            </RevealStagger>
           )}
         </div>
       </section>
 
       {/* Add / Edit Article Modal */}
-      {modalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="blog-modal-title"
-          onClick={() => setModalOpen(false)}
-        >
-          <div
-            className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 sm:p-8 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {modalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="blog-modal-title"
+            onClick={() => setModalOpen(false)}
           >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-6 sm:p-8 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
             <div className="flex items-center justify-between border-b border-[#E8E8EC] pb-4">
               <h2
                 id="blog-modal-title"
@@ -468,9 +485,10 @@ export default function BlogListClient({ initialArticles }: BlogListClientProps)
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

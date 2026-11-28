@@ -33,6 +33,7 @@ import SkillsSection from '@/components/sections/SkillsSection';
 import CertificationsSection from '@/components/sections/CertificationsSection';
 import ResilientImage from '@/components/ui/ResilientImage';
 import FaqAccordionList from '@/components/seo/FaqAccordionList';
+import { RevealBlock, RevealItem, RevealStagger } from '@/components/ui/MotionPrimitives';
 
 interface HomeClientProps {
   recentArticles: BlogArticle[];
@@ -138,11 +139,11 @@ export default function HomeClient({
       <section className="relative overflow-hidden bg-white pt-10 pb-16 sm:pt-14 sm:pb-24 lg:pt-20 lg:pb-28">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
-            {/* Left Column */}
+            {/* Left Column — Keep opacity visible on initial paint for optimal LCP */}
             <motion.div
-              initial={{ opacity: 0, y: 6 }}
+              initial={{ opacity: 1, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-6 space-y-6"
             >
               <p className="text-xs font-bold tracking-widest text-[#7137D8]">
@@ -181,9 +182,9 @@ export default function HomeClient({
                   href={heroWhatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[44px] items-center gap-2 px-2 py-2 text-xs font-bold text-[#151515] hover:text-[#7137D8] transition-colors whitespace-nowrap"
+                  className="link-interactive group inline-flex min-h-[44px] items-center gap-2 rounded-xl px-2.5 py-2 text-xs font-bold text-[#151515] hover:bg-[#F7F7F9] hover:text-[#7137D8] whitespace-nowrap"
                 >
-                  <MessageCircle className="h-4 w-4 text-[#E5092F]" />
+                  <MessageCircle className="h-4 w-4 text-[#E5092F] transition-transform duration-200 group-hover:scale-110" />
                   <span>{t.hero.whatsappCta}</span>
                 </a>
               </div>
@@ -195,9 +196,9 @@ export default function HomeClient({
 
             {/* Right Column */}
             <motion.div
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0.92, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.48, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-6"
             >
               <HeroVisual />
@@ -209,7 +210,7 @@ export default function HomeClient({
       {/* SECTION 2: TRUST AND INTRODUCTION */}
       <section className="bg-[#F7F7F9] py-20 sm:py-24 border-y border-[#E8E8EC]">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
+          <RevealBlock className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
               <p className="text-xs font-bold tracking-widest text-[#E5092F]">
                 {t.hero.tagline}
@@ -221,125 +222,126 @@ export default function HomeClient({
             <div className="lg:col-span-5">
               <p className="text-base leading-relaxed text-[#686868]">{t.trust.description}</p>
             </div>
-          </div>
+          </RevealBlock>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealStagger className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {t.trust.pillars.map((pillar, idx) => (
-              <div
-                key={pillar.title}
-                className="rounded-2xl border border-[#E8E8EC] bg-white p-6 transition-colors hover:border-[#7137D8]/50"
-              >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#F7F7F9]">
-                  {trustIcons[idx]}
+              <RevealItem key={pillar.title} className="h-full">
+                <div className="group card-interactive h-full rounded-2xl border border-[#E8E8EC] bg-white p-6">
+                  <div className="card-icon-float flex h-11 w-11 items-center justify-center rounded-xl bg-[#F7F7F9]">
+                    {trustIcons[idx]}
+                  </div>
+                  <h3 className="card-title-scale mt-5 inline-block font-[family-name:var(--font-jakarta)] text-lg font-bold text-[#151515]">
+                    {pillar.title}
+                  </h3>
+                  <p className="card-desc-enhance mt-2 text-sm leading-relaxed text-[#686868]">
+                    {pillar.summary}
+                  </p>
                 </div>
-                <h3 className="mt-5 font-[family-name:var(--font-jakarta)] text-lg font-bold text-[#151515]">
-                  {pillar.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#686868]">{pillar.summary}</p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
       {/* SECTION 3: SERVICES */}
       <section id="services" className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
+          <RevealBlock className="max-w-2xl">
             <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515] sm:text-4xl lg:text-[42px]">
               {t.services.headline}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[#686868] sm:text-lg">
               {t.services.subheading}
             </p>
-          </div>
+          </RevealBlock>
 
-          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+          <RevealStagger className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
             {t.services.cards.map((card, idx) => (
-              <div
-                key={card.id}
-                className="group flex flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white p-7 sm:p-8 transition-all duration-200 hover:border-[#7137D8]/60 hover:shadow-lg"
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F7F7F9] text-[#E5092F] transition-colors group-hover:bg-[#7137D8] group-hover:text-white">
-                      {serviceIcons[idx]}
+              <RevealItem key={card.id} className="h-full">
+                <div className="group card-interactive flex h-full flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white p-7 sm:p-8">
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <div className="card-icon-float flex h-12 w-12 items-center justify-center rounded-xl bg-[#F7F7F9] text-[#E5092F] group-hover:bg-[#7137D8] group-hover:text-white">
+                        {serviceIcons[idx]}
+                      </div>
+                      <span className="font-mono text-sm font-semibold tabular-nums text-[#686868] transition-colors group-hover:text-[#7137D8]">
+                        {card.number}.
+                      </span>
                     </div>
-                    <span className="font-mono text-sm font-semibold tabular-nums text-[#686868]">
-                      {card.number}.
-                    </span>
+
+                    <h3 className="card-title-scale mt-6 inline-block font-[family-name:var(--font-jakarta)] text-xl font-extrabold tracking-tight text-[#151515]">
+                      {card.title}
+                    </h3>
+                    <p className="card-desc-enhance mt-3 max-w-2xl text-sm leading-relaxed text-[#686868] sm:text-base">
+                      {card.description}
+                    </p>
+
+                    <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                      {card.features.map((feat) => (
+                        <li key={feat} className="flex items-center gap-2 text-sm text-[#151515]">
+                          <Check className="h-4 w-4 shrink-0 text-[#7137D8] transition-transform duration-200 group-hover:scale-110" />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  <h3 className="mt-6 font-[family-name:var(--font-jakarta)] text-xl font-extrabold tracking-tight text-[#151515]">
-                    {card.title}
-                  </h3>
-                  <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#686868] sm:text-base">
-                    {card.description}
-                  </p>
-
-                  <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                    {card.features.map((feat) => (
-                      <li key={feat} className="flex items-center gap-2 text-sm text-[#151515]">
-                        <Check className="h-4 w-4 shrink-0 text-[#7137D8]" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-8 pt-5 border-t border-[#E8E8EC] flex flex-wrap items-center justify-between gap-3">
-                  <Link
-                    href={serviceRoutes[idx] ?? `/services#${card.id}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-bold text-[#E5092F] hover:text-[#7137D8] transition-colors"
-                  >
-                    <span>{t.services.learnMore}</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  {idx === 0 && (
+                  <div className="mt-8 pt-5 border-t border-[#E8E8EC] flex flex-wrap items-center justify-between gap-3">
                     <Link
-                      href="/ecommerce-website-development"
-                      className="text-xs font-semibold text-[#7137D8] hover:text-[#E5092F] transition-colors"
+                      href={serviceRoutes[idx] ?? `/services#${card.id}`}
+                      className="link-interactive inline-flex items-center gap-1.5 text-sm font-bold text-[#E5092F] hover:text-[#7137D8]"
                     >
-                      {locale === 'sw'
-                        ? 'Duka Mtandaoni & M-Pesa →'
-                        : 'E-Commerce & M-Pesa Stores →'}
+                      <span>{t.services.learnMore}</span>
+                      <ArrowRight className="h-4 w-4" />
                     </Link>
-                  )}
+                    {idx === 0 && (
+                      <Link
+                        href="/ecommerce-website-development"
+                        className="link-interactive text-xs font-semibold text-[#7137D8] hover:text-[#E5092F]"
+                      >
+                        {locale === 'sw'
+                          ? 'Duka Mtandaoni & M-Pesa →'
+                          : 'E-Commerce & M-Pesa Stores →'}
+                      </Link>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
       {/* SECTION 4: WHY CHOOSE US */}
       <section className="bg-[#111111] py-20 sm:py-24 text-white">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
+          <RevealBlock className="max-w-2xl">
             <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
               {t.whyUs.headline}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[#A1A1AA] sm:text-lg">
               {t.whyUs.subheading}
             </p>
-          </div>
+          </RevealBlock>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealStagger className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {t.whyUs.items.map((item, idx) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-7 transition-colors hover:border-[#8B5CF6]/60"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#E5092F]/15 text-[#E5092F]">
-                  {whyIcons[idx]}
+              <RevealItem key={item.title} className="h-full">
+                <div className="group card-interactive-dark h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-7">
+                  <div className="card-icon-float flex h-10 w-10 items-center justify-center rounded-lg bg-[#E5092F]/15 text-[#E5092F] group-hover:bg-[#7137D8]/25 group-hover:text-[#A78BFA]">
+                    {whyIcons[idx]}
+                  </div>
+                  <h3 className="card-title-scale mt-5 inline-block font-[family-name:var(--font-jakarta)] text-lg font-bold text-white">
+                    {item.title}
+                  </h3>
+                  <p className="card-desc-enhance mt-2.5 text-sm leading-relaxed text-[#A1A1AA]">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="mt-5 font-[family-name:var(--font-jakarta)] text-lg font-bold text-white">
-                  {item.title}
-                </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-[#A1A1AA]">{item.description}</p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
@@ -358,42 +360,41 @@ export default function HomeClient({
       {/* SECTION 7: OUR WORKING PROCESS */}
       <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
+          <RevealBlock className="max-w-2xl">
             <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515] sm:text-4xl lg:text-[42px]">
               {t.process.headline}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[#686868] sm:text-lg">
               {t.process.subheading}
             </p>
-          </div>
+          </RevealBlock>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealStagger className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {t.process.steps.map((step) => (
-              <div
-                key={step.number}
-                className="relative flex flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-[#F7F7F9] p-7"
-              >
-                <div>
-                  <span className="font-mono text-2xl font-extrabold tabular-nums text-[#E5092F]">
-                    {step.number}
-                  </span>
-                  <h3 className="mt-4 font-[family-name:var(--font-jakarta)] text-lg font-extrabold tracking-tight text-[#151515]">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-[#686868]">
-                    {step.description}
-                  </p>
+              <RevealItem key={step.number} className="h-full">
+                <div className="group card-interactive relative flex h-full flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-[#F7F7F9] p-7 hover:bg-white">
+                  <div>
+                    <span className="card-icon-float inline-block font-mono text-2xl font-extrabold tabular-nums text-[#E5092F] group-hover:text-[#7137D8]">
+                      {step.number}
+                    </span>
+                    <h3 className="card-title-scale mt-4 inline-block font-[family-name:var(--font-jakarta)] text-lg font-extrabold tracking-tight text-[#151515]">
+                      {step.title}
+                    </h3>
+                    <p className="card-desc-enhance mt-2.5 text-sm leading-relaxed text-[#686868]">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
       {/* SECTION 8: TESTIMONIALS */}
       <section className="bg-[#F7F7F9] py-20 sm:py-24 border-y border-[#E8E8EC]">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <RevealBlock className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
               <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515] sm:text-4xl">
                 {t.testimonials.headline}
@@ -409,13 +410,13 @@ export default function HomeClient({
               <span>{t.testimonials.shareFeedbackCta}</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
+          </RevealBlock>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
+          <RevealStagger className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
             {t.testimonials.slots.map((slot, idx) => (
-              <article
+              <RevealItem
                 key={slot.companyPlaceholder}
-                className={`flex flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white p-7 transition-colors hover:border-[#7137D8]/50 ${
+                className={`h-full ${
                   idx < 3
                     ? 'lg:col-span-2'
                     : idx === 4
@@ -423,31 +424,35 @@ export default function HomeClient({
                       : 'lg:col-span-3'
                 }`}
               >
-                <div>
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="text-xs font-semibold text-[#7137D8]">
-                      {slot.slotLabel}
-                    </span>
-                    <Quote className="h-4 w-4 shrink-0 text-[#E5092F]" />
+                <article className="group card-interactive flex h-full flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white p-7">
+                  <div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-xs font-semibold text-[#7137D8]">
+                        {slot.slotLabel}
+                      </span>
+                      <Quote className="card-icon-float h-4 w-4 shrink-0 text-[#E5092F]" />
+                    </div>
+                    <p className="card-desc-enhance mt-4 text-sm leading-relaxed text-[#151515] sm:text-[15px]">
+                      &ldquo;{slot.quotePlaceholder}&rdquo;
+                    </p>
                   </div>
-                  <p className="mt-4 text-sm leading-relaxed text-[#151515] sm:text-[15px]">
-                    &ldquo;{slot.quotePlaceholder}&rdquo;
-                  </p>
-                </div>
-                <div className="mt-6 border-t border-[#E8E8EC] pt-4">
-                  <p className="text-sm font-bold text-[#151515]">{slot.companyPlaceholder}</p>
-                  <p className="mt-0.5 text-xs text-[#686868]">{slot.authorPlaceholder}</p>
-                </div>
-              </article>
+                  <div className="mt-6 border-t border-[#E8E8EC] pt-4">
+                    <p className="card-title-scale inline-block text-sm font-bold text-[#151515]">
+                      {slot.companyPlaceholder}
+                    </p>
+                    <p className="mt-0.5 text-xs text-[#686868]">{slot.authorPlaceholder}</p>
+                  </div>
+                </article>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
       {/* SECTION 9: BLOG PREVIEW */}
       <section className="bg-white py-20 sm:py-24">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <RevealBlock className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
               <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515] sm:text-4xl">
                 {t.blog.previewHeadline}
@@ -463,65 +468,68 @@ export default function HomeClient({
               <span>{t.blog.viewAllArticles}</span>
               <ArrowUpRight className="h-4 w-4" />
             </Link>
-          </div>
+          </RevealBlock>
 
-          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+          <RevealStagger className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
             {recentArticles.slice(0, 3).map((article) => {
               const localized = locale === 'sw' ? article.sw : article.en;
               return (
-                <article
-                  key={article.slug}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-[#E8E8EC] bg-white transition-all duration-200 hover:border-[#7137D8]/50 hover:shadow-lg"
-                >
-                  <Link
-                    href={`/blog/${article.slug}`}
-                    className="relative aspect-[16/9] w-full overflow-hidden bg-[#F7F7F9]"
-                  >
-                    <ResilientImage
-                      src={article.featuredImage}
-                      alt={localized.imageAlt}
-                      fallbackLabel={localized.title}
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
-                  </Link>
-                  <div className="flex flex-1 flex-col p-6">
-                    <div className="flex items-center gap-2 text-xs text-[#686868]">
-                      <span className="font-semibold text-[#7137D8]">{article.category}</span>
-                      <span aria-hidden="true">·</span>
-                      <time dateTime={article.publishedAt}>{article.publishedAt}</time>
+                <RevealItem key={article.slug} className="h-full">
+                  <article className="group card-interactive flex h-full flex-col overflow-hidden rounded-2xl border border-[#E8E8EC] bg-white">
+                    <Link
+                      href={`/blog/${article.slug}`}
+                      className="relative aspect-[16/9] w-full overflow-hidden bg-[#F7F7F9]"
+                    >
+                      <ResilientImage
+                        src={article.featuredImage}
+                        alt={localized.imageAlt}
+                        fallbackLabel={localized.title}
+                        className="img-zoom-target object-cover"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                      />
+                    </Link>
+                    <div className="flex flex-1 flex-col p-6">
+                      <div className="flex items-center gap-2 text-xs text-[#686868]">
+                        <span className="font-semibold text-[#7137D8]">{article.category}</span>
+                        <span aria-hidden="true">·</span>
+                        <time dateTime={article.publishedAt}>{article.publishedAt}</time>
+                      </div>
+                      <h3 className="mt-3 font-[family-name:var(--font-jakarta)] text-lg font-bold leading-snug text-[#151515]">
+                        <Link
+                          href={`/blog/${article.slug}`}
+                          className="card-title-scale inline-block hover:text-[#7137D8]"
+                        >
+                          {localized.title}
+                        </Link>
+                      </h3>
+                      <p className="card-desc-enhance mt-2.5 flex-1 text-sm leading-relaxed text-[#686868]">
+                        {localized.excerpt}
+                      </p>
+                      <div className="mt-6 pt-4 border-t border-[#E8E8EC]">
+                        <Link
+                          href={`/blog/${article.slug}`}
+                          className="link-interactive inline-flex items-center gap-1.5 text-xs font-extrabold tracking-wider text-[#E5092F] hover:text-[#7137D8]"
+                        >
+                          <span>{t.blog.readMore}</span>
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
+                      </div>
                     </div>
-                    <h3 className="mt-3 font-[family-name:var(--font-jakarta)] text-lg font-bold leading-snug text-[#151515]">
-                      <Link
-                        href={`/blog/${article.slug}`}
-                        className="hover:text-[#7137D8] transition-colors"
-                      >
-                        {localized.title}
-                      </Link>
-                    </h3>
-                    <p className="mt-2.5 flex-1 text-sm leading-relaxed text-[#686868]">
-                      {localized.excerpt}
-                    </p>
-                    <div className="mt-6 pt-4 border-t border-[#E8E8EC]">
-                      <Link
-                        href={`/blog/${article.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-extrabold tracking-wider text-[#E5092F] hover:text-[#7137D8] transition-colors"
-                      >
-                        <span>{t.blog.readMore}</span>
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
-                    </div>
-                  </div>
-                </article>
+                  </article>
+                </RevealItem>
               );
             })}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
       {/* SECTION 9B: INDUSTRY-SPECIFIC WEB SOLUTIONS */}
       <section id="industries" className="border-t border-[#E8E8EC] bg-[#F7F7F9] py-16 sm:py-20">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <RevealBlock className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
               <p className="text-xs font-bold tracking-widest text-[#7137D8]">
                 {locale === 'sw' ? 'SULUHU KWA SEKTA MBALIMBALI' : 'INDUSTRY SOLUTIONS IN KENYA'}
@@ -534,7 +542,7 @@ export default function HomeClient({
             </div>
             <Link
               href="/ecommerce-website-development"
-              className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#E5092F] hover:text-[#7137D8]"
+              className="link-interactive inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#E5092F] hover:text-[#7137D8]"
             >
               <span>
                 {locale === 'sw'
@@ -543,37 +551,38 @@ export default function HomeClient({
               </span>
               <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
+          </RevealBlock>
 
-          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealStagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {industryLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="group flex flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white p-6 transition-colors hover:border-[#7137D8]/60"
-              >
-                <div>
-                  <h3 className="font-[family-name:var(--font-jakarta)] text-lg font-bold text-[#151515] group-hover:text-[#7137D8]">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#686868]">
-                    {item.description}
-                  </p>
-                </div>
-                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#E5092F]">
-                  <span>{locale === 'sw' ? 'Soma zaidi' : 'Explore solution'}</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </Link>
+              <RevealItem key={item.href} className="h-full">
+                <Link
+                  href={item.href}
+                  className="group card-interactive flex h-full flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white p-6"
+                >
+                  <div>
+                    <h3 className="card-title-scale inline-block font-[family-name:var(--font-jakarta)] text-lg font-bold text-[#151515]">
+                      {item.title}
+                    </h3>
+                    <p className="card-desc-enhance mt-2 text-sm leading-relaxed text-[#686868]">
+                      {item.description}
+                    </p>
+                  </div>
+                  <span className="link-interactive mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#E5092F] group-hover:text-[#7137D8]">
+                    <span>{locale === 'sw' ? 'Soma zaidi' : 'Explore solution'}</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </Link>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </div>
       </section>
 
       {/* SECTION 9C: KEY FAQs (SSR ACCESSIBLE) */}
       <section className="border-t border-[#E8E8EC] bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <RevealBlock className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515]">
                 {t.servicesPage.faqHeadline}
@@ -582,22 +591,26 @@ export default function HomeClient({
             </div>
             <Link
               href="/services#faq"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#7137D8] hover:text-[#E5092F] whitespace-nowrap"
+              className="link-interactive inline-flex items-center gap-1.5 text-xs font-bold text-[#7137D8] hover:text-[#E5092F] whitespace-nowrap"
             >
               <span>{locale === 'sw' ? 'Maswali Yote' : 'View all 15 FAQs'}</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
-          </div>
+          </RevealBlock>
 
-          <div className="mt-8">
+          <RevealBlock delay={0.08} className="mt-8">
             <FaqAccordionList items={t.servicesPage.faqs.slice(0, 6)} defaultOpenIndex={0} />
-          </div>
+          </RevealBlock>
         </div>
       </section>
 
       {/* SECTION 10: FINAL CALL TO ACTION */}
-      <section className="bg-[#111111] py-20 sm:py-24 text-white">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-[#111111] py-20 sm:py-24 text-white">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-0 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-[#7137D8]/15 blur-3xl"
+        />
+        <RevealBlock className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center space-y-6">
             <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
               {t.finalCta.headline}
@@ -624,7 +637,7 @@ export default function HomeClient({
               </a>
             </div>
           </div>
-        </div>
+        </RevealBlock>
       </section>
     </div>
   );

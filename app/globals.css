@@ -2,6 +2,7 @@
 
 @layer base {
   html {
+    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -29,21 +30,21 @@
   }
 }
 
-/* Primary CTA Button Standard: Red (#E5092F) -> Purple Hover (#7137D8) */
+/* ==========================================================================
+   PREMIUM BUTTON INTERACTIONS (200-260ms, GPU-composited)
+   ========================================================================== */
 .btn-primary-cta {
   background-color: #E5092F;
   color: #FFFFFF;
-  transition: background-color 90ms ease-out,
-              transform 90ms ease-out,
-              box-shadow 90ms ease-out;
+  transition:
+    background-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 14px -2px rgba(229, 9, 47, 0.28);
 }
 
-.btn-primary-cta:hover {
-  background-color: #7137D8;
-  color: #FFFFFF;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px -4px rgba(113, 55, 216, 0.36);
+.btn-primary-cta svg {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary-cta:active {
@@ -55,47 +56,257 @@
   outline-offset: 2px;
 }
 
-/* Secondary Outline Button */
 .btn-secondary-outline {
   border: 1px solid #E8E8EC;
   background-color: #FFFFFF;
   color: #151515;
-  transition: border-color 90ms ease-out,
-              color 90ms ease-out,
-              transform 90ms ease-out,
-              background-color 90ms ease-out;
+  transition:
+    border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-secondary-outline:hover {
-  border-color: #7137D8;
-  color: #7137D8;
-  background-color: #F7F7F9;
-  transform: translateY(-1px);
+.btn-secondary-outline svg {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-secondary-outline:active {
   transform: translateY(0) scale(0.98);
 }
 
+.btn-secondary-outline:focus-visible {
+  outline: 2px solid #7137D8;
+  outline-offset: 2px;
+}
+
 .btn-secondary-outline-dark {
   border: 1px solid rgba(255, 255, 255, 0.22);
   background-color: transparent;
   color: #FFFFFF;
-  transition: border-color 90ms ease-out,
-              background-color 90ms ease-out,
-              transform 90ms ease-out;
+  transition:
+    border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-secondary-outline-dark:hover {
-  border-color: #8B5CF6;
-  background-color: rgba(113, 55, 216, 0.16);
-  transform: translateY(-1px);
+.btn-secondary-outline-dark svg {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-secondary-outline-dark:active {
   transform: translateY(0) scale(0.98);
 }
 
+.btn-secondary-outline-dark:focus-visible {
+  outline: 2px solid #8B5CF6;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   INTERACTIVE CARD ELEVATION, BORDER GLOW & CONTROLLED TEXT SCALING
+   ========================================================================== */
+.card-interactive {
+  will-change: transform;
+  transition:
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 280ms ease;
+}
+
+.card-interactive-dark {
+  will-change: transform;
+  transition:
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 280ms ease;
+}
+
+.card-interactive-popular {
+  will-change: transform;
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-title-scale {
+  transform-origin: left center;
+  transition:
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 220ms ease;
+}
+
+.card-desc-enhance {
+  transition: color 260ms ease, opacity 260ms ease;
+}
+
+.card-icon-float {
+  transition:
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 260ms ease,
+    border-color 260ms ease,
+    color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+/* Image zoom inside overflow-hidden containers */
+.img-zoom-target {
+  will-change: transform;
+  transition:
+    transform 440ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 440ms ease;
+}
+
+/* ==========================================================================
+   NAVIGATION & TEXT LINK INTERACTIONS
+   ========================================================================== */
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 9999px;
+  background-color: #7137D8;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-interactive {
+  transition:
+    color 200ms ease,
+    letter-spacing 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-interactive svg {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   DESKTOP POINTER-ONLY HOVER RULES (prevents stuck hover states on mobile)
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary-cta:hover {
+    background-color: #7137D8;
+    color: #FFFFFF;
+    transform: translateY(-2px) scale(1.025);
+    box-shadow: 0 12px 28px -6px rgba(113, 55, 216, 0.42);
+  }
+
+  .btn-primary-cta:hover svg {
+    transform: translateX(3px);
+  }
+
+  .btn-secondary-outline:hover {
+    border-color: #7137D8;
+    color: #7137D8;
+    background-color: #F7F7F9;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 22px -8px rgba(113, 55, 216, 0.22);
+  }
+
+  .btn-secondary-outline:hover svg {
+    transform: translateX(3px);
+  }
+
+  .btn-secondary-outline-dark:hover {
+    border-color: #8B5CF6;
+    background-color: rgba(113, 55, 216, 0.18);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 28px -8px rgba(139, 92, 246, 0.35);
+  }
+
+  .btn-secondary-outline-dark:hover svg {
+    transform: translateX(3px);
+  }
+
+  .card-interactive:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(113, 55, 216, 0.55);
+    box-shadow:
+      0 20px 40px -14px rgba(21, 21, 21, 0.14),
+      0 0 0 1px rgba(113, 55, 216, 0.14);
+  }
+
+  .card-interactive-dark:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(139, 92, 246, 0.65);
+    background-color: rgba(255, 255, 255, 0.055);
+    box-shadow:
+      0 22px 44px -14px rgba(0, 0, 0, 0.6),
+      0 0 28px -8px rgba(139, 92, 246, 0.28);
+  }
+
+  .card-interactive-popular:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow:
+      0 28px 56px -14px rgba(113, 55, 216, 0.38),
+      0 0 0 2px rgba(139, 92, 246, 0.75);
+  }
+
+  .group:hover .card-title-scale,
+  .card-interactive:hover .card-title-scale {
+    transform: scale(1.025);
+    color: #7137D8;
+  }
+
+  .card-interactive-dark:hover .card-title-scale {
+    transform: scale(1.025);
+    color: #FFFFFF;
+  }
+
+  .group:hover .card-desc-enhance,
+  .card-interactive:hover .card-desc-enhance {
+    color: #3F3F46;
+  }
+
+  .card-interactive-dark:hover .card-desc-enhance {
+    color: #E4E4E7;
+  }
+
+  .group:hover .card-icon-float,
+  .card-interactive:hover .card-icon-float,
+  .card-interactive-dark:hover .card-icon-float {
+    transform: scale(1.08) rotate(-4deg);
+  }
+
+  .group:hover .img-zoom-target {
+    transform: scale(1.07);
+    filter: brightness(1.03) contrast(1.02);
+  }
+
+  .nav-link-underline:hover::after {
+    transform: scaleX(1);
+  }
+
+  .link-interactive:hover svg {
+    transform: translateX(3px);
+  }
+}
+
+/* Tactile touch feedback on touch devices */
+@media (hover: none) {
+  .card-interactive:active,
+  .card-interactive-dark:active,
+  .card-interactive-popular:active {
+    transform: scale(0.99);
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY: RESPECT PREFERS-REDUCED-MOTION
+   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

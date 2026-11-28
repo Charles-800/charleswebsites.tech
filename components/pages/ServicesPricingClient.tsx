@@ -17,6 +17,7 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { buildWhatsAppUrl } from '@/lib/config/site';
 import PricingSection from '@/components/sections/PricingSection';
 import FaqAccordionList from '@/components/seo/FaqAccordionList';
+import { RevealBlock, RevealItem, RevealStagger } from '@/components/ui/MotionPrimitives';
 
 interface ServicesPricingClientProps {
   mode: 'services' | 'pricing';
@@ -136,84 +137,87 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
         </div>
       </section>
 
-      {/* Detailed 4 Service Categories (Shown prominently on /services) */}
+      {/* Detailed Service Categories (Shown prominently on /services) */}
       {mode === 'services' && (
         <section className="py-16 sm:py-20">
-          <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 space-y-8">
+          <RevealStagger className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 space-y-8">
             {t.services.cards.map((card, idx) => (
-              <div
-                key={card.id}
-                id={card.id}
-                className="scroll-mt-24 grid grid-cols-1 gap-8 rounded-2xl border border-[#E8E8EC] bg-white p-7 sm:p-10 lg:grid-cols-12 lg:items-center"
-              >
-                <div className="lg:col-span-6 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F7F7F9]">
-                      {serviceIcons[idx]}
+              <RevealItem key={card.id}>
+                <div
+                  id={card.id}
+                  className="group card-interactive scroll-mt-24 grid grid-cols-1 gap-8 rounded-2xl border border-[#E8E8EC] bg-white p-7 sm:p-10 lg:grid-cols-12 lg:items-center"
+                >
+                  <div className="lg:col-span-6 space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="card-icon-float flex h-12 w-12 items-center justify-center rounded-xl bg-[#F7F7F9] group-hover:border group-hover:border-[#7137D8]/30 group-hover:bg-white">
+                        {serviceIcons[idx]}
+                      </div>
+                      <span className="font-mono text-sm font-bold text-[#686868] transition-colors group-hover:text-[#7137D8]">
+                        {card.number}.
+                      </span>
                     </div>
-                    <span className="font-mono text-sm font-bold text-[#686868]">
-                      {card.number}.
-                    </span>
-                  </div>
-                  <h2 className="font-[family-name:var(--font-jakarta)] text-2xl font-extrabold text-[#151515]">
-                    {card.title}
-                  </h2>
-                  <p className="text-base leading-relaxed text-[#686868]">{card.description}</p>
-                  <div className="pt-2 flex flex-wrap items-center gap-3">
-                    <Link
-                      href={`/contact?service=${encodeURIComponent(card.title)}`}
-                      className="btn-primary-cta inline-flex items-center gap-2 rounded-xl px-5 py-3 text-xs font-bold tracking-wider whitespace-nowrap"
-                    >
-                      <span>{t.nav.getQuote}</span>
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                    <a
-                      href={buildWhatsAppUrl(
-                        `Hello Charles Websites, I would like to inquire about ${card.title}.`
+                    <h2 className="card-title-scale inline-block font-[family-name:var(--font-jakarta)] text-2xl font-extrabold text-[#151515]">
+                      {card.title}
+                    </h2>
+                    <p className="card-desc-enhance text-base leading-relaxed text-[#686868]">
+                      {card.description}
+                    </p>
+                    <div className="pt-2 flex flex-wrap items-center gap-3">
+                      <Link
+                        href={`/contact?service=${encodeURIComponent(card.title)}`}
+                        className="btn-primary-cta inline-flex items-center gap-2 rounded-xl px-5 py-3 text-xs font-bold tracking-wider whitespace-nowrap"
+                      >
+                        <span>{t.nav.getQuote}</span>
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                      <a
+                        href={buildWhatsAppUrl(
+                          `Hello Charles Websites, I would like to inquire about ${card.title}.`
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-secondary-outline inline-flex items-center gap-2 rounded-xl px-5 py-3 text-xs font-bold whitespace-nowrap"
+                      >
+                        <MessageCircle className="h-4 w-4 text-[#E5092F]" />
+                        <span>{t.nav.whatsappUs}</span>
+                      </a>
+                      {dedicatedServiceRoutes[idx] && (
+                        <Link
+                          href={dedicatedServiceRoutes[idx] as string}
+                          className="link-interactive inline-flex items-center gap-1 px-2 py-2 text-xs font-bold text-[#7137D8] hover:text-[#E5092F]"
+                        >
+                          <span>{locale === 'sw' ? 'Maelezo Kamili' : 'Detailed Guide'}</span>
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
                       )}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-secondary-outline inline-flex items-center gap-2 rounded-xl px-5 py-3 text-xs font-bold whitespace-nowrap"
-                    >
-                      <MessageCircle className="h-4 w-4 text-[#E5092F]" />
-                      <span>{t.nav.whatsappUs}</span>
-                    </a>
-                    {dedicatedServiceRoutes[idx] && (
-                      <Link
-                        href={dedicatedServiceRoutes[idx] as string}
-                        className="inline-flex items-center gap-1 px-2 py-2 text-xs font-bold text-[#7137D8] hover:text-[#E5092F] transition-colors"
-                      >
-                        <span>{locale === 'sw' ? 'Maelezo Kamili' : 'Detailed Guide'}</span>
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
-                    )}
-                    {idx === 0 && (
-                      <Link
-                        href="/ecommerce-website-development"
-                        className="inline-flex items-center gap-1 px-2 py-2 text-xs font-bold text-[#E5092F] hover:text-[#7137D8] transition-colors"
-                      >
-                        <span>{locale === 'sw' ? 'Duka Mtandaoni & M-Pesa' : 'E-Commerce & M-Pesa'}</span>
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
-                    )}
+                      {idx === 0 && (
+                        <Link
+                          href="/ecommerce-website-development"
+                          className="link-interactive inline-flex items-center gap-1 px-2 py-2 text-xs font-bold text-[#E5092F] hover:text-[#7137D8]"
+                        >
+                          <span>{locale === 'sw' ? 'Duka Mtandaoni & M-Pesa' : 'E-Commerce & M-Pesa'}</span>
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                <div className="lg:col-span-6">
-                  <div className="rounded-xl border border-[#E8E8EC] bg-[#F7F7F9] p-6">
-                    <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      {card.features.map((feat) => (
-                        <li key={feat} className="flex items-start gap-2.5 text-sm text-[#151515]">
-                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#7137D8]" />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="lg:col-span-6">
+                    <div className="rounded-xl border border-[#E8E8EC] bg-[#F7F7F9] p-6 transition-colors duration-200 group-hover:border-[#7137D8]/25">
+                      <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        {card.features.map((feat) => (
+                          <li key={feat} className="flex items-start gap-2.5 text-sm text-[#151515]">
+                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#7137D8] transition-transform duration-200 group-hover:scale-110" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </section>
       )}
 
@@ -222,12 +226,12 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
 
       {/* Package Comparison Table */}
       <section className="bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+        <RevealBlock className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <h2 className="font-[family-name:var(--font-jakarta)] text-2xl font-extrabold text-[#151515] sm:text-3xl">
             {t.pricing.comparisonTitle}
           </h2>
 
-          <div className="mt-8 overflow-x-auto rounded-2xl border border-[#E8E8EC]">
+          <div className="mt-8 overflow-x-auto rounded-2xl border border-[#E8E8EC] shadow-xs">
             <table className="w-full min-w-[640px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-[#E8E8EC] bg-[#F7F7F9]">
@@ -256,7 +260,7 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
               </thead>
               <tbody className="divide-y divide-[#E8E8EC] bg-white">
                 {comparisonRows.map((row) => (
-                  <tr key={row.label} className="hover:bg-[#F7F7F9]/60">
+                  <tr key={row.label} className="transition-colors duration-150 hover:bg-[#F7F7F9]/80">
                     <td className="px-6 py-3.5 text-sm font-medium text-[#151515]">{row.label}</td>
                     <td className="px-6 py-3.5 text-center">{renderCell(row.starter)}</td>
                     <td className="px-6 py-3.5 text-center bg-[#F7F7F9]/40">
@@ -268,12 +272,12 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
               </tbody>
             </table>
           </div>
-        </div>
+        </RevealBlock>
       </section>
 
       {/* FAQs Accordion (all answers rendered in SSR DOM) */}
       <section id="faq" className="scroll-mt-24 border-t border-[#E8E8EC] bg-[#F7F7F9] py-16 sm:py-20">
-        <div className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8">
+        <RevealBlock className="mx-auto max-w-[960px] px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="font-[family-name:var(--font-jakarta)] text-3xl font-extrabold tracking-tight text-[#151515]">
               {t.servicesPage.faqHeadline}
@@ -284,7 +288,7 @@ export default function ServicesPricingClient({ mode }: ServicesPricingClientPro
           <div className="mt-10">
             <FaqAccordionList items={t.servicesPage.faqs} defaultOpenIndex={0} />
           </div>
-        </div>
+        </RevealBlock>
       </section>
     </div>
   );

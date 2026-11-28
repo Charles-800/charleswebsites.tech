@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Phone, MessageCircle, ArrowUpRight, Mail } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { SITE_CONFIG, buildWhatsAppUrl } from '@/lib/config/site';
+import { RevealBlock } from '@/components/ui/MotionPrimitives';
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -13,20 +14,20 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#111111] text-white border-t border-white/10 pb-20 md:pb-0">
-      <div className="mx-auto max-w-[1280px] px-4 py-16 sm:px-6 lg:px-8">
+      <RevealBlock className="mx-auto max-w-[1280px] px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12">
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-5">
-            <Link href="/" className="inline-flex items-center gap-4 whitespace-nowrap">
+            <Link href="/" className="group inline-flex items-center gap-4 whitespace-nowrap">
               <Image
                 src="/assets/aistudio/CHARLES_WEBSITES_91d4851c.png"
                 alt="Charles Websites AI Logo"
                 width={96}
                 height={96}
                 referrerPolicy="no-referrer"
-                className="h-20 w-20 sm:h-24 sm:w-24 shrink-0 rounded-2xl bg-[#0C152B] object-cover shadow-lg ring-1 ring-white/20"
+                className="h-20 w-20 sm:h-24 sm:w-24 shrink-0 rounded-2xl bg-[#0C152B] object-cover shadow-lg ring-1 ring-white/20 transition-all duration-300 group-hover:scale-105 group-hover:ring-[#8B5CF6]/60"
               />
-              <span className="font-[family-name:var(--font-jakarta)] text-xl font-extrabold tracking-tight text-white">
+              <span className="font-[family-name:var(--font-jakarta)] text-xl font-extrabold tracking-tight text-white transition-colors duration-200 group-hover:text-[#8B5CF6]">
                 CHARLES <span className="text-[#E5092F]">WEBSITES</span>
               </span>
             </Link>
@@ -64,27 +65,27 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5 text-sm text-[#A1A1AA]">
               <li>
-                <Link href="/" className="hover:text-[#8B5CF6] transition-colors">
+                <Link href="/" className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]">
                   {t.nav.home}
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-[#8B5CF6] transition-colors">
+                <Link href="/about" className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]">
                   {t.nav.about}
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="hover:text-[#8B5CF6] transition-colors">
+                <Link href="/portfolio" className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]">
                   {t.nav.portfolio}
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-[#8B5CF6] transition-colors">
+                <Link href="/blog" className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]">
                   {t.nav.blog}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-[#8B5CF6] transition-colors">
+                <Link href="/contact" className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]">
                   {t.nav.contact}
                 </Link>
               </li>
@@ -98,42 +99,42 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 text-sm text-[#A1A1AA]">
               <li>
-                <Link href="/web-design-kenya" className="hover:text-[#8B5CF6] transition-colors">
+                <Link href="/web-design-kenya" className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]">
                   Website Design & Development Kenya
                 </Link>
               </li>
               <li>
                 <Link
                   href="/ecommerce-website-development"
-                  className="hover:text-[#8B5CF6] transition-colors"
+                  className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]"
                 >
                   E-Commerce & M-Pesa Websites
                 </Link>
               </li>
               <li>
-                <Link href="/ai-solutions" className="hover:text-[#8B5CF6] transition-colors">
+                <Link href="/ai-solutions" className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]">
                   AI Chatbots & Business Automation
                 </Link>
               </li>
               <li>
-                <Link href="/seo-services" className="hover:text-[#8B5CF6] transition-colors">
+                <Link href="/seo-services" className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]">
                   Technical & Local SEO Services
                 </Link>
               </li>
               <li>
-                <Link href="/graphic-design" className="hover:text-[#8B5CF6] transition-colors">
+                <Link href="/graphic-design" className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]">
                   Graphic Design & Branding
                 </Link>
               </li>
               <li>
-                <Link href="/software-development" className="hover:text-[#8B5CF6] transition-colors">
+                <Link href="/software-development" className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]">
                   Custom Software Development
                 </Link>
               </li>
               <li>
                 <Link
                   href="/solutions/healthcare-websites"
-                  className="hover:text-[#8B5CF6] transition-colors"
+                  className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]"
                 >
                   Hospitals & Clinics Websites
                 </Link>
@@ -141,7 +142,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/solutions/law-firm-websites"
-                  className="hover:text-[#8B5CF6] transition-colors"
+                  className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]"
                 >
                   Law Firm & Statutory Websites
                 </Link>
@@ -149,7 +150,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/solutions/hotel-hospitality-websites"
-                  className="hover:text-[#8B5CF6] transition-colors"
+                  className="inline-block transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]"
                 >
                   Hotels & Real Estate Websites
                 </Link>
@@ -168,7 +169,7 @@ export default function Footer() {
                   <li key={pkg.id}>
                     <Link
                       href="/pricing"
-                      className="flex items-center justify-between hover:text-[#8B5CF6] transition-colors"
+                      className="flex items-center justify-between transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]"
                     >
                       <span>{pkg.name}</span>
                       <span className="font-mono text-xs tabular-nums text-white/80">
@@ -186,9 +187,9 @@ export default function Footer() {
               </h3>
               <a
                 href={SITE_CONFIG.phoneHref}
-                className="flex items-center gap-2.5 text-sm text-white/90 hover:text-[#8B5CF6] transition-colors"
+                className="group flex items-center gap-2.5 text-sm text-white/90 transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]"
               >
-                <Phone className="h-4 w-4 text-[#E5092F]" />
+                <Phone className="h-4 w-4 text-[#E5092F] transition-transform duration-200 group-hover:scale-110" />
                 <span>
                   {t.footer.phoneLabel}: {SITE_CONFIG.phoneDisplay}
                 </span>
@@ -197,18 +198,18 @@ export default function Footer() {
                 href={buildWhatsAppUrl(t.contact.whatsappPrefill)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-sm text-white/90 hover:text-[#8B5CF6] transition-colors"
+                className="group flex items-center gap-2.5 text-sm text-white/90 transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6]"
               >
-                <MessageCircle className="h-4 w-4 text-[#E5092F]" />
+                <MessageCircle className="h-4 w-4 text-[#E5092F] transition-transform duration-200 group-hover:scale-110" />
                 <span>
                   {t.footer.whatsappLabel}: {SITE_CONFIG.whatsappDisplay}
                 </span>
               </a>
               <a
                 href={SITE_CONFIG.emailHref}
-                className="flex items-center gap-2.5 text-sm text-white/90 hover:text-[#8B5CF6] transition-colors break-all"
+                className="group flex items-center gap-2.5 text-sm text-white/90 transition-all duration-200 hover:translate-x-1 hover:text-[#8B5CF6] break-all"
               >
-                <Mail className="h-4 w-4 shrink-0 text-[#E5092F]" />
+                <Mail className="h-4 w-4 shrink-0 text-[#E5092F] transition-transform duration-200 group-hover:scale-110" />
                 <span>{SITE_CONFIG.email}</span>
               </a>
               {SITE_CONFIG.gbpUrl && (
@@ -216,7 +217,7 @@ export default function Footer() {
                   href={SITE_CONFIG.gbpUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 pt-1 text-xs font-semibold text-[#A1A1AA] hover:text-[#8B5CF6] transition-colors"
+                  className="link-interactive inline-flex items-center gap-1.5 pt-1 text-xs font-semibold text-[#A1A1AA] hover:text-[#8B5CF6]"
                 >
                   <span>Google Business Profile</span>
                   <ArrowUpRight className="h-3.5 w-3.5" />
@@ -237,12 +238,12 @@ export default function Footer() {
             <Link href="/terms-of-service" className="hover:text-[#8B5CF6] transition-colors">
               Terms of Service
             </Link>
-            <span className="font-mono tabular-nums text-white/60">
-              {SITE_CONFIG.currency} · {SITE_CONFIG.location}
-            </span>
+              <span className="font-mono tabular-nums text-white/60">
+                {SITE_CONFIG.currency} · {SITE_CONFIG.location}
+              </span>
+            </div>
           </div>
-        </div>
-      </div>
+      </RevealBlock>
     </footer>
   );
 }

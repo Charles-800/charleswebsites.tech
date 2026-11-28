@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { motion } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import {
   Award,
   BadgeCheck,
@@ -25,6 +25,7 @@ import {
 } from '@/lib/data/certifications';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import ResilientImage from '@/components/ui/ResilientImage';
+import { RevealBlock, RevealItem, RevealStagger } from '@/components/ui/MotionPrimitives';
 
 interface CertificationsSectionProps {
   initialCertifications: CertificationItem[];
@@ -280,7 +281,7 @@ export default function CertificationsSection({
 
       <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <RevealBlock className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-xs font-bold tracking-widest text-[#7137D8]">
               {t.certifications.kicker}
@@ -301,7 +302,7 @@ export default function CertificationsSection({
                   setManageMode((prev) => !prev);
                   setConfirmDeleteId(null);
                 }}
-                className={`inline-flex min-h-[42px] items-center gap-2 rounded-xl border px-4 py-2 text-xs font-bold transition-colors whitespace-nowrap cursor-pointer ${
+                className={`inline-flex min-h-[42px] items-center gap-2 rounded-xl border px-4 py-2 text-xs font-bold transition-all duration-200 whitespace-nowrap cursor-pointer active:scale-95 ${
                   manageMode
                     ? 'border-[#111111] bg-[#111111] text-white'
                     : 'border-[#E8E8EC] bg-white/80 backdrop-blur-sm text-[#151515] hover:border-[#7137D8] hover:text-[#7137D8]'
@@ -316,11 +317,11 @@ export default function CertificationsSection({
               </button>
             </div>
           )}
-        </div>
+        </RevealBlock>
 
         {/* Status Filters (shown when credentials exist) */}
         {certifications.length > 0 && (
-          <div className="mt-8 flex flex-wrap items-center gap-2">
+          <RevealBlock delay={0.05} className="mt-8 flex flex-wrap items-center gap-2">
             {filterTabs.map((tab) => {
               const count =
                 tab.key === 'all'
@@ -331,10 +332,10 @@ export default function CertificationsSection({
                   key={tab.key}
                   type="button"
                   onClick={() => setStatusFilter(tab.key)}
-                  className={`inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-semibold transition-colors whitespace-nowrap cursor-pointer ${
+                  className={`inline-flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer active:scale-95 ${
                     statusFilter === tab.key
-                      ? 'bg-[#111111] text-white'
-                      : 'border border-[#E8E8EC] bg-white/80 backdrop-blur-sm text-[#686868] hover:text-[#7137D8]'
+                      ? 'bg-[#111111] text-white shadow-sm'
+                      : 'border border-[#E8E8EC] bg-white/80 backdrop-blur-sm text-[#686868] hover:border-[#7137D8]/50 hover:text-[#7137D8]'
                   }`}
                 >
                   <span>{tab.label}</span>
@@ -348,12 +349,12 @@ export default function CertificationsSection({
                 </button>
               );
             })}
-          </div>
+          </RevealBlock>
         )}
 
         {/* Empty State or Cards Grid */}
         {certifications.length === 0 ? (
-          <div className="mt-10 rounded-2xl border border-[#E8E8EC] bg-white/80 p-8 sm:p-10 backdrop-blur-md shadow-xs">
+          <RevealBlock className="mt-10 rounded-2xl border border-[#E8E8EC] bg-white/80 p-8 sm:p-10 backdrop-blur-md shadow-xs">
             <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
               <div className="flex items-start gap-4 max-w-2xl">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#7137D8]/25 bg-[#7137D8]/10 text-[#7137D8]">
@@ -369,103 +370,109 @@ export default function CertificationsSection({
                 </div>
               </div>
             </div>
-          </div>
+          </RevealBlock>
         ) : (
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <RevealStagger
+            key={statusFilter}
+            className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+          >
             {filteredCertifications.map((item) => {
               const badge = statusMeta(item.status);
               const hasCertificateFile = Boolean(item.certificateFileUrl);
               const hasVerificationUrl = Boolean(item.verificationUrl);
 
               return (
-                <motion.article
-                  key={item.id}
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                  className="group flex flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white/85 p-6 backdrop-blur-md shadow-xs transition-shadow duration-200 hover:border-[#7137D8]/50 hover:shadow-xl"
-                >
-                  <div>
-                    {/* Top Row: Institution Logo + Status Badge */}
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#E8E8EC] bg-[#F7F7F9] p-2">
-                        {item.institutionLogo ? (
-                          <ResilientImage
-                            src={item.institutionLogo}
-                            alt={`${item.institution} logo`}
-                            width={48}
-                            height={48}
-                            fill={false}
-                            className="h-10 w-10 object-contain"
-                            fallbackLabel={item.institution}
-                          />
-                        ) : (
-                          <Award className="h-6 w-6 text-[#7137D8]" />
-                        )}
-                      </div>
-
-                      <span
-                        className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[11px] font-bold whitespace-nowrap ${badge.badgeClass}`}
-                      >
-                        {badge.icon}
-                        <span>{badge.label}</span>
-                      </span>
-                    </div>
-
-                    {/* Issuing Institution & Title */}
-                    <p className="mt-5 text-xs font-bold uppercase tracking-wider text-[#7137D8]">
-                      {item.institution}
-                    </p>
-                    <h3 className="mt-1.5 font-[family-name:var(--font-jakarta)] text-lg font-extrabold leading-snug text-[#151515]">
-                      {item.title}
-                    </h3>
-
-                    {/* Metadata Rows (Rendered strictly when provided) */}
-                    {(item.dateEarned || item.credentialId) && (
-                      <div className="mt-4 space-y-2 border-t border-[#E8E8EC] pt-4 text-xs text-[#686868]">
-                        {item.dateEarned && (
-                          <div className="flex items-center justify-between gap-3">
-                            <span className="inline-flex items-center gap-1.5 font-medium">
-                              <Calendar className="h-3.5 w-3.5 text-[#E5092F]" />
-                              <span>{t.certifications.dateEarnedLabel}</span>
-                            </span>
-                            <span className="font-semibold text-[#151515]">
-                              {item.dateEarned}
-                            </span>
-                          </div>
-                        )}
-                        {item.credentialId && (
-                          <div className="flex items-center justify-between gap-3">
-                            <span className="inline-flex items-center gap-1.5 font-medium shrink-0">
-                              <Hash className="h-3.5 w-3.5 text-[#7137D8]" />
-                              <span>{t.certifications.credentialIdLabel}</span>
-                            </span>
-                            <span className="truncate font-mono text-[11px] font-semibold text-[#151515]">
-                              {item.credentialId}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {/* Attached Certificate Document Preview */}
-                    {hasCertificateFile && item.certificateFileUrl && (
-                      <div className="mt-4 overflow-hidden rounded-xl border border-[#E8E8EC] bg-[#F7F7F9]">
-                        {item.certificateFileType === 'image' ? (
-                          <button
-                            type="button"
-                            onClick={() => setPreviewItem(item)}
-                            className="relative block aspect-[4/3] w-full overflow-hidden bg-white p-2 cursor-pointer"
-                            aria-label={`${t.certifications.viewCertificate}: ${item.title}`}
-                          >
+                <RevealItem key={item.id} className="h-full">
+                  <article className="group card-interactive flex h-full flex-col justify-between rounded-2xl border border-[#E8E8EC] bg-white/85 p-6 backdrop-blur-md shadow-xs">
+                    <div>
+                      {/* Top Row: Institution Logo + Status Badge */}
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="card-icon-float relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#E8E8EC] bg-[#F7F7F9] p-2 group-hover:border-[#7137D8]/40 group-hover:bg-white">
+                          {item.institutionLogo ? (
                             <ResilientImage
-                              src={item.certificateFileUrl}
-                              alt={`${item.title} certificate`}
-                              sizes="(max-width: 768px) 100vw, 400px"
-                              className="object-contain p-1.5 transition-transform duration-300 group-hover:scale-[1.02]"
-                              fallbackLabel={item.title}
+                              src={item.institutionLogo}
+                              alt={`${item.institution} logo`}
+                              width={48}
+                              height={48}
+                              fill={false}
+                              className="h-10 w-10 object-contain"
+                              fallbackLabel={item.institution}
                             />
-                          </button>
-                        ) : (
+                          ) : (
+                            <Award className="h-6 w-6 text-[#7137D8]" />
+                          )}
+                        </div>
+
+                        <span
+                          className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[11px] font-bold whitespace-nowrap ${badge.badgeClass}`}
+                        >
+                          {badge.icon}
+                          <span>{badge.label}</span>
+                        </span>
+                      </div>
+
+                      {/* Issuing Institution & Title */}
+                      <p className="mt-5 text-xs font-bold uppercase tracking-wider text-[#7137D8]">
+                        {item.institution}
+                      </p>
+                      <h3 className="card-title-scale mt-1.5 inline-block font-[family-name:var(--font-jakarta)] text-lg font-extrabold leading-snug text-[#151515]">
+                        {item.title}
+                      </h3>
+
+                      {/* Metadata Rows (Rendered strictly when provided) */}
+                      {(item.dateEarned || item.credentialId) && (
+                        <div className="mt-4 space-y-2 border-t border-[#E8E8EC] pt-4 text-xs text-[#686868]">
+                          {item.dateEarned && (
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="inline-flex items-center gap-1.5 font-medium">
+                                <Calendar className="h-3.5 w-3.5 text-[#E5092F]" />
+                                <span>{t.certifications.dateEarnedLabel}</span>
+                              </span>
+                              <span className="font-semibold text-[#151515]">
+                                {item.dateEarned}
+                              </span>
+                            </div>
+                          )}
+                          {item.credentialId && (
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="inline-flex items-center gap-1.5 font-medium shrink-0">
+                                <Hash className="h-3.5 w-3.5 text-[#7137D8]" />
+                                <span>{t.certifications.credentialIdLabel}</span>
+                              </span>
+                              <span className="truncate font-mono text-[11px] font-semibold text-[#151515]">
+                                {item.credentialId}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Attached Certificate Document Preview */}
+                      {hasCertificateFile && item.certificateFileUrl && (
+                        <div className="mt-4 overflow-hidden rounded-xl border border-[#E8E8EC] bg-[#F7F7F9]">
+                          {item.certificateFileType === 'image' ? (
+                            <button
+                              type="button"
+                              onClick={() => setPreviewItem(item)}
+                              className="relative block aspect-[4/3] w-full overflow-hidden bg-white p-2 cursor-pointer"
+                              aria-label={`${t.certifications.viewCertificate}: ${item.title}`}
+                            >
+                              <ResilientImage
+                                src={item.certificateFileUrl}
+                                alt={`${item.title} certificate`}
+                                sizes="(max-width: 768px) 100vw, 400px"
+                                className="img-zoom-target object-contain p-1.5"
+                                fallbackLabel={item.title}
+                              />
+                              <span
+                                aria-hidden="true"
+                                className="pointer-events-none absolute right-2.5 bottom-2.5 inline-flex items-center gap-1 rounded-lg bg-[#111111]/85 px-2.5 py-1 text-[11px] font-bold text-white opacity-0 shadow-sm transition-opacity duration-300 group-hover:opacity-100"
+                              >
+                                <Eye className="h-3 w-3" />
+                                <span>{t.certifications.viewCertificate}</span>
+                              </span>
+                            </button>
+                          ) : (
                           <div className="flex items-center gap-3 px-3.5 py-3">
                             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white border border-[#E8E8EC] text-[#E5092F]">
                               <FileText className="h-4 w-4" />
@@ -569,38 +576,48 @@ export default function CertificationsSection({
                       </div>
                     )}
                   </div>
-                </motion.article>
+                </article>
+                </RevealItem>
               );
             })}
-          </div>
+          </RevealStagger>
         )}
       </div>
 
       {/* Certificate Preview Modal */}
-      {previewItem && previewItem.certificateFileUrl && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-xs"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="certificate-preview-title"
-          onClick={() => setPreviewItem(null)}
-        >
-          <div
-            className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-[#E8E8EC] bg-white shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {previewItem && previewItem.certificateFileUrl && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-xs"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="certificate-preview-title"
+            onClick={() => setPreviewItem(null)}
           >
-            <div className="flex items-center justify-between gap-4 border-b border-[#E8E8EC] bg-[#111111] px-6 py-4 text-white">
-              <div className="min-w-0">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#8B5CF6]">
-                  {previewItem.institution}
-                </p>
-                <h3
-                  id="certificate-preview-title"
-                  className="truncate font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-white"
-                >
-                  {previewItem.title}
-                </h3>
-              </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-[#E8E8EC] bg-white shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between gap-4 border-b border-[#E8E8EC] bg-[#111111] px-6 py-4 text-white">
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#8B5CF6]">
+                    {previewItem.institution}
+                  </p>
+                  <h3
+                    id="certificate-preview-title"
+                    className="truncate font-[family-name:var(--font-jakarta)] text-lg font-extrabold text-white"
+                  >
+                    {previewItem.title}
+                  </h3>
+                </div>
 
               <button
                 type="button"
@@ -676,24 +693,34 @@ export default function CertificationsSection({
                   </a>
                 )}
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Add / Edit Certification Modal */}
-      {editorOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 p-4 backdrop-blur-xs"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="certification-editor-title"
-          onClick={() => setEditorOpen(false)}
-        >
-          <div
-            className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[#E8E8EC] bg-white shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {editorOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 p-4 backdrop-blur-xs"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="certification-editor-title"
+            onClick={() => setEditorOpen(false)}
           >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[#E8E8EC] bg-white shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#E8E8EC] bg-white px-6 py-4">
               <h3
                 id="certification-editor-title"
@@ -974,9 +1001,10 @@ export default function CertificationsSection({
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

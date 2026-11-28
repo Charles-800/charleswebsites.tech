@@ -289,7 +289,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       languageLabel: 'Language',
     },
     hero: {
-      kicker: 'FOUNDER, CHARLES WEBSITES AI · WEB DEVELOPMENT & AI ENGINEERING',
+      kicker: 'FOUNDER, CHARLES WEBSITES AI · SOFTWARE DEVELOPER, WEB DEVELOPMENT & AI ENGINEERING',
       headlinePre: 'WE BUILD ',
       headlineAccentRed: 'DIGITAL EXPERIENCES',
       headlineMid: ' THAT MOVE ',
@@ -623,7 +623,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       kicker: 'CORE TECHNOLOGIES',
       headline: 'SKILLS & ENGINEERING STACK.',
       subheading:
-        'We build fast, reliable, and scalable websites using battle-tested frontend and backend web technologies.',
+        'We build fast, reliable, and scalable websites and software using battle-tested web, application, and systems engineering languages.',
       items: [
         {
           id: 'html5',
@@ -664,6 +664,30 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
           logo: '/assets/aistudio/php_cd1beaa0.svg',
           description:
             'Reliable server-side web engineering powering custom WordPress business platforms, WooCommerce online stores, Laravel portals, and database-driven company systems.',
+        },
+        {
+          id: 'java',
+          name: 'Java',
+          role: 'Enterprise Software & Android Backends',
+          logo: '/assets/skills/java.svg',
+          description:
+            'Object-oriented application engineering for dependable enterprise backends, business management software, Android integrations, and maintainable multi-user systems.',
+        },
+        {
+          id: 'c',
+          name: 'C',
+          role: 'Foundational Systems & Core Logic',
+          logo: '/assets/skills/c.svg',
+          description:
+            'Low-level systems programming delivering tight memory control, deterministic execution, foundational algorithms, and fast core utilities.',
+        },
+        {
+          id: 'cplusplus',
+          name: 'C++',
+          role: 'High-Performance Software Engineering',
+          logo: '/assets/skills/cplusplus.svg',
+          description:
+            'High-efficiency systems and application development combining object-oriented architecture with native performance for compute-intensive software workflows.',
         },
       ],
     },
@@ -992,7 +1016,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       languageLabel: 'Lugha',
     },
     hero: {
-      kicker: 'MWANZILISHI, CHARLES WEBSITES AI · UJENZI WA TOVUTI & UHANDISI WA AI',
+      kicker: 'MWANZILISHI, CHARLES WEBSITES AI · MSANIDI WA SOFTWARE, UJENZI WA TOVUTI & UHANDISI WA AI',
       headlinePre: 'TUNAJENGA ',
       headlineAccentRed: 'MIFUMO YA KIDIJITALI',
       headlineMid: ' INAYOKUZA ',
@@ -1326,7 +1350,7 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
       kicker: 'TEKNOLOJIA KUU',
       headline: 'UJUZI NA TEKNOLOJIA ZETU.',
       subheading:
-        'Tunajenga tovuti za haraka, thabiti, na zinazokua kwa kutumia teknolojia zilizothibitishwa za muundo na seva.',
+        'Tunajenga tovuti na mifumo ya software ya haraka, thabiti, na inayokua kwa kutumia lugha zilizothibitishwa za wavuti na uhandisi wa programu.',
       items: [
         {
           id: 'html5',
@@ -1367,6 +1391,30 @@ export const TRANSLATIONS: Record<Locale, TranslationSchema> = {
           logo: '/assets/aistudio/php_cd1beaa0.svg',
           description:
             'Lugha thabiti ya seva inayoendesha tovuti maalum za WordPress, maduka ya mtandaoni ya WooCommerce, mifumo ya Laravel, na hifadhidata za kibiashara.',
+        },
+        {
+          id: 'java',
+          name: 'Java',
+          role: 'Mifumo ya Biashara na Android',
+          logo: '/assets/skills/java.svg',
+          description:
+            'Uhandisi wa programu thabiti za kibiashara, mifumo ya seva za kampuni, uunganishaji wa Android, na programu zinazohudumia watumiaji wengi kwa usalama.',
+        },
+        {
+          id: 'c',
+          name: 'C',
+          role: 'Mifumo ya Msingi na Kasi ya Juu',
+          logo: '/assets/skills/c.svg',
+          description:
+            'Upangaji programu wa kiwango cha msingi unaotoa udhibiti bora wa kumbukumbu, algoriti za haraka, na utendaji thabiti wa mfumo.',
+        },
+        {
+          id: 'cplusplus',
+          name: 'C++',
+          role: 'Uhandisi wa Programu za Kasi Kubwa',
+          logo: '/assets/skills/cplusplus.svg',
+          description:
+            'Utengenezaji wa programu za ufanisi wa hali ya juu unaochanganya muundo wa kisasa na kasi halisi ya mfumo kwa kazi zinazohitaji nguvu kubwa.',
         },
       ],
     },

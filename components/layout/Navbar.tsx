@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, Phone, MessageCircle, Globe } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { SITE_CONFIG, buildWhatsAppUrl } from '@/lib/config/site';
 
@@ -77,7 +78,7 @@ export default function Navbar() {
             setMobileOpen(false);
             setNavTarget({ from: pathname, to: '/' });
           }}
-          className="flex min-w-0 items-center gap-2.5 sm:gap-3.5 text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7137D8] rounded-xl active:scale-[0.98] transition-transform duration-75"
+          className="group flex min-w-0 items-center gap-2.5 sm:gap-3.5 text-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7137D8] rounded-xl active:scale-[0.98] transition-transform duration-150"
         >
           <Image
             src="/assets/aistudio/CHARLES_WEBSITES_91d4851c.png"
@@ -86,9 +87,9 @@ export default function Navbar() {
             height={72}
             priority
             referrerPolicy="no-referrer"
-            className="h-14 w-14 sm:h-16 sm:w-16 lg:h-[72px] lg:w-[72px] shrink-0 rounded-xl bg-[#0C152B] object-cover shadow-sm ring-1 ring-[#151515]/15"
+            className="h-14 w-14 sm:h-16 sm:w-16 lg:h-[72px] lg:w-[72px] shrink-0 rounded-xl bg-[#0C152B] object-cover shadow-sm ring-1 ring-[#151515]/15 transition-all duration-300 ease-out group-hover:scale-105 group-hover:ring-[#7137D8]/50 group-hover:shadow-md"
           />
-          <span className="truncate font-[family-name:var(--font-jakarta)] text-[14px] font-extrabold tracking-tight text-[#151515] sm:text-lg lg:text-xl">
+          <span className="truncate font-[family-name:var(--font-jakarta)] text-[14px] font-extrabold tracking-tight text-[#151515] transition-colors duration-200 group-hover:text-[#7137D8] sm:text-lg lg:text-xl">
             CHARLES <span className="text-[#E5092F]">WEBSITES</span>
           </span>
         </Link>
@@ -109,15 +110,17 @@ export default function Navbar() {
                 onFocus={() => router.prefetch(item.href)}
                 onTouchStart={() => router.prefetch(item.href)}
                 onClick={() => setNavTarget({ from: pathname, to: item.href })}
-                className={`relative whitespace-nowrap shrink-0 py-1 text-sm font-medium transition-colors duration-75 active:scale-[0.97] ${
+                className={`relative whitespace-nowrap shrink-0 py-1 text-sm font-medium transition-colors duration-200 active:scale-[0.97] ${
                   active
                     ? 'text-[#7137D8] font-semibold'
-                    : 'text-[#151515] hover:text-[#7137D8]'
+                    : 'nav-link-underline text-[#151515] hover:text-[#7137D8]'
                 }`}
               >
                 {item.label}
                 {active && (
-                  <span
+                  <motion.span
+                    layoutId="navbar-active-indicator"
+                    transition={{ type: 'spring', stiffness: 420, damping: 32 }}
                     aria-hidden="true"
                     className="absolute inset-x-0 -bottom-0.5 h-[2px] rounded-full bg-[#7137D8]"
                   />
@@ -222,12 +225,17 @@ export default function Navbar() {
       </div>
 
       {/* Full-Viewport Mobile Navigation Drawer */}
-      {mobileOpen && (
-        <div
-          id="mobile-navigation-drawer"
-          className="lg:hidden fixed inset-x-0 top-[76px] sm:top-[84px] bottom-0 z-50 overflow-y-auto border-t border-[#E8E8EC] bg-white px-4 pb-10 pt-4"
-        >
-          <nav aria-label="Mobile Navigation" className="flex flex-col space-y-1">
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            id="mobile-navigation-drawer"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:hidden fixed inset-x-0 top-[76px] sm:top-[84px] bottom-0 z-50 overflow-y-auto border-t border-[#E8E8EC] bg-white px-4 pb-10 pt-4"
+          >
+            <nav aria-label="Mobile Navigation" className="flex flex-col space-y-1">
             {navItems.map((item) => {
               const active = isActive(item.href);
               return (
@@ -314,8 +322,9 @@ export default function Navbar() {
               <span>{t.nav.callUs}</span>
             </a>
           </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </header>
   );
